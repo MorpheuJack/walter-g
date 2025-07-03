@@ -84,11 +84,11 @@ export default function Home() {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4 lg:p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-24">
+      <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24">
         
-        <div className="flex flex-col gap-y-32 py-16">
+        <div className="flex flex-col gap-y-32 py-16 lg:col-span-3">
           <motion.div 
-            className="flex flex-col justify-center text-foreground min-h-[60vh]"
+            className="flex flex-col justify-center text-foreground min-h-[calc(100vh_-_8rem)]"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -148,7 +148,7 @@ export default function Home() {
           <WalterBenefits />
         </div>
 
-        <div className="lg:sticky lg:top-16 h-fit py-16">
+        <div className="lg:sticky lg:top-16 h-fit py-16 lg:col-span-2">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
