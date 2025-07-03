@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogClose } from '@/components/ui/dialog';
 import WalterBenefits from '@/components/walter-benefits';
+import Link from 'next/link';
 
 const initialState = {
   message: '',
@@ -74,6 +75,10 @@ export default function Home() {
     // This is a workaround to clear previous errors when the form is shown again.
     Object.assign(state, initialState);
   };
+  
+  const handleScrollToForm = () => {
+    document.getElementById('form-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -101,9 +106,11 @@ export default function Home() {
               Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
-                <Heart className="mr-2 h-5 w-5" />
-                Começar Agora
+              <Button asChild className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
+                <Link href="#form-section">
+                  <Heart className="mr-2 h-5 w-5" />
+                  Começar Agora
+                </Link>
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
@@ -134,7 +141,7 @@ export default function Home() {
                   </div>
                   <div className="mt-8 text-center">
                     <DialogClose asChild>
-                      <Button size="lg" className="bg-gradient-to-r from-primary via-accent to-primary/80 text-primary-foreground rounded-full py-5 px-8 text-base font-semibold hover:opacity-90 transition-opacity">
+                      <Button onClick={handleScrollToForm} size="lg" className="bg-gradient-to-r from-primary via-accent to-primary/80 text-primary-foreground rounded-full py-5 px-8 text-base font-semibold hover:opacity-90 transition-opacity">
                         <Heart className="mr-2 h-5 w-5" />
                         Começar Agora
                       </Button>
@@ -146,7 +153,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="lg:col-span-2 lg:sticky lg:top-0 flex items-center h-full lg:h-screen py-12 lg:py-0">
+        <div id="form-section" className="lg:col-span-2 lg:sticky lg:top-0 flex items-center h-full lg:h-screen py-12 lg:py-0">
           <motion.div
             className="w-full"
             initial={{ opacity: 0, x: 50 }}
