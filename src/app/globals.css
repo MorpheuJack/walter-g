@@ -58,5 +58,10 @@
     background-image: linear-gradient(to bottom right, hsl(250 47% 41%), hsl(253 45% 18%));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  body::-webkit-scrollbar {
+    display: none;
   }
 }
