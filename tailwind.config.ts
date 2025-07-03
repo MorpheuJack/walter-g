@@ -77,10 +77,21 @@ export default {
             height: '0',
           },
         },
+        'breathing-glow': {
+          '0%, 100%': {
+            transform: 'scale(1)',
+            opacity: '0.2',
+          },
+          '50%': {
+            transform: 'scale(1.5)',
+            opacity: '0.35',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'breathing-glow': 'breathing-glow 8s ease-in-out infinite',
       },
     },
   },
