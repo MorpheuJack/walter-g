@@ -1,13 +1,13 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { getPersonalizedTipsAction } from '@/app/actions/generate-tips-action';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Heart, ArrowRight, Send, Lock } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 const initialState = {
@@ -26,7 +26,7 @@ function SubmitButton() {
 }
 
 export default function Home() {
-  const [state, formAction] = useFormState(getPersonalizedTipsAction, initialState);
+  const [state, formAction] = useActionState(getPersonalizedTipsAction, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
