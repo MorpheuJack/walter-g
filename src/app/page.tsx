@@ -125,86 +125,84 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-12">
+    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex items-center min-h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-12 w-full">
         
-        <div className="lg:col-span-3">
-          <div className="flex flex-col justify-center text-center lg:text-left min-h-screen lg:py-16">
-            <motion.div 
-              className="flex flex-col justify-center text-foreground items-center lg:items-start"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
-                <span className="block">ENTENDA O QUE VOCÊ SENTE</span>
-                <span>RECEBA UM PLANO DE AÇÃO</span>
-              </h1>
-              <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
-              <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
-              Se você nunca fez terapia, é normal se sentir perdido. Descreva sua situação e receba uma primeira análise que te dará clareza e um plano de ação para começar a resolver seus problemas.
-              </p>
-              <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
-                  <Heart className="mr-2 h-5 w-5" />
-                  Começar Análise
-                </Button>
-                <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" className="rounded-lg border-accent bg-transparent px-6 py-5 text-base font-semibold text-accent hover:bg-accent/10 transition-transform duration-300 hover:scale-105">
-                      Como funciona
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-lg bg-black/60 backdrop-blur-lg border-white/10 p-6 sm:p-8 text-foreground shadow-2xl rounded-3xl">
-                    <DialogHeader className="text-center items-center">
-                      <DialogTitle className="text-3xl font-bold">Como Funciona Sua Primeira Análise</DialogTitle>
-                      <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
-                        Veja como é simples ter clareza sobre seus sentimentos em 4 passos.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <motion.div 
-                      className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8"
-                      variants={popupContainerVariants}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      {howItWorksSteps.map((item) => (
-                        <motion.div 
-                          key={item.step} 
-                          className="flex items-start text-left gap-4 md:flex-col md:items-center md:text-center"
-                          variants={popupItemVariants}
-                        >
-                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold text-lg shadow-lg">
-                            {item.step}
-                          </div>
-                          <div className="flex-grow md:flex-grow-0">
-                            <h4 className="font-bold text-lg text-foreground">{item.title}</h4>
-                            <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                    <div className="mt-8 flex justify-center">
-                      <Button
-                        onClick={handleStartNowClick}
-                        className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-105"
+        <div className="lg:col-span-3 py-12 lg:py-0">
+          <motion.div 
+            className="flex flex-col justify-center text-foreground items-center lg:items-start"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
+              <span className="block">ENTENDA O QUE VOCÊ SENTE</span>
+              <span>RECEBA UM PLANO DE AÇÃO</span>
+            </h1>
+            <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
+            <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
+            Se você nunca fez terapia, é normal se sentir perdido. Descreva sua situação e receba uma primeira análise que te dará clareza e um plano de ação para começar a resolver seus problemas.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
+              <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
+                <Heart className="mr-2 h-5 w-5" />
+                Começar Análise
+              </Button>
+              <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="rounded-lg border-accent bg-transparent px-6 py-5 text-base font-semibold text-accent hover:bg-accent/10 transition-transform duration-300 hover:scale-105">
+                    Como funciona
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-lg bg-black/60 backdrop-blur-lg border-white/10 p-6 sm:p-8 text-foreground shadow-2xl rounded-3xl">
+                  <DialogHeader className="text-center items-center">
+                    <DialogTitle className="text-3xl font-bold">Como Funciona Sua Primeira Análise</DialogTitle>
+                    <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
+                      Veja como é simples ter clareza sobre seus sentimentos em 4 passos.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <motion.div 
+                    className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8"
+                    variants={popupContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {howItWorksSteps.map((item) => (
+                      <motion.div 
+                        key={item.step} 
+                        className="flex items-start text-left gap-4 md:flex-col md:items-center md:text-center"
+                        variants={popupItemVariants}
                       >
-                        <Heart className="mr-2 h-5 w-5" />
-                        Começar Agora
-                      </Button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </motion.div>
-            <div className="py-16 sm:py-24">
-              <WalterBenefits />
+                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold text-lg shadow-lg">
+                          {item.step}
+                        </div>
+                        <div className="flex-grow md:flex-grow-0">
+                          <h4 className="font-bold text-lg text-foreground">{item.title}</h4>
+                          <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                  <div className="mt-8 flex justify-center">
+                    <Button
+                      onClick={handleStartNowClick}
+                      className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-105"
+                    >
+                      <Heart className="mr-2 h-5 w-5" />
+                      Começar Agora
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
+          </motion.div>
+          <div className="pt-16 sm:pt-24 lg:pt-16">
+            <WalterBenefits />
           </div>
         </div>
 
-        <div id="form-section" className="lg:col-span-2 lg:sticky lg:top-0 flex items-center h-full lg:h-screen py-12 lg:py-0">
+        <div id="form-section" className="lg:col-span-2">
           <motion.div
             className="w-full"
             initial={{ opacity: 0, x: 50 }}
