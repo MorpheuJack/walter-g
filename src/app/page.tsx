@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Heart, ArrowRight, Send, Lock, CheckCircle2, Undo2 } from 'lucide-react';
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import WalterBenefits from '@/components/walter-benefits';
 import Link from 'next/link';
@@ -80,6 +80,7 @@ export default function Home() {
   const formRef = useRef<HTMLFormElement>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const formAnimationControls = useAnimationControls();
 
   useEffect(() => {
     if (state.message === 'success') {
@@ -107,6 +108,14 @@ export default function Home() {
   const handleStartNowClick = () => {
     setIsPopupOpen(false);
     handleScrollToForm();
+    formAnimationControls.start({
+      boxShadow: [
+        '0 0 0 0px hsl(var(--primary) / 0.0)',
+        '0 0 0 4px hsl(var(--primary) / 0.7)',
+        '0 0 0 0px hsl(var(--primary) / 0.0)',
+      ],
+      transition: { duration: 1.5, ease: 'easeInOut', times: [0, 0.3, 1] },
+    });
   };
 
   const cardVariants = {
@@ -179,7 +188,7 @@ export default function Home() {
                     <div className="mt-8 flex justify-center">
                       <Button
                         onClick={handleStartNowClick}
-                        className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-105 animate-border-pulse"
+                        className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-105"
                       >
                         <Heart className="mr-2 h-5 w-5" />
                         Começar Agora
@@ -203,6 +212,10 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4 }}
           >
             <div className="relative mx-auto w-full max-w-md rounded-2xl bg-black/30 p-8 shadow-2xl backdrop-blur-xl border border-white/10 overflow-hidden">
+              <motion.div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                animate={formAnimationControls}
+              />
               <div className="absolute inset-0 z-0 animate-breathing-glow bg-primary/20 blur-3xl rounded-full"></div>
               <div className="relative z-10">
                   <AnimatePresence mode="wait">
