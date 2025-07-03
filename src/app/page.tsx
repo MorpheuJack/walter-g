@@ -85,9 +85,9 @@ export default function Home() {
     <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
       <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24">
         
-        <div className="lg:col-span-3 flex flex-col justify-center py-16 lg:py-0">
+        <div className="lg:col-span-3 flex flex-col justify-center text-center lg:text-left min-h-screen lg:py-16">
           <motion.div 
-            className="flex flex-col justify-center text-foreground text-center lg:text-left items-center lg:items-start"
+            className="flex flex-col justify-center text-foreground items-center lg:items-start"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
