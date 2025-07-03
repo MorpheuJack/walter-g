@@ -32,24 +32,47 @@ const howItWorksSteps = [
     {
       step: 1,
       title: 'Compartilhe Seu E-mail',
-      description: 'Digite seu e-mail no campo indicado. Suas informações são 100% seguras e confidenciais.',
+      description: 'Digite seu e-mail no campo indicado para que possamos entrar em contato.',
     },
     {
       step: 2,
-      title: 'Desabafe Suas Dores',
-      description: 'Conte o que está te incomodando no campo de texto. Seja honesto e aberto - Walter está aqui para te ajudar.',
+      title: 'Descreva sua situação',
+      description: 'Use o campo de texto para nos contar o que está acontecendo. Suas informações são 100% confidenciais.',
     },
     {
       step: 3,
-      title: 'Receba Apoio Imediato',
-      description: 'Clique em "Enviar Mensagem" e aguarde. Walter analisará sua situação com cuidado e empatia.',
+      title: 'Envie sua Mensagem',
+      description: 'Clique no botão de envio. Nossa equipe receberá sua mensagem de forma segura.',
     },
     {
       step: 4,
-      title: 'Resposta Personalizada',
-      description: 'Em até 24 horas, você receberá uma resposta detalhada e personalizada em seu e-mail com orientações e apoio.',
+      title: 'Aguarde nosso Contato',
+      description: 'Em até 24 horas, um de nossos especialistas entrará em contato com você pelo e-mail fornecido.',
     },
   ];
+
+const popupContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const popupItemVariants = {
+  hidden: { x: -20, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: 'easeOut',
+    },
+  },
+};
 
 export default function Home() {
   const [state, formAction] = useActionState(getPersonalizedTipsAction, initialState);
@@ -83,7 +106,7 @@ export default function Home() {
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+    exit: { opacity: 0, y: -20, transition: { duration: '0.3' } },
   };
 
   return (
@@ -107,7 +130,7 @@ export default function Home() {
                 Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
               </p>
               <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Button asChild className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
+                <Button asChild className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
                   <Link href="#form-section">
                     <Heart className="mr-2 h-5 w-5" />
                     Começar Agora
@@ -124,22 +147,31 @@ export default function Home() {
                     <DialogHeader className="text-center items-center">
                       <DialogTitle className="text-3xl font-bold">Como Funciona o WALTER</DialogTitle>
                       <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
-                        Siga estes simples passos para receber apoio emocional personalizado
+                        Veja como é simples e seguro nos enviar sua mensagem para receber apoio.
                       </DialogDescription>
                     </DialogHeader>
-                    <div className="mt-8 space-y-8">
+                    <motion.div 
+                      className="mt-8 space-y-6"
+                      variants={popupContainerVariants}
+                      initial="hidden"
+                      animate="visible"
+                    >
                       {howItWorksSteps.map((item) => (
-                        <div key={item.step} className="flex flex-col items-center text-center gap-3">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold text-xl shadow-lg">
+                        <motion.div 
+                          key={item.step} 
+                          className="flex items-start text-left gap-4"
+                          variants={popupItemVariants}
+                        >
+                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold text-lg shadow-lg">
                             {item.step}
                           </div>
-                          <div>
-                            <h4 className="font-bold text-xl text-foreground">{item.title}</h4>
+                          <div className="flex-grow">
+                            <h4 className="font-bold text-lg text-foreground">{item.title}</h4>
                             <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
-                    </div>
+                    </motion.div>
                   </DialogContent>
                 </Dialog>
               </div>
