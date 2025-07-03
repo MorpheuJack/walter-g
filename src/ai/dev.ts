@@ -1,4 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/personalized-tips.ts';
+// AI flows are no longer used.

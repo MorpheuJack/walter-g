@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Heart, ArrowRight, Send, Lock, Sparkles, CheckCircle2, Undo2 } from 'lucide-react';
+import { Heart, ArrowRight, Send, Lock, CheckCircle2, Undo2 } from 'lucide-react';
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,7 +15,6 @@ import WalterBenefits from '@/components/walter-benefits';
 
 const initialState = {
   message: '',
-  tips: [] as string[],
   errors: { email: [] as string[], issue: [] as string[] },
 };
 
@@ -23,7 +22,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending} className="w-full rounded-lg py-6 text-lg bg-white/90 text-primary-foreground hover:bg-white transition-all duration-300 transform hover:scale-105">
-      {pending ? 'Enviando...' : <><Send className="mr-2 h-5 w-5" /> Receber Apoio Gratuito</>}
+      {pending ? 'Enviando...' : <><Send className="mr-2 h-5 w-5" /> Enviar Mensagem</>}
     </Button>
   );
 }
@@ -37,17 +36,17 @@ const howItWorksSteps = [
     {
       step: 2,
       title: 'Desabafe Suas Dores',
-      description: 'Conte o que está te incomodando no campo de texto. Seja honesto e aberto - Walter está aqui para te ajudar.',
+      description: 'Conte o que está te incomodando no campo de texto. Seja honesto e aberto - estamos aqui para te ajudar.',
     },
     {
       step: 3,
-      title: 'Receba Apoio Imediato',
-      description: 'Clique em "Receber Apoio Gratuito" e aguarde. Walter analisará sua situação com cuidado e empatia.',
+      title: 'Envie sua mensagem',
+      description: 'Clique em "Enviar Mensagem" para que nossa equipe receba suas informações com cuidado e empatia.',
     },
     {
       step: 4,
-      title: 'Resposta Personalizada',
-      description: 'Em até 24 horas, você receberá uma resposta detalhada e personalizada em seu e-mail com orientações e apoio.',
+      title: 'Aguarde o contato',
+      description: 'Em até 24 horas, nossa equipe entrará em contato com você pelo e-mail fornecido.',
     },
   ];
 
@@ -55,11 +54,11 @@ export default function Home() {
   const [state, formAction] = useActionState(getPersonalizedTipsAction, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
-  const [showTips, setShowTips] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    if (state.message === 'success' && state.tips.length > 0) {
-      setShowTips(true);
+    if (state.message === 'success') {
+      setShowSuccess(true);
       formRef.current?.reset();
     } else if (state.message && !['success', 'Invalid form data.'].includes(state.message)) {
       toast({
@@ -71,7 +70,7 @@ export default function Home() {
   }, [state, toast]);
 
   const handleReset = () => {
-    setShowTips(false);
+    setShowSuccess(false);
     // This is a workaround to clear previous errors when the form is shown again.
     Object.assign(state, initialState);
   };
@@ -99,7 +98,7 @@ export default function Home() {
             </h1>
             <p className="mt-2 text-lg tracking-[0.2em] text-primary">TERAPIA DIGITAL GRATUITA</p>
             <p className="mt-8 max-w-md text-lg text-muted-foreground">
-              Conte suas dores e receba ajuda imediata. Walter é um terapeuta digital especializado em saúde mental que oferece suporte emocional 24h por dia, 7 dias por semana, de forma completamente gratuita.
+              Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
@@ -156,10 +155,10 @@ export default function Home() {
           >
             <div className="relative w-full max-w-md rounded-2xl bg-black/30 p-8 shadow-2xl backdrop-blur-xl border border-white/10">
               <AnimatePresence mode="wait">
-                {!showTips ? (
+                {!showSuccess ? (
                   <motion.div key="form" variants={cardVariants} initial="hidden" animate="visible" exit="exit">
-                    <h2 className="text-3xl font-bold text-foreground">Como posso te ajudar hoje?</h2>
-                    <p className="mt-2 text-muted-foreground">Conte o que está te incomodando e receba ajuda imediata.</p>
+                    <h2 className="text-3xl font-bold text-foreground">Como podemos te ajudar?</h2>
+                    <p className="mt-2 text-muted-foreground">Sua mensagem é confidencial e será enviada para nossa equipe.</p>
 
                     <form ref={formRef} action={formAction} className="mt-8 space-y-6">
                       <div>
@@ -189,23 +188,15 @@ export default function Home() {
                     </form>
                   </motion.div>
                 ) : (
-                  <motion.div key="tips" variants={cardVariants} initial="hidden" animate="visible" exit="exit" className="text-center">
+                  <motion.div key="success" variants={cardVariants} initial="hidden" animate="visible" exit="exit" className="text-center">
                     <div className="flex flex-col items-center justify-center">
                       <CheckCircle2 className="h-16 w-16 text-green-400 mb-4" />
-                      <h3 className="text-2xl font-bold mb-2 text-foreground flex items-center gap-2 justify-center"><Sparkles className="h-6 w-6 text-accent" />Walter Sugere:</h3>
-                      <p className="text-muted-foreground mb-6">Aqui estão algumas dicas para te ajudar a seguir em frente.</p>
+                      <h3 className="text-2xl font-bold mb-2 text-foreground">Mensagem Enviada!</h3>
+                      <p className="text-muted-foreground mb-6">Obrigado por entrar em contato. Responderemos em breve.</p>
                     </div>
-                    <ul className="space-y-3 list-inside text-left bg-black/20 p-4 rounded-lg border border-white/10">
-                      {state.tips.map((tip, index) => (
-                        <li key={index} className="text-muted-foreground flex items-start gap-2">
-                          <Heart className="h-4 w-4 text-primary mt-1 shrink-0" />
-                          <span>{tip}</span>
-                        </li>
-                      ))}
-                    </ul>
                     <Button onClick={handleReset} className="mt-8 w-full" variant="outline">
                       <Undo2 className="mr-2 h-4 w-4" />
-                      Pedir novo conselho
+                      Enviar outra mensagem
                     </Button>
                   </motion.div>
                 )}
