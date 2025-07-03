@@ -87,7 +87,7 @@ export default function Home() {
         
         <div className="lg:col-span-3 flex flex-col justify-center py-16 lg:py-0">
           <motion.div 
-            className="flex flex-col justify-center text-foreground"
+            className="flex flex-col justify-center text-foreground text-center lg:text-left items-center lg:items-start"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -100,7 +100,7 @@ export default function Home() {
             <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
               Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
               <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
                 <Heart className="mr-2 h-5 w-5" />
                 Começar Agora
