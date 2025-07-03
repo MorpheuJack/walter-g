@@ -108,7 +108,7 @@ export default function Home() {
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="rounded-lg border-primary bg-transparent px-6 py-5 text-base font-semibold text-primary hover:bg-primary/10 transition-transform duration-300 hover:scale-105">
+                  <Button variant="outline" className="rounded-lg border-accent bg-transparent px-6 py-5 text-base font-semibold text-accent hover:bg-accent/10 transition-transform duration-300 hover:scale-105">
                     Como funciona
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
