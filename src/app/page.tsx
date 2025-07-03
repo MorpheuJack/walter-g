@@ -88,7 +88,7 @@ export default function Home() {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24">
+      <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-12">
         
         <div className="lg:col-span-3">
           <div className="flex flex-col justify-center text-center lg:text-left min-h-screen lg:py-16">
