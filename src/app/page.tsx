@@ -31,23 +31,23 @@ function SubmitButton() {
 const howItWorksSteps = [
     {
       step: 1,
-      title: 'Submeta seu Caso',
-      description: 'Forneça seu e-mail e descreva o problema com o máximo de detalhes para uma análise precisa.',
+      title: 'Você Descreve',
+      description: 'Conte-nos o que está sentindo, de forma simples e confidencial. Não precisa ser um especialista.',
     },
     {
       step: 2,
-      title: 'Análise Técnica',
-      description: 'Nosso sistema especialista processa suas informações, identificando padrões cognitivos e comportamentais.',
+      title: 'Nós Analisamos',
+      description: 'Nossos especialistas analisam sua descrição para identificar as possíveis causas e padrões por trás dos seus sentimentos.',
     },
     {
       step: 3,
-      title: 'Receba seu Plano',
-      description: 'Enviamos para seu e-mail um plano de ação detalhado com ferramentas e técnicas baseadas em evidências.',
+      title: 'Você Recebe Clareza',
+      description: 'Enviamos para seu e-mail uma explicação clara do que pode estar acontecendo e um plano de ação com os primeiros passos práticos.',
     },
     {
       step: 4,
-      title: 'Implemente e Monitore',
-      description: 'Aplique as estratégias recomendadas e utilize nossas métricas para acompanhar seu progresso.',
+      title: 'Você Começa a Agir',
+      description: 'Use as ferramentas e estratégias que recomendamos para começar a ver mudanças e entender seu progresso.',
     },
   ];
 
@@ -137,12 +137,12 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
-                <span className="block">ANÁLISE PSICOLÓGICA</span>
-                <span>RESULTADOS PRÁTICOS</span>
+                <span className="block">ENTENDA O QUE VOCÊ SENTE</span>
+                <span>RECEBA UM PLANO DE AÇÃO</span>
               </h1>
-              <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">PSICOLOGIA BASEADA EM DADOS</p>
+              <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
               <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
-                Descreva sua situação. Receba uma análise técnica profunda e um plano de ação estruturado para sua saúde mental.
+              Se você nunca fez terapia, é normal se sentir perdido. Descreva sua situação e receba uma primeira análise que te dará clareza e um plano de ação para começar a resolver seus problemas.
               </p>
               <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
@@ -158,9 +158,9 @@ export default function Home() {
                   </DialogTrigger>
                   <DialogContent className="max-w-lg bg-black/60 backdrop-blur-lg border-white/10 p-6 sm:p-8 text-foreground shadow-2xl rounded-3xl">
                     <DialogHeader className="text-center items-center">
-                      <DialogTitle className="text-3xl font-bold">Nossa Metodologia Analítica</DialogTitle>
+                      <DialogTitle className="text-3xl font-bold">Como Funciona Sua Primeira Análise</DialogTitle>
                       <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
-                        Entenda o processo desde a submissão até o recebimento do seu plano de ação personalizado.
+                        Veja como é simples ter clareza sobre seus sentimentos em 4 passos.
                       </DialogDescription>
                     </DialogHeader>
                     <motion.div 
@@ -221,8 +221,8 @@ export default function Home() {
                   <AnimatePresence mode="wait">
                     {!showSuccess ? (
                       <motion.div key="form" variants={cardVariants} initial="hidden" animate="visible" exit="exit">
-                        <h2 className="text-3xl font-bold text-foreground">Inicie sua Análise Técnica</h2>
-                        <p className="mt-2 text-muted-foreground">Submeta seu caso para uma análise técnica, confidencial e gratuita.</p>
+                        <h2 className="text-3xl font-bold text-foreground">Comece Sua Primeira Análise</h2>
+                        <p className="mt-2 text-muted-foreground">É confidencial, gratuito e o primeiro passo para você se entender melhor.</p>
 
                         <form ref={formRef} action={formAction} className="mt-8 space-y-6">
                           <div>
@@ -242,7 +242,7 @@ export default function Home() {
                             <Textarea 
                               id="issue" 
                               name="issue" 
-                              placeholder="Seja detalhista. Descreva sintomas, pensamentos recorrentes, situações gatilho e o que já tentou fazer." 
+                              placeholder="Conte com suas palavras o que você tem sentido. Não se preocupe com termos técnicos. Fale sobre seus sentimentos, situações difíceis ou pensamentos que se repetem." 
                               className="mt-2 min-h-[120px] bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg p-3 focus:border-primary focus:ring-primary"
                               required
                             />

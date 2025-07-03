@@ -6,13 +6,13 @@ import { motion } from 'framer-motion';
 const benefits = [
   {
     icon: <BrainCircuit className="h-8 w-8 text-primary" />,
-    title: 'Análise Técnica Profunda',
-    description: 'Identificamos padrões cognitivos e a raiz neuropsicológica do problema, indo além dos sintomas superficiais.',
+    title: 'Traduza Seus Sentimentos',
+    description: 'Ajudamos a dar nome ao que você sente, explicando de forma simples as possíveis causas por trás da sua ansiedade, tristeza ou confusão.',
   },
   {
     icon: <ClipboardList className="h-8 w-8 text-primary" />,
-    title: 'Plano de Ação Estruturado',
-    description: 'Você recebe um cronograma com ferramentas práticas, técnicas de TCC e exercícios para implementar imediatamente.',
+    title: 'Um Caminho a Seguir',
+    description: 'Você recebe um plano com os primeiros passos práticos e fáceis de aplicar para começar a lidar com seus problemas hoje mesmo.',
   },
   {
     icon: <ShieldCheck className="h-8 w-8 text-primary" />,
@@ -21,8 +21,8 @@ const benefits = [
   },
   {
     icon: <TrendingUp className="h-8 w-8 text-primary" />,
-    title: 'Foco em Resultados',
-    description: 'Fornecemos métricas claras para que você possa acompanhar seu progresso e ver a eficácia das estratégias.',
+    title: 'Argumentos Para Você',
+    description: 'Com a análise em mãos, você terá mais segurança e argumentos para, se desejar, conversar com um profissional ou simplesmente entender melhor seu próprio processo.',
   },
 ];
 
@@ -61,9 +61,9 @@ export default function WalterBenefits() {
           variants={itemVariants}
           className="flex flex-col items-start space-y-4 mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-headline bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent">A Metodologia Walter</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-headline bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent">Clareza Para o Seu Primeiro Passo</h2>
           <p className="max-w-[600px] text-muted-foreground md:text-lg">
-            Nossa abordagem combina análise de dados, neurociência e psicologia baseada em evidências para fornecer um plano de ação claro e mensurável.
+            Entendemos que buscar ajuda pode ser difícil. Por isso, criamos um método para te dar um ponto de partida claro, sem jargões complicados, focado em resultados que você pode sentir.
           </p>
         </motion.div>
         <motion.div 
