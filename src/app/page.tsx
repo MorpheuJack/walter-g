@@ -82,22 +82,22 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4 lg:p-8">
+    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
       <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24">
         
-        <div className="flex flex-col gap-y-32 py-16 lg:col-span-3">
+        <div className="lg:col-span-3 flex flex-col justify-center py-16 lg:py-0">
           <motion.div 
-            className="flex flex-col justify-center text-foreground min-h-[calc(100vh_-_12rem)]"
+            className="flex flex-col justify-center text-foreground"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <h1 className="font-headline font-extrabold text-6xl md:text-8xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
+            <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
               <span className="block">WALTER</span>
               <span>TERAPEUTA</span>
             </h1>
-            <p className="mt-2 text-lg tracking-[0.2em] text-primary">TERAPIA DIGITAL GRATUITA</p>
-            <p className="mt-8 max-w-md text-lg text-muted-foreground">
+            <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">TERAPIA DIGITAL GRATUITA</p>
+            <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
               Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
@@ -144,20 +144,18 @@ export default function Home() {
               </Dialog>
             </div>
           </motion.div>
-          <WalterBenefits />
         </div>
 
-        <div className="lg:col-span-2">
-          <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:justify-center">
-            <motion.div
-              className="w-full"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-            >
-              <div className="relative mx-auto w-full max-w-md rounded-2xl bg-black/30 p-8 shadow-2xl backdrop-blur-xl border border-white/10 overflow-hidden">
-                <div className="absolute inset-0 z-0 animate-breathing-glow bg-primary/20 blur-3xl rounded-full"></div>
-                <div className="relative z-10">
+        <div className="lg:col-span-2 lg:sticky lg:top-0 flex items-center h-full lg:h-screen py-12 lg:py-0">
+          <motion.div
+            className="w-full"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+            <div className="relative mx-auto w-full max-w-md rounded-2xl bg-black/30 p-8 shadow-2xl backdrop-blur-xl border border-white/10 overflow-hidden">
+              <div className="absolute inset-0 z-0 animate-breathing-glow bg-primary/20 blur-3xl rounded-full"></div>
+              <div className="relative z-10">
                   <AnimatePresence mode="wait">
                     {!showSuccess ? (
                       <motion.div key="form" variants={cardVariants} initial="hidden" animate="visible" exit="exit">
@@ -210,9 +208,12 @@ export default function Home() {
                     Suas informações são confidenciais e seguras
                   </p>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="lg:col-span-5 py-16 sm:py-24">
+          <WalterBenefits />
         </div>
       </div>
     </div>
