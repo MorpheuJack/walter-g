@@ -156,7 +156,7 @@ export default function Home() {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-md bg-black/60 backdrop-blur-lg border-white/10 p-8 text-foreground shadow-2xl rounded-3xl">
+                  <DialogContent className="max-w-lg bg-black/60 backdrop-blur-lg border-white/10 p-6 sm:p-8 text-foreground shadow-2xl rounded-3xl">
                     <DialogHeader className="text-center items-center">
                       <DialogTitle className="text-3xl font-bold">Como Funciona o WALTER</DialogTitle>
                       <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
@@ -164,7 +164,7 @@ export default function Home() {
                       </DialogDescription>
                     </DialogHeader>
                     <motion.div 
-                      className="mt-8 space-y-6"
+                      className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8"
                       variants={popupContainerVariants}
                       initial="hidden"
                       animate="visible"
@@ -172,13 +172,13 @@ export default function Home() {
                       {howItWorksSteps.map((item) => (
                         <motion.div 
                           key={item.step} 
-                          className="flex items-start text-left gap-4"
+                          className="flex items-start text-left gap-4 md:flex-col md:items-center md:text-center"
                           variants={popupItemVariants}
                         >
                           <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold text-lg shadow-lg">
                             {item.step}
                           </div>
-                          <div className="flex-grow">
+                          <div className="flex-grow md:flex-grow-0">
                             <h4 className="font-bold text-lg text-foreground">{item.title}</h4>
                             <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
                           </div>
