@@ -1,54 +1,58 @@
-// src/ai/flows/personalized-tips.ts
 'use server';
 /**
- * @fileOverview A flow for generating personalized mental health tips based on user mood and stressors.
+ * @fileOverview Um fluxo para o terapeuta digital Walter gerar conselhos de apoio.
  *
- * - generatePersonalizedTips - A function that generates personalized mental health tips.
- * - PersonalizedTipsInput - The input type for the generatePersonalizedTips function.
- * - PersonalizedTipsOutput - The return type for the generatePersonalizedTips function.
+ * - getSupport - Uma função que gera conselhos de apoio com base no problema do usuário.
+ * - GetSupportInput - O tipo de entrada para a função getSupport.
+ * - GetSupportOutput - O tipo de retorno para a função getSupport.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const PersonalizedTipsInputSchema = z.object({
-  mood: z
+const GetSupportInputSchema = z.object({
+  email: z
+    .string().email()
+    .describe('O endereço de e-mail do usuário, para identificação.'),
+  issue: z
     .string()
-    .describe('The current mood of the user (e.g., happy, sad, anxious).'),
-  stressors: z
-    .string()
-    .describe('The current stressors affecting the user (e.g., work, relationships, finances).'),
+    .describe('A descrição do problema, dor ou ansiedade do usuário.'),
 });
 
-export type PersonalizedTipsInput = z.infer<typeof PersonalizedTipsInputSchema>;
+export type GetSupportInput = z.infer<typeof GetSupportInputSchema>;
 
-const PersonalizedTipsOutputSchema = z.object({
-  tips: z.array(z.string()).describe('An array of personalized mental health tips.'),
+const GetSupportOutputSchema = z.object({
+  tips: z.array(z.string()).describe('Uma lista de dicas ou passos de ação úteis para o usuário.'),
 });
 
-export type PersonalizedTipsOutput = z.infer<typeof PersonalizedTipsOutputSchema>;
+export type GetSupportOutput = z.infer<typeof GetSupportOutputSchema>;
 
-export async function generatePersonalizedTips(input: PersonalizedTipsInput): Promise<PersonalizedTipsOutput> {
-  return personalizedTipsFlow(input);
+export async function getSupport(input: GetSupportInput): Promise<GetSupportOutput> {
+  return getSupportFlow(input);
 }
 
 const prompt = ai.definePrompt({
-  name: 'personalizedTipsPrompt',
-  input: {schema: PersonalizedTipsInputSchema},
-  output: {schema: PersonalizedTipsOutputSchema},
-  prompt: `You are a mental health expert. Generate personalized mental health tips based on the user's current mood and stressors.
+  name: 'getSupportPrompt',
+  input: {schema: GetSupportInputSchema},
+  output: {schema: GetSupportOutputSchema},
+  prompt: `Você é Walter, um terapeuta digital compassivo, solidário e especializado em saúde mental.
+Seu objetivo é fornecer apoio emocional imediato e conselhos práticos.
 
-Mood: {{{mood}}}
-Stressors: {{{stressors}}}
+Um usuário, {{email}}, está procurando ajuda.
 
-Tips:`,
+O problema deles é: {{{issue}}}
+
+Com base no problema deles, gere uma lista de 3 a 5 dicas, insights ou próximos passos acionáveis.
+Seu tom deve ser empático, encorajador e profissional. Forneça conselhos que sejam seguros e geralmente aplicáveis.
+Comece com uma breve afirmação de validação antes de listar as dicas.
+Não se refira ao usuário pelo e-mail.`,
 });
 
-const personalizedTipsFlow = ai.defineFlow(
+const getSupportFlow = ai.defineFlow(
   {
-    name: 'personalizedTipsFlow',
-    inputSchema: PersonalizedTipsInputSchema,
-    outputSchema: PersonalizedTipsOutputSchema,
+    name: 'getSupportFlow',
+    inputSchema: GetSupportInputSchema,
+    outputSchema: GetSupportOutputSchema,
   },
   async input => {
     const {output} = await prompt(input);
