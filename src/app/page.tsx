@@ -198,9 +198,9 @@ export default function Home() {
                 </Dialog>
               </div>
             </motion.div>
-          </div>
-          <div className="py-16 sm:py-24">
-            <WalterBenefits />
+            <div className="py-16 sm:py-24">
+              <WalterBenefits />
+            </div>
           </div>
         </div>
 
