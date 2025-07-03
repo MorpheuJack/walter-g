@@ -10,7 +10,7 @@ import { Heart, ArrowRight, Send, Lock, CheckCircle2, Undo2 } from 'lucide-react
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import WalterBenefits from '@/components/walter-benefits';
 import Link from 'next/link';
 
@@ -37,17 +37,17 @@ const howItWorksSteps = [
     {
       step: 2,
       title: 'Desabafe Suas Dores',
-      description: 'Conte o que está te incomodando no campo de texto. Seja honesto e aberto - estamos aqui para te ajudar.',
+      description: 'Conte o que está te incomodando no campo de texto. Seja honesto e aberto - Walter está aqui para te ajudar.',
     },
     {
       step: 3,
-      title: 'Envie sua mensagem',
-      description: 'Clique em "Enviar Mensagem" para que nossa equipe receba suas informações com cuidado e empatia.',
+      title: 'Receba Apoio Imediato',
+      description: 'Clique em "Enviar Mensagem" e aguarde. Walter analisará sua situação com cuidado e empatia.',
     },
     {
       step: 4,
-      title: 'Aguarde o contato',
-      description: 'Em até 24 horas, nossa equipe entrará em contato com você pelo e-mail fornecido.',
+      title: 'Resposta Personalizada',
+      description: 'Em até 24 horas, você receberá uma resposta detalhada e personalizada em seu e-mail com orientações e apoio.',
     },
   ];
 
@@ -120,33 +120,25 @@ export default function Home() {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-lg bg-card border-border/50 p-8 text-foreground shadow-2xl rounded-2xl">
+                  <DialogContent className="max-w-md bg-black/60 backdrop-blur-lg border-white/10 p-8 text-foreground shadow-2xl rounded-3xl">
                     <DialogHeader className="text-center items-center">
                       <DialogTitle className="text-3xl font-bold">Como Funciona o WALTER</DialogTitle>
-                      <DialogDescription className="text-muted-foreground mt-2">
+                      <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
                         Siga estes simples passos para receber apoio emocional personalizado
                       </DialogDescription>
                     </DialogHeader>
-                    <div className="mt-8 space-y-6">
+                    <div className="mt-8 space-y-8">
                       {howItWorksSteps.map((item) => (
-                        <div key={item.step} className="flex items-start gap-4">
-                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
+                        <div key={item.step} className="flex flex-col items-center text-center gap-3">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold text-xl shadow-lg">
                             {item.step}
                           </div>
                           <div>
-                            <h4 className="font-semibold text-lg text-foreground">{item.title}</h4>
-                            <p className="text-muted-foreground">{item.description}</p>
+                            <h4 className="font-bold text-xl text-foreground">{item.title}</h4>
+                            <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
                           </div>
                         </div>
                       ))}
-                    </div>
-                    <div className="mt-8 text-center">
-                      <DialogClose asChild>
-                        <Button onClick={handleScrollToForm} size="lg" className="bg-gradient-to-r from-primary via-accent to-primary/80 text-primary-foreground rounded-full py-5 px-8 text-base font-semibold hover:opacity-90 transition-opacity">
-                          <Heart className="mr-2 h-5 w-5" />
-                          Começar Agora
-                        </Button>
-                      </DialogClose>
                     </div>
                   </DialogContent>
                 </Dialog>
