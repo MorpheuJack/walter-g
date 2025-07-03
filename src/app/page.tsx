@@ -79,6 +79,7 @@ export default function Home() {
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     if (state.message === 'success') {
@@ -101,6 +102,11 @@ export default function Home() {
   
   const handleScrollToForm = () => {
     document.getElementById('form-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleStartNowClick = () => {
+    setIsPopupOpen(false);
+    handleScrollToForm();
   };
 
   const cardVariants = {
@@ -130,13 +136,11 @@ export default function Home() {
                 Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
               </p>
               <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Button asChild className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
-                  <Link href="#form-section">
-                    <Heart className="mr-2 h-5 w-5" />
-                    Começar Agora
-                  </Link>
+                <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
+                  <Heart className="mr-2 h-5 w-5" />
+                  Começar Agora
                 </Button>
-                <Dialog>
+                <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
                   <DialogTrigger asChild>
                     <Button variant="outline" className="rounded-lg border-accent bg-transparent px-6 py-5 text-base font-semibold text-accent hover:bg-accent/10 transition-transform duration-300 hover:scale-105">
                       Como funciona
@@ -172,6 +176,15 @@ export default function Home() {
                         </motion.div>
                       ))}
                     </motion.div>
+                    <div className="mt-8 flex justify-center">
+                      <Button
+                        onClick={handleStartNowClick}
+                        className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-105 animate-border-pulse"
+                      >
+                        <Heart className="mr-2 h-5 w-5" />
+                        Começar Agora
+                      </Button>
+                    </div>
                   </DialogContent>
                 </Dialog>
               </div>

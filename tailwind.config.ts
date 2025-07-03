@@ -87,11 +87,16 @@ export default {
             opacity: '0.35',
           },
         },
+        'border-pulse': {
+          '0%, 100%': { 'box-shadow': '0 0 0 0 hsl(var(--primary) / 0.7)' },
+          '70%': { 'box-shadow': '0 0 0 10px hsl(var(--primary) / 0)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'breathing-glow': 'breathing-glow 8s ease-in-out infinite',
+        'border-pulse': 'border-pulse 2.5s ease-in-out infinite',
       },
     },
   },
