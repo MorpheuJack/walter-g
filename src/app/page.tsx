@@ -87,7 +87,7 @@ export default function Home() {
         
         <div className="flex flex-col gap-y-32 py-16 lg:col-span-3">
           <motion.div 
-            className="flex flex-col justify-center text-foreground min-h-[calc(100vh_-_8rem)]"
+            className="flex flex-col justify-center text-foreground min-h-[calc(100vh_-_12rem)]"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -147,66 +147,69 @@ export default function Home() {
           <WalterBenefits />
         </div>
 
-        <div className="lg:sticky lg:top-16 h-fit py-16 lg:col-span-2">
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-          >
-            <div className="relative w-full max-w-md rounded-2xl bg-black/30 p-8 shadow-2xl backdrop-blur-xl border border-white/10">
-              <AnimatePresence mode="wait">
-                {!showSuccess ? (
-                  <motion.div key="form" variants={cardVariants} initial="hidden" animate="visible" exit="exit">
-                    <h2 className="text-3xl font-bold text-foreground">Como podemos te ajudar?</h2>
-                    <p className="mt-2 text-muted-foreground">Sua mensagem é confidencial e será enviada para nossa equipe.</p>
+        <div className="lg:col-span-2">
+          <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:justify-center">
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+            >
+              <div className="relative mx-auto w-full max-w-md rounded-2xl bg-black/30 p-8 shadow-2xl backdrop-blur-xl border border-white/10">
+                <AnimatePresence mode="wait">
+                  {!showSuccess ? (
+                    <motion.div key="form" variants={cardVariants} initial="hidden" animate="visible" exit="exit">
+                      <h2 className="text-3xl font-bold text-foreground">Como podemos te ajudar?</h2>
+                      <p className="mt-2 text-muted-foreground">Sua mensagem é confidencial e será enviada para nossa equipe.</p>
 
-                    <form ref={formRef} action={formAction} className="mt-8 space-y-6">
-                      <div>
-                        <Label htmlFor="email" className="text-muted-foreground">Seu e-mail</Label>
-                        <Input 
-                          id="email" 
-                          name="email" 
-                          type="email" 
-                          placeholder="seuemail@exemplo.com" 
-                          className="mt-2 bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg p-3 focus:border-primary focus:ring-primary" 
-                          required
-                        />
-                        {state.errors?.email && <p className="mt-1 text-sm font-medium text-destructive">{state.errors.email[0]}</p>}
+                      <form ref={formRef} action={formAction} className="mt-8 space-y-6">
+                        <div>
+                          <Label htmlFor="email" className="text-muted-foreground">Seu e-mail</Label>
+                          <Input 
+                            id="email" 
+                            name="email" 
+                            type="email" 
+                            placeholder="seuemail@exemplo.com" 
+                            className="mt-2 bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg p-3 focus:border-primary focus:ring-primary" 
+                            required
+                          />
+                          {state.errors?.email && <p className="mt-1 text-sm font-medium text-destructive">{state.errors.email[0]}</p>}
+                        </div>
+                        <div>
+                          <Label htmlFor="issue" className="text-muted-foreground">O que está te afligindo?</Label>
+                          <Textarea 
+                            id="issue" 
+                            name="issue" 
+                            placeholder="Conte suas dores, medos, ansiedades..." 
+                            className="mt-2 min-h-[120px] bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg p-3 focus:border-primary focus:ring-primary"
+                            required
+                          />
+                          {state.errors?.issue && <p className="mt-1 text-sm font-medium text-destructive">{state.errors.issue[0]}</p>}
+                        </div>
+                        <SubmitButton />
+                      </form>
+                    </motion.div>
+                  ) : (
+                    <motion.div key="success" variants={cardVariants} initial="hidden" animate="visible" exit="exit" className="text-center">
+                      <div className="flex flex-col items-center justify-center">
+                        <CheckCircle2 className="h-16 w-16 text-green-400 mb-4" />
+                        <h3 className="text-2xl font-bold mb-2 text-foreground">Mensagem Enviada!</h3>
+                        <p className="text-muted-foreground mb-6">Obrigado por entrar em contato. Responderemos em breve.</p>
                       </div>
-                      <div>
-                        <Label htmlFor="issue" className="text-muted-foreground">O que está te afligindo?</Label>
-                        <Textarea 
-                          id="issue" 
-                          name="issue" 
-                          placeholder="Conte suas dores, medos, ansiedades..." 
-                          className="mt-2 min-h-[120px] bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg p-3 focus:border-primary focus:ring-primary"
-                          required
-                        />
-                        {state.errors?.issue && <p className="mt-1 text-sm font-medium text-destructive">{state.errors.issue[0]}</p>}
-                      </div>
-                      <SubmitButton />
-                    </form>
-                  </motion.div>
-                ) : (
-                  <motion.div key="success" variants={cardVariants} initial="hidden" animate="visible" exit="exit" className="text-center">
-                    <div className="flex flex-col items-center justify-center">
-                      <CheckCircle2 className="h-16 w-16 text-green-400 mb-4" />
-                      <h3 className="text-2xl font-bold mb-2 text-foreground">Mensagem Enviada!</h3>
-                      <p className="text-muted-foreground mb-6">Obrigado por entrar em contato. Responderemos em breve.</p>
-                    </div>
-                    <Button onClick={handleReset} className="mt-8 w-full" variant="outline">
-                      <Undo2 className="mr-2 h-4 w-4" />
-                      Enviar outra mensagem
-                    </Button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <p className="mt-6 flex items-center justify-center text-xs text-muted-foreground">
-                <Lock className="mr-2 h-3 w-3" />
-                Suas informações são confidenciais e seguras
-              </p>
-            </div>
-          </motion.div>
+                      <Button onClick={handleReset} className="mt-8 w-full" variant="outline">
+                        <Undo2 className="mr-2 h-4 w-4" />
+                        Enviar outra mensagem
+                      </Button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <p className="mt-6 flex items-center justify-center text-xs text-muted-foreground">
+                  <Lock className="mr-2 h-3 w-3" />
+                  Suas informações são confidenciais e seguras
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
