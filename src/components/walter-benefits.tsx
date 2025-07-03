@@ -1,28 +1,28 @@
 'use client';
 
-import { Clock, Zap, ShieldCheck, Heart } from 'lucide-react';
+import { BrainCircuit, ClipboardList, ShieldCheck, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const benefits = [
   {
-    icon: <Clock className="h-8 w-8 text-primary" />,
-    title: 'Disponível 24/7',
-    description: 'Walter está sempre aqui para você, a qualquer hora do dia ou da noite, sem necessidade de agendamento.',
+    icon: <BrainCircuit className="h-8 w-8 text-primary" />,
+    title: 'Análise Técnica Profunda',
+    description: 'Identificamos padrões cognitivos e a raiz neuropsicológica do problema, indo além dos sintomas superficiais.',
   },
   {
-    icon: <Zap className="h-8 w-8 text-primary" />,
-    title: 'Respostas Imediatas',
-    description: 'Receba apoio e conselhos práticos instantaneamente, no momento em que você mais precisa.',
+    icon: <ClipboardList className="h-8 w-8 text-primary" />,
+    title: 'Plano de Ação Estruturado',
+    description: 'Você recebe um cronograma com ferramentas práticas, técnicas de TCC e exercícios para implementar imediatamente.',
   },
   {
     icon: <ShieldCheck className="h-8 w-8 text-primary" />,
     title: '100% Confidencial',
-    description: 'Suas conversas são totalmente privadas e seguras, criando um espaço seguro para você se abrir.',
+    description: 'Suas informações são criptografadas e processadas com segurança absoluta para garantir sua privacidade.',
   },
   {
-    icon: <Heart className="h-8 w-8 text-primary" />,
-    title: 'Completamente Gratuito',
-    description: 'Acesse suporte de qualidade para sua saúde mental sem nenhum custo, de forma ilimitada.',
+    icon: <TrendingUp className="h-8 w-8 text-primary" />,
+    title: 'Foco em Resultados',
+    description: 'Fornecemos métricas claras para que você possa acompanhar seu progresso e ver a eficácia das estratégias.',
   },
 ];
 
@@ -61,9 +61,9 @@ export default function WalterBenefits() {
           variants={itemVariants}
           className="flex flex-col items-start space-y-4 mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-headline bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent">Por que conversar com Walter?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-headline bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent">A Metodologia Walter</h2>
           <p className="max-w-[600px] text-muted-foreground md:text-lg">
-            Descubra as vantagens de ter um terapeuta digital sempre ao seu lado, oferecendo apoio contínuo e personalizado para sua jornada de bem-estar.
+            Nossa abordagem combina análise de dados, neurociência e psicologia baseada em evidências para fornecer um plano de ação claro e mensurável.
           </p>
         </motion.div>
         <motion.div 

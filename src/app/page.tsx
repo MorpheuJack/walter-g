@@ -23,7 +23,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending} className="w-full rounded-lg py-6 text-lg bg-white/90 text-primary-foreground hover:bg-white transition-all duration-300 transform hover:scale-105">
-      {pending ? 'Enviando...' : <><Send className="mr-2 h-5 w-5" /> Enviar Mensagem</>}
+      {pending ? 'Enviando...' : <><Send className="mr-2 h-5 w-5" /> Enviar para Análise</>}
     </Button>
   );
 }
@@ -31,23 +31,23 @@ function SubmitButton() {
 const howItWorksSteps = [
     {
       step: 1,
-      title: 'Compartilhe Seu E-mail',
-      description: 'Digite seu e-mail no campo indicado para que possamos entrar em contato.',
+      title: 'Submeta seu Caso',
+      description: 'Forneça seu e-mail e descreva o problema com o máximo de detalhes para uma análise precisa.',
     },
     {
       step: 2,
-      title: 'Descreva sua situação',
-      description: 'Use o campo de texto para nos contar o que está acontecendo. Suas informações são 100% confidenciais.',
+      title: 'Análise Técnica',
+      description: 'Nosso sistema especialista processa suas informações, identificando padrões cognitivos e comportamentais.',
     },
     {
       step: 3,
-      title: 'Envie sua Mensagem',
-      description: 'Clique no botão de envio. Nossa equipe receberá sua mensagem de forma segura.',
+      title: 'Receba seu Plano',
+      description: 'Enviamos para seu e-mail um plano de ação detalhado com ferramentas e técnicas baseadas em evidências.',
     },
     {
       step: 4,
-      title: 'Aguarde nosso Contato',
-      description: 'Em até 24 horas, um de nossos especialistas entrará em contato com você pelo e-mail fornecido.',
+      title: 'Implemente e Monitore',
+      description: 'Aplique as estratégias recomendadas e utilize nossas métricas para acompanhar seu progresso.',
     },
   ];
 
@@ -137,17 +137,17 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
-                <span className="block">WALTER</span>
-                <span>TERAPEUTA</span>
+                <span className="block">ANÁLISE PSICOLÓGICA</span>
+                <span>RESULTADOS PRÁTICOS</span>
               </h1>
-              <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">TERAPIA DIGITAL GRATUITA</p>
+              <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">PSICOLOGIA BASEADA EM DADOS</p>
               <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
-                Deixe sua mensagem e nossa equipe de especialistas em saúde mental entrará em contato para oferecer suporte emocional, de forma completamente gratuita.
+                Descreva sua situação. Receba uma análise técnica profunda e um plano de ação estruturado para sua saúde mental.
               </p>
               <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={handleScrollToForm}>
                   <Heart className="mr-2 h-5 w-5" />
-                  Começar Agora
+                  Começar Análise
                 </Button>
                 <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
                   <DialogTrigger asChild>
@@ -158,9 +158,9 @@ export default function Home() {
                   </DialogTrigger>
                   <DialogContent className="max-w-lg bg-black/60 backdrop-blur-lg border-white/10 p-6 sm:p-8 text-foreground shadow-2xl rounded-3xl">
                     <DialogHeader className="text-center items-center">
-                      <DialogTitle className="text-3xl font-bold">Como Funciona o WALTER</DialogTitle>
+                      <DialogTitle className="text-3xl font-bold">Nossa Metodologia Analítica</DialogTitle>
                       <DialogDescription className="text-muted-foreground mt-2 max-w-sm">
-                        Veja como é simples e seguro nos enviar sua mensagem para receber apoio.
+                        Entenda o processo desde a submissão até o recebimento do seu plano de ação personalizado.
                       </DialogDescription>
                     </DialogHeader>
                     <motion.div 
@@ -221,12 +221,12 @@ export default function Home() {
                   <AnimatePresence mode="wait">
                     {!showSuccess ? (
                       <motion.div key="form" variants={cardVariants} initial="hidden" animate="visible" exit="exit">
-                        <h2 className="text-3xl font-bold text-foreground">Como podemos te ajudar?</h2>
-                        <p className="mt-2 text-muted-foreground">Sua mensagem é confidencial e será enviada para nossa equipe.</p>
+                        <h2 className="text-3xl font-bold text-foreground">Inicie sua Análise Técnica</h2>
+                        <p className="mt-2 text-muted-foreground">Submeta seu caso para uma análise técnica, confidencial e gratuita.</p>
 
                         <form ref={formRef} action={formAction} className="mt-8 space-y-6">
                           <div>
-                            <Label htmlFor="email" className="text-muted-foreground">Seu e-mail</Label>
+                            <Label htmlFor="email" className="text-muted-foreground">Seu e-mail de contato</Label>
                             <Input 
                               id="email" 
                               name="email" 
@@ -238,11 +238,11 @@ export default function Home() {
                             {state.errors?.email && <p className="mt-1 text-sm font-medium text-destructive">{state.errors.email[0]}</p>}
                           </div>
                           <div>
-                            <Label htmlFor="issue" className="text-muted-foreground">O que está te afligindo?</Label>
+                            <Label htmlFor="issue" className="text-muted-foreground">Descreva o problema principal</Label>
                             <Textarea 
                               id="issue" 
                               name="issue" 
-                              placeholder="Conte suas dores, medos, ansiedades..." 
+                              placeholder="Seja detalhista. Descreva sintomas, pensamentos recorrentes, situações gatilho e o que já tentou fazer." 
                               className="mt-2 min-h-[120px] bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg p-3 focus:border-primary focus:ring-primary"
                               required
                             />
@@ -255,12 +255,12 @@ export default function Home() {
                       <motion.div key="success" variants={cardVariants} initial="hidden" animate="visible" exit="exit" className="text-center">
                         <div className="flex flex-col items-center justify-center">
                           <CheckCircle2 className="h-16 w-16 text-green-400 mb-4" />
-                          <h3 className="text-2xl font-bold mb-2 text-foreground">Mensagem Enviada!</h3>
-                          <p className="text-muted-foreground mb-6">Obrigado por entrar em contato. Responderemos em breve.</p>
+                          <h3 className="text-2xl font-bold mb-2 text-foreground">Análise em Andamento</h3>
+                          <p className="text-muted-foreground mb-6">Seu plano de ação personalizado será enviado para o seu e-mail em breve. Verifique sua caixa de spam.</p>
                         </div>
                         <Button onClick={handleReset} className="mt-8 w-full" variant="outline">
                           <Undo2 className="mr-2 h-4 w-4" />
-                          Enviar outra mensagem
+                          Enviar nova análise
                         </Button>
                       </motion.div>
                     )}
