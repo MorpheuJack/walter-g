@@ -35,7 +35,7 @@ export default function WalterBenefits() {
         </div>
         <div className="grid gap-x-8 gap-y-12 md:grid-cols-2">
           {benefits.map((benefit, index) => (
-            <div key={index} className="flex items-start gap-5">
+            <div key={index} className="flex items-center gap-5">
                <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-card text-primary shadow-lg border border-white/10">
                  {benefit.icon}
                </div>
