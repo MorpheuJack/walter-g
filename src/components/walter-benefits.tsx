@@ -1,0 +1,52 @@
+import { Clock, Zap, ShieldCheck, Heart } from 'lucide-react';
+
+const benefits = [
+  {
+    icon: <Clock className="h-10 w-10 text-primary" />,
+    title: 'Disponível 24/7',
+    description: 'Walter está sempre aqui para você, a qualquer hora do dia ou da noite, sem necessidade de agendamento.',
+  },
+  {
+    icon: <Zap className="h-10 w-10 text-primary" />,
+    title: 'Respostas Imediatas',
+    description: 'Receba apoio e conselhos práticos instantaneamente, no momento em que você mais precisa.',
+  },
+  {
+    icon: <ShieldCheck className="h-10 w-10 text-primary" />,
+    title: '100% Confidencial',
+    description: 'Suas conversas são totalmente privadas e seguras, criando um espaço seguro para você se abrir.',
+  },
+  {
+    icon: <Heart className="h-10 w-10 text-primary" />,
+    title: 'Completamente Gratuito',
+    description: 'Acesse suporte de qualidade para sua saúde mental sem nenhum custo, de forma ilimitada.',
+  },
+];
+
+export default function WalterBenefits() {
+  return (
+    <section className="text-foreground">
+      <div className="container px-0">
+        <div className="flex flex-col items-start space-y-4 mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-headline bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent">Por que conversar com Walter?</h2>
+          <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+            Descubra as vantagens de ter um terapeuta digital sempre ao seu lado, oferecendo apoio contínuo e personalizado para sua jornada de bem-estar.
+          </p>
+        </div>
+        <div className="grid gap-x-8 gap-y-12 md:grid-cols-2">
+          {benefits.map((benefit, index) => (
+            <div key={index} className="flex items-start gap-5">
+               <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-card text-primary shadow-lg border border-white/10">
+                 {benefit.icon}
+               </div>
+               <div>
+                 <h3 className="font-bold text-xl text-foreground">{benefit.title}</h3>
+                 <p className="text-muted-foreground mt-1">{benefit.description}</p>
+               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
