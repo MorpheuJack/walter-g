@@ -6,12 +6,12 @@ import { cn } from '@/lib/utils';
 import Footer from '@/components/footer';
 
 export const metadata: Metadata = {
-  title: 'Walter Terapeuta',
+  title: 'Terapia Digital',
   description: 'Terapia digital e gratuita para todos.',
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Walter Terapeuta",
+    title: "Terapia Digital",
   },
 };
 

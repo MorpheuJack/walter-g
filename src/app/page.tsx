@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-16">
       {/* Hero Section */}
-      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:text-left p-8 lg:p-16 relative">
+      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:items-start p-8 lg:p-16 relative">
         <MotionDiv 
           className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
@@ -122,7 +122,7 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg text-center lg:text-left">
-            Walter Terapeuta
+            Terapia Digital
           </h1>
           <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
           <p className="mt-8 text-base md:text-lg text-muted-foreground text-center lg:text-left">

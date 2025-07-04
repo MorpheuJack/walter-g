@@ -9,11 +9,11 @@ export default function Footer() {
           <div className="flex items-center gap-2">
              <Heart className="h-5 w-5 text-primary" />
             <span className="text-base font-semibold text-foreground">
-              Walter Terapeuta
+              Terapia Digital
             </span>
           </div>
           <p className="text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Walter Terapeuta. Todos os direitos reservados.
+            © {new Date().getFullYear()} Terapia Digital. Todos os direitos reservados.
           </p>
         </div>
       </div>
