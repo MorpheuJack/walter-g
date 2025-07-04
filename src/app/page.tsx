@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-16">
       {/* Hero Section */}
-      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center text-center p-4 relative">
+      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center text-center lg:items-start lg:text-left p-8 lg:p-16 relative">
         <MotionDiv 
           className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
@@ -125,7 +125,7 @@ export default function Home() {
             Walter Terapeuta
           </h1>
           <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
-          <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground text-center lg:text-left">
+          <p className="mt-8 text-base md:text-lg text-muted-foreground text-center lg:text-left">
           Se você nunca fez terapia, é normal se sentir perdido. Descreva sua situação e receba uma primeira análise que te dará clareza e um plano de ação para começar a resolver seus problemas.
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
