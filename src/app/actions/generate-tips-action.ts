@@ -25,34 +25,36 @@ export async function getPersonalizedTipsAction(
 
   const { email, issue } = validatedFields.data;
 
-  if (!process.env.N8N_WEBHOOK_URL) {
-    console.error('N8N_WEBHOOK_URL is not set in the .env file.');
-    return {
-      message: 'A configuração do servidor está incompleta. Por favor, tente novamente.',
-      errors: {},
-    };
-  }
+  const n8nWebhookUrl = 'https://n8n-927020941701.southamerica-east1.run.app/webhook/8e1b3a4a-174a-4f47-8223-2a20840d0f9b';
+
+  const dataToSend = {
+      email: email,
+      problem: issue,
+      submittedAt: new Date().toISOString()
+  };
 
   try {
-    const response = await fetch(process.env.N8N_WEBHOOK_URL, {
+    const response = await fetch(n8nWebhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
-      body: JSON.stringify({ email, issue }),
+      body: JSON.stringify(dataToSend),
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Falha ao enviar para o n8n:', response.status, errorText);
-      throw new Error('Falha ao enviar os dados. Por favor, tente novamente mais tarde.');
+        const errorText = await response.text();
+        console.error('Falha ao enviar para o n8n:', response.status, errorText);
+        throw new Error(errorText || `A resposta da rede não foi 'ok': ${response.statusText}`);
     }
 
+    console.log('Sucesso! Enviado para o n8n.');
     return { message: 'success', errors: {} };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Erro ao enviar para o n8n:', error);
     return {
-      message: 'Ocorreu um erro no servidor ao tentar enviar seus dados. Por favor, tente novamente mais tarde.',
+      message: `Houve um problema ao enviar seus dados. Detalhe: ${error.message}`,
       errors: {},
     };
   }
