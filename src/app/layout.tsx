@@ -3,6 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
+import Footer from '@/components/footer';
 
 export const metadata: Metadata = {
   title: 'Walter Terapeuta',
@@ -32,10 +33,11 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-body antialiased'
+          'min-h-screen bg-background font-body antialiased flex flex-col'
         )}
       >
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
+        <Footer />
         <Toaster />
         <Script
           strategy="afterInteractive"
