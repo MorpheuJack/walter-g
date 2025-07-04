@@ -122,7 +122,7 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg text-center lg:text-left">
-            Terapia Digital
+            Walter Terapeuta
           </h1>
           <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
           <p className="mt-8 text-base md:text-lg text-muted-foreground text-center lg:text-left">
