@@ -112,23 +112,23 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-16">
       {/* Hero Section */}
-      <section className="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 relative">
+      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center text-center p-4 relative">
         <MotionDiv 
-          className="flex flex-col justify-center text-foreground items-center w-full max-w-2xl"
+          className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg text-center lg:text-left">
             Walter Terapeuta
           </h1>
           <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
-          <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
+          <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground text-center lg:text-left">
           Se você nunca fez terapia, é normal se sentir perdido. Descreva sua situação e receba uma primeira análise que te dará clareza e um plano de ação para começar a resolver seus problemas.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4 justify-center">
+          <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
             <Button className="rounded-lg bg-primary px-6 py-5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105" onClick={() => handleScrollTo('analysis-section')}>
               <Heart className="mr-2 h-5 w-5" />
               Começar Análise
@@ -195,12 +195,12 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits-section" className="w-full max-w-7xl py-24 px-4 sm:px-6 lg:px-8">
+      <section id="benefits-section" className="lg:col-span-1 w-full max-w-7xl py-24 px-4 sm:px-6 lg:px-8 mx-auto">
         <WalterBenefits />
       </section>
 
       {/* Form Section */}
-      <section id="analysis-section" className="w-full flex justify-center py-24 px-4 sm:px-6 lg:px-8 bg-black/10">
+      <section id="analysis-section" className="w-full flex justify-center py-24 px-4 sm:px-6 lg:px-8 bg-black/10 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-0 lg:h-screen lg:items-center lg:py-0 lg:bg-transparent">
         <MotionDiv
           className="w-full max-w-md"
           initial={{ opacity: 0, y: 50 }}
