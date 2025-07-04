@@ -7,6 +7,11 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = {
   title: 'Walter Terapeuta',
   description: 'Terapia digital e gratuita para todos.',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Walter Terapeuta",
+  },
 };
 
 export default function RootLayout({
@@ -17,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="scroll-smooth">
       <head>
+        <meta name="theme-color" content="#1a113c" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
