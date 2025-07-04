@@ -25,7 +25,35 @@ export async function getPersonalizedTipsAction(
 
   const { email, issue } = validatedFields.data;
 
-  console.log('Form data submitted:', { email, issue });
+  if (!process.env.N8N_WEBHOOK_URL) {
+    console.error('N8N_WEBHOOK_URL is not set in the .env file.');
+    return {
+      message: 'A configuração do servidor está incompleta. Por favor, tente novamente.',
+      errors: {},
+    };
+  }
 
-  return { message: 'success', errors: {} };
+  try {
+    const response = await fetch(process.env.N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, issue }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Falha ao enviar para o n8n:', response.status, errorText);
+      throw new Error('Falha ao enviar os dados. Por favor, tente novamente mais tarde.');
+    }
+
+    return { message: 'success', errors: {} };
+  } catch (error) {
+    console.error('Erro ao enviar para o n8n:', error);
+    return {
+      message: 'Ocorreu um erro no servidor ao tentar enviar seus dados. Por favor, tente novamente mais tarde.',
+      errors: {},
+    };
+  }
 }
