@@ -53,7 +53,7 @@ const itemVariants = {
 export default function WalterBenefits() {
   return (
     <section className="text-foreground">
-      <div className="container px-0">
+      <div className="">
         <motion.div
           initial="hidden"
           whileInView="visible"
