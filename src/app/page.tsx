@@ -127,7 +127,7 @@ export default function Home() {
     <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex items-center min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-12 w-full">
         
-        <div className="lg:col-span-3 py-12 lg:py-0">
+        <div className="lg:col-span-3 lg:py-12">
           <div className="min-h-screen flex items-center lg:min-h-0">
             <motion.div 
               className="flex flex-col justify-center text-foreground items-center lg:items-start w-full"
@@ -136,8 +136,7 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
-                <span className="block">ENTENDA O QUE VOCÊ SENTE</span>
-                <span>RECEBA UM PLANO DE AÇÃO</span>
+                Walter Terapeuta
               </h1>
               <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
               <p className="mt-8 max-w-md text-base md:text-lg text-muted-foreground">
