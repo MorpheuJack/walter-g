@@ -46,10 +46,14 @@ export async function getPersonalizedTipsAction(
     if (!response.ok) {
         const errorText = await response.text();
         console.error('Falha ao enviar para o n8n:', response.status, errorText);
-        throw new Error(errorText || `A resposta da rede não foi 'ok': ${response.statusText}`);
+        // The error comes from the n8n server. Provide a more helpful message.
+        throw new Error(`O serviço de automação retornou um erro (Status: ${response.status}). Verifique a URL e a configuração do seu webhook no n8n.`);
     }
 
-    console.log('Sucesso! Enviado para o n8n.');
+    // Handle cases where n8n returns a 2xx status but no JSON body.
+    const data = await response.json().catch(() => ({}));
+
+    console.log('Sucesso! Enviado para o n8n:', data);
     return { message: 'success', errors: {} };
   } catch (error: any) {
     console.error('Erro ao enviar para o n8n:', error);
