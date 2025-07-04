@@ -130,7 +130,7 @@ export default function Home() {
         <div className="lg:col-span-3 lg:py-12">
           <div className="min-h-screen flex items-center lg:min-h-0">
             <motion.div 
-              className="flex flex-col justify-center text-foreground items-center lg:items-start w-full"
+              className="flex flex-col justify-center text-foreground items-center lg:items-start w-full text-center lg:text-left"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
