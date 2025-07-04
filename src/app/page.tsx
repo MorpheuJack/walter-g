@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-16">
       {/* Hero Section */}
-      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center text-center lg:items-start lg:text-left p-8 lg:p-16 relative">
+      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:text-left p-8 lg:p-16 relative">
         <MotionDiv 
           className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
