@@ -55,7 +55,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(to bottom right, hsl(var(--background)), hsl(253 45% 18%));
+    background-image: linear-gradient(to bottom, hsl(var(--background)), hsl(253 45% 18%));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;

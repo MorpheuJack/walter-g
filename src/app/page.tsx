@@ -200,7 +200,7 @@ export default function Home() {
       </section>
 
       {/* Form Section */}
-      <section id="analysis-section" className="w-full flex justify-center py-24 px-4 sm:px-6 lg:px-8 bg-black/10 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-0 lg:h-screen lg:items-center lg:py-0 lg:bg-transparent">
+      <section id="analysis-section" className="w-full flex justify-center py-24 px-4 sm:px-6 lg:px-8 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-0 lg:h-screen lg:items-center lg:py-0">
         <MotionDiv
           className="w-full max-w-md"
           initial={{ opacity: 0, y: 50 }}
