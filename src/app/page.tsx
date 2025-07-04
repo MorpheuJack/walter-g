@@ -12,7 +12,6 @@ import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import WalterBenefits from '@/components/walter-benefits';
-import Link from 'next/link';
 
 const initialState = {
   message: '',
