@@ -25,35 +25,7 @@ export async function getPersonalizedTipsAction(
 
   const { email, issue } = validatedFields.data;
 
-  try {
-    const n8nWebhookUrl = 'https://n8n-927020941701.southamerica-east1.run.app/webhook/8e1b3a4a-174a-4f47-8223-2a20840d0f9b';
-    const dataToSend = {
-        email: email,
-        problem: issue,
-        submittedAt: new Date().toISOString()
-    };
+  console.log('Form data submitted:', { email, issue });
 
-    const webhookResponse = await fetch(n8nWebhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'ngrok-skip-browser-warning': 'true'
-        },
-        body: JSON.stringify(dataToSend),
-    });
-
-    if (!webhookResponse.ok) {
-      const errorText = await webhookResponse.text();
-      console.error('Erro ao enviar dados para o n8n:', errorText || `A resposta da rede não foi 'ok': ${webhookResponse.statusText}`);
-      throw new Error('Houve um problema ao enviar seus dados. Por favor, tente novamente mais tarde.');
-    }
-    
-    console.log('Sucesso! Enviado para o n8n.');
-    return { message: 'success', errors: {} };
-
-  } catch (error) {
-    console.error(error);
-    const errorMessage = error instanceof Error ? error.message : 'Ocorreu um erro ao enviar sua mensagem.';
-    return { message: errorMessage, errors: {} };
-  }
+  return { message: 'success', errors: {} };
 }
