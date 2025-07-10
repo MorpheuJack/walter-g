@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-24">
       {/* Hero Section */}
-      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:items-start p-8 lg:py-16 lg:pl-32 lg:pr-0 relative">
+      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:items-start p-8 lg:py-16 lg:pl-40 lg:pr-0 relative">
         <MotionDiv 
           className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
@@ -195,7 +195,7 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits-section" className="lg:col-span-1 w-full py-24 px-4 sm:px-6 lg:pl-32 lg:pr-0">
+      <section id="benefits-section" className="lg:col-span-1 w-full py-24 px-4 sm:px-6 lg:pl-40 lg:pr-0">
         <div className="w-full max-w-2xl">
           <WalterBenefits />
         </div>
