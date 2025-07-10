@@ -114,18 +114,22 @@ export default function Home() {
   return (
     <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-24">
       {/* Hero Section */}
-      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:items-start px-6 py-12 lg:py-16 lg:pl-48 lg:pr-0 relative">
+      <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:items-start px-6 pt-24 pb-12 lg:py-16 lg:pl-48 lg:pr-0 relative text-center lg:text-left">
         <MotionDiv 
           className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg text-center lg:text-left">
+          <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
             Walter Terapeuta
           </h1>
-          <p className="mt-2 text-base md:text-lg tracking-[0.2em] text-primary text-center lg:text-left">SEU PRIMEIRO PASSO PARA O BEM-ESTAR MENTAL</p>
-          <p className="mt-8 text-base md:text-lg text-muted-foreground text-center lg:text-left">
+          <p className="mt-4 text-base md:text-lg tracking-[0.2em] text-primary">
+            SEU PRIMEIRO PASSO PARA O BEM-
+            <br className="lg:hidden" />
+            ESTAR MENTAL
+          </p>
+          <p className="mt-8 text-base md:text-lg text-muted-foreground">
           Se você nunca fez terapia, é normal se sentir perdido. Descreva sua situação e receba uma primeira análise que te dará clareza e um plano de ação para começar a resolver seus problemas.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start w-full sm:w-auto">
