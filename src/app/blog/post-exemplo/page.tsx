@@ -122,6 +122,49 @@ const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: 
   );
 };
 
+const stats = [
+    { value: '10 anos', label: 'no mercado' },
+    { value: '500+', label: 'projetos concluídos' },
+    { value: '99%', label: 'de clientes satisfeitos' },
+];
+
+const CallToActionSection = () => {
+    return (
+        <section className="py-24">
+            <div className="container mx-auto max-w-6xl px-4">
+                <div className="bg-card/50 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
+                    <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: "url('https://placehold.co/1920x1080.png')", backgroundSize: 'cover', backgroundPosition: 'center' }} data-ai-hint="dark green leaves"></div>
+                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Transformamos escritórios em zonas de trabalho confortáveis</h2>
+                            <p className="text-muted-foreground text-lg">Até mesmo um ambiente de negócios deve ser agradável, por isso criamos projetos únicos que contribuem para o trabalho produtivo de seus funcionários.</p>
+                        </div>
+                        <div/>
+                    </div>
+                    <div className="relative z-10 mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div className="relative rounded-2xl overflow-hidden group">
+                            <Image src="https://placehold.co/600x400.png" alt="Office with plants" width={600} height={400} className="w-full h-full object-cover" data-ai-hint="office plants" />
+                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                                 <button className="h-20 w-20 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/50 transition-all duration-300">
+                                    <Play className="h-10 w-10 text-white fill-white" />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="space-y-6">
+                            {stats.map((stat, index) => (
+                                <div key={index} className="bg-black/20 backdrop-blur-sm border border-white/10 p-6 rounded-xl flex items-center gap-6">
+                                    <p className="text-5xl font-bold text-white">{stat.value}</p>
+                                    <p className="text-muted-foreground text-lg">{stat.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 
 export default function BlogPostPage() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -257,9 +300,8 @@ export default function BlogPostPage() {
           />
         ))}
       </div>
+      <CallToActionSection />
       <audio ref={audioRef} src="/audio-placeholder.mp3" />
     </div>
   );
 }
-
-    
