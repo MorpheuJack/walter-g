@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Heart, ArrowRight, Send, Lock, CheckCircle2, Undo2, ChevronDown } from 'lucide-react';
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import WalterBenefits from '@/components/walter-benefits';
 
@@ -81,6 +81,9 @@ export default function Home() {
   const formRef = useRef<HTMLFormElement>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const { scrollYProgress } = useScroll();
+  const chevronOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
   useEffect(() => {
     if (state.message === 'success') {
@@ -188,10 +191,8 @@ export default function Home() {
         </MotionDiv>
 
         <MotionDiv
+          style={{ opacity: chevronOpacity }}
           className="absolute bottom-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
           onClick={() => handleScrollTo('benefits-section')}
         >
           <ChevronDown className="h-8 w-8 text-primary/50 animate-bounce cursor-pointer" />
