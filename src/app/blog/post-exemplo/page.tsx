@@ -11,7 +11,7 @@ const content = [
     chapter: '01',
     title: 'Respiração Profunda',
     description: [
-      'A ansiedade é uma resposta natural do corpo ao estresse. É um sentimento de medo ou apreensão sobre o que está por vir. O primeiro dia de aula, uma entrevista de emprego ou um discurso podem causar ansiedade na maioria das pessoas. Mas se seus sentimentos de ansiedade são extremos, duram mais de seis meses e estão interferindo em sua vida, você pode ter um transtorno de ansiedade.',
+      'A ansiedade é uma resposta natural do corpo ao estresse. É um sentimento de medo ou apreensão sobre o que está por vir. O primeiro dia de aula, uma entrevista de emprego ou um discurso podem causar ansiedade na maioria das pessoas. Mas se seus sentimentos de ansiedade são extremos, duram mais de six meses e estão interferindo em sua vida, você pode ter um transtorno de ansiedade.',
       'Quando você está ansioso, sua respiração se torna rápida e superficial. A respiração profunda e diafragmática é uma ferramenta poderosa para acalmar seu sistema nervoso. Encontre um lugar tranquilo, inspire lentamente pelo nariz por quatro segundos, segure por quatro e expire pela boca por seis. Repita por vários minutos.',
     ],
   },
@@ -64,9 +64,9 @@ const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: 
       variants={variants}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
-      className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-3 lg:gap-12 px-4 py-24 items-start"
+      className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-3 lg:gap-12 px-4 py-24"
     >
-      <div className={`lg:col-span-1 ${isReversed ? 'lg:order-last' : ''}`}>
+      <div className={`self-start lg:sticky lg:top-32 lg:col-span-1 ${isReversed ? 'lg:order-last' : ''}`}>
         <p className="text-[10rem] lg:text-[15rem] font-black text-foreground/10 leading-none text-center lg:text-left">{chapter}</p>
       </div>
 
