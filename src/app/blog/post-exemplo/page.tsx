@@ -119,26 +119,6 @@ export default function BlogPostPage() {
           />
         ))}
       </div>
-
-       <footer className="container mx-auto max-w-6xl px-4 py-24">
-          <div className="border-t border-border pt-12 flex items-center gap-6">
-             <Image
-                src="https://placehold.co/100x100.png"
-                data-ai-hint="professional woman smiling"
-                alt="Foto da autora Ana de Almeida"
-                width={80}
-                height={80}
-                className="rounded-full border-2 border-primary"
-              />
-            <div>
-              <p className="text-sm text-muted-foreground">Escrito por</p>
-              <h4 className="text-xl font-bold text-foreground">Ana de Almeida</h4>
-              <p className="mt-1 text-base text-muted-foreground">
-                Ana é uma psicóloga licenciada com mais de 10 anos de experiência em Terapia Cognitivo-Comportamental e Mindfulness.
-              </p>
-            </div>
-          </div>
-        </footer>
     </div>
   );
 }
