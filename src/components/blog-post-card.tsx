@@ -11,7 +11,7 @@ interface BlogPostCardProps {
   description: string;
 }
 
-export default function BlogPostCard({ title, category, imageUrl, aiHint }: BlogPostCardProps) {
+export default function BlogPostCard({ title, category, imageUrl, aiHint, description }: BlogPostCardProps) {
   return (
     <Link href="#" className="group block overflow-hidden rounded-2xl">
       <div className="relative h-80 w-full transform transition-all duration-500 ease-in-out group-hover:scale-110">
