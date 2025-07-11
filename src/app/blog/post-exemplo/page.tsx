@@ -11,7 +11,10 @@ const content = [
     chapter: '01',
     title: 'Respiração Profunda',
     description: [
-      'A ansiedade é uma resposta natural do corpo ao estresse. É um sentimento de medo ou apreensão sobre o que está por vir. O primeiro dia de aula, uma entrevista de emprego ou um discurso podem causar ansiedade na maioria das pessoas. Mas se seus sentimentos de ansiedade são extremos, duram mais de six meses e estão interferindo em sua vida, você pode ter um transtorno de ansiedade.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
       'Quando você está ansioso, sua respiração se torna rápida e superficial. A respiração profunda e diafragmática é uma ferramenta poderosa para acalmar seu sistema nervoso. Encontre um lugar tranquilo, inspire lentamente pelo nariz por quatro segundos, segure por quatro e expire pela boca por seis. Repita por vários minutos.',
     ],
   },
@@ -19,8 +22,10 @@ const content = [
     chapter: '02',
     title: 'Incorpore o Mindfulness',
     description: [
-        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
-        'Tente focar em suas sensações: o que você vê, ouve, cheira, sente? A prática regular ajuda a treinar sua mente a não se deixar levar por preocupações, trazendo uma sensação de controle e paz interior.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+      'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+      'Tente focar em suas sensações: o que você vê, ouve, cheira, sente? A prática regular ajuda a treinar sua mente a não se deixar levar por preocupações, trazendo uma sensação de controle e paz interior.',
         '"O momento presente é o único momento disponível para nós, e é a porta para todos os outros momentos." - Thich Nhat Hanh'
     ],
   },
@@ -29,7 +34,13 @@ const content = [
     title: 'Movimente Seu Corpo',
     description: [
         'A atividade física é um redutor de estresse muito eficaz. O exercício regular pode diminuir os hormônios do estresse, como o cortisol, e aumentar as endorfinas, que melhoram o humor.',
-        'Não precisa ser um treino intenso; uma caminhada de 30 minutos por dia pode fazer uma grande diferença. Encontre uma atividade que você goste para que seja mais fácil manter a consistência.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
+        'Mindfulness é a prática de prestar atenção ao momento presente sem julgamento. Isso pode ajudá-lo a se desvincular de pensamentos ansiosos sobre o passado ou o futuro.',
     ],
   },
     {
@@ -75,7 +86,7 @@ const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: 
           <h3 className="text-3xl font-bold tracking-tight text-primary">
             {title}
           </h3>
-          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
             {description.map((paragraph, pIndex) => (
               <p key={pIndex}>{paragraph}</p>
             ))}
