@@ -4,7 +4,6 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import Footer from '@/components/footer';
-import Header from '@/components/header';
 
 export const metadata: Metadata = {
   title: 'Terapia Digital',
@@ -37,7 +36,6 @@ export default function RootLayout({
           'min-h-screen bg-background font-body antialiased flex flex-col'
         )}
       >
-        <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
