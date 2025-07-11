@@ -6,7 +6,15 @@ import { useRef, useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, Clock, ChevronDown } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const content = [
   {
@@ -117,6 +125,10 @@ const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: 
 
 export default function BlogPostPage() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState('1');
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const toggleAudio = () => {
@@ -129,13 +141,55 @@ export default function BlogPostPage() {
       setIsPlaying(!isPlaying);
     }
   };
+  
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return '00:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  };
+
+  const handleProgressChange = (value: number[]) => {
+    if (audioRef.current) {
+      const newTime = (value[0] / 100) * duration;
+      audioRef.current.currentTime = newTime;
+      setProgress(value[0]);
+    }
+  };
+
+  const handlePlaybackRateChange = (rate: string) => {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = parseFloat(rate);
+      setPlaybackRate(rate);
+    }
+  };
 
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      const handleEnded = () => setIsPlaying(false);
+      const updateProgress = () => {
+        const currentProgress = (audio.currentTime / audio.duration) * 100;
+        setProgress(currentProgress);
+        setCurrentTime(audio.currentTime);
+      };
+      
+      const setAudioData = () => {
+        setDuration(audio.duration);
+      }
+
+      const handleEnded = () => {
+        setIsPlaying(false);
+        setProgress(0);
+        audio.currentTime = 0;
+      }
+
+      audio.addEventListener('timeupdate', updateProgress);
+      audio.addEventListener('loadedmetadata', setAudioData);
       audio.addEventListener('ended', handleEnded);
+
       return () => {
+        audio.removeEventListener('timeupdate', updateProgress);
+        audio.removeEventListener('loadedmetadata', setAudioData);
         audio.removeEventListener('ended', handleEnded);
       };
     }
@@ -148,17 +202,48 @@ export default function BlogPostPage() {
         <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl">
           5 Maneiras de Lidar com a Ansiedade no Dia a Dia
         </h1>
-        <Button 
-            onClick={toggleAudio}
-            variant="outline" 
-            className="mt-8 rounded-lg border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
-            {isPlaying ? (
-                <Pause className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-            ) : (
-                <Play className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-            )}
-            {isPlaying ? 'Pausar o artigo' : 'Ouvir o artigo'}
-        </Button>
+        <div className="mt-8 max-w-xl space-y-4">
+            <div className="flex items-center gap-4">
+                <Button 
+                    onClick={toggleAudio}
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full h-14 w-14 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group flex-shrink-0">
+                    {isPlaying ? (
+                        <Pause className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                    ) : (
+                        <Play className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                    )}
+                </Button>
+                <div className="w-full flex items-center gap-3">
+                    <span className="text-sm text-muted-foreground font-mono">{formatTime(currentTime)}</span>
+                    <Slider
+                        value={[progress]}
+                        onValueChange={handleProgressChange}
+                        max={100}
+                        step={1}
+                    />
+                    <span className="text-sm text-muted-foreground font-mono">{formatTime(duration)}</span>
+                </div>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 rounded-lg border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300">
+                        <Clock className="h-4 w-4" />
+                        <span>{playbackRate}x</span>
+                        <ChevronDown className="h-4 w-4" />
+                    </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-24 bg-card">
+                    <DropdownMenuRadioGroup value={playbackRate} onValueChange={handlePlaybackRateChange}>
+                        <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="1">1x</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+        </div>
       </header>
       
       <div className="flex flex-col">
@@ -176,3 +261,5 @@ export default function BlogPostPage() {
     </div>
   );
 }
+
+    
