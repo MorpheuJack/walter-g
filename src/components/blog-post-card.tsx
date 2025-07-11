@@ -13,8 +13,8 @@ interface BlogPostCardProps {
 
 export default function BlogPostCard({ title, category, imageUrl, aiHint, description }: BlogPostCardProps) {
   return (
-    <Link href="#" className="group block overflow-hidden rounded-2xl">
-      <div className="relative h-80 w-full transform transition-all duration-500 ease-in-out group-hover:scale-110">
+    <Link href="/blog/post-exemplo" className="group block overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+      <div className="relative h-80 w-full transform transition-all duration-500 ease-in-out group-hover:scale-105">
         <Image
           src={imageUrl}
           data-ai-hint={aiHint}
