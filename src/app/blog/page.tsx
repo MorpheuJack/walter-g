@@ -85,7 +85,7 @@ export default function BlogPage() {
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
