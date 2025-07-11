@@ -2,6 +2,8 @@
 'use client';
 
 import BlogPostCard from '@/components/blog-post-card';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const posts = [
   {
@@ -48,21 +50,70 @@ const posts = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  },
+};
+
 export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 py-12 md:py-16">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-6xl font-headline">Nosso Blog</h1>
-        <p className="max-w-[600px] mx-auto mt-4 text-muted-foreground md:text-xl">
-          Artigos, dicas e reflexões para apoiar sua jornada de autoconhecimento e bem-estar.
-        </p>
-      </div>
+    <div className="w-full">
+       <section className="relative w-full h-[50vh] flex items-center justify-center text-center px-4 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://placehold.co/1920x1080.png"
+            data-ai-hint="dark green leaves"
+            alt="Fundo do blog"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="relative z-10"
+        >
+          <h1 className="text-5xl font-extrabold tracking-tighter sm:text-7xl md:text-8xl font-headline text-white">
+            Nosso Blog
+          </h1>
+          <p className="max-w-[600px] mx-auto mt-4 text-primary/80 md:text-xl">
+            Artigos, dicas e reflexões para apoiar sua jornada de autoconhecimento e bem-estar.
+          </p>
+        </motion.div>
+      </section>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        className="container mx-auto px-4 py-16 md:py-24 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {posts.map((post, index) => (
-          <BlogPostCard key={index} {...post} />
+          <motion.div key={index} variants={itemVariants}>
+            <BlogPostCard {...post} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

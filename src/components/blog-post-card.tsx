@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { Button } from './ui/button';
+import { ArrowRight } from 'lucide-react';
 
 interface BlogPostCardProps {
   title: string;
@@ -12,29 +11,27 @@ interface BlogPostCardProps {
   description: string;
 }
 
-export default function BlogPostCard({ title, category, imageUrl, aiHint, description }: BlogPostCardProps) {
+export default function BlogPostCard({ title, category, imageUrl, aiHint }: BlogPostCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card border-border/50">
-      <CardHeader className="p-0 relative">
+    <Link href="#" className="group block overflow-hidden rounded-2xl">
+      <div className="relative h-80 w-full transform transition-all duration-500 ease-in-out group-hover:scale-110">
         <Image
           src={imageUrl}
           data-ai-hint={aiHint}
           alt={title}
-          width={600}
-          height={400}
-          className="w-full h-48 object-cover"
+          fill
+          className="object-cover"
         />
-        <Badge className="absolute top-4 right-4 bg-primary/80 text-primary-foreground">{category}</Badge>
-      </CardHeader>
-      <CardContent className="p-6 flex-1">
-        <CardTitle className="mb-2 text-xl text-foreground">{title}</CardTitle>
-        <p className="text-muted-foreground text-sm line-clamp-3">{description}</p>
-      </CardContent>
-      <CardFooter className="p-6 pt-0">
-        <Button variant="secondary" className="w-full asChild">
-          <Link href="#">Leia Mais</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+          <Badge className="mb-2 w-fit bg-primary/80 text-primary-foreground backdrop-blur-sm">{category}</Badge>
+          <h3 className="text-2xl font-bold leading-tight">{title}</h3>
+          <p className="mt-2 text-sm text-primary/80 line-clamp-2">{description}</p>
+          <div className="mt-4 flex items-center text-sm font-semibold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            Leia Mais <ArrowRight className="ml-1 h-4 w-4" />
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }
