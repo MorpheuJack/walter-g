@@ -2,11 +2,11 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Play } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
 
 const content = [
   {
@@ -116,6 +116,31 @@ const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: 
 
 
 export default function BlogPostPage() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      const handleEnded = () => setIsPlaying(false);
+      audio.addEventListener('ended', handleEnded);
+      return () => {
+        audio.removeEventListener('ended', handleEnded);
+      };
+    }
+  }, []);
+
   return (
     <div className="w-full bg-background text-foreground">
       <header className="container mx-auto max-w-6xl px-4 py-24 md:py-32 text-left">
@@ -123,9 +148,16 @@ export default function BlogPostPage() {
         <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl">
           5 Maneiras de Lidar com a Ansiedade no Dia a Dia
         </h1>
-        <Button variant="outline" className="mt-8 rounded-lg border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
-            <Play className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-            Ouvir o artigo
+        <Button 
+            onClick={toggleAudio}
+            variant="outline" 
+            className="mt-8 rounded-lg border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
+            {isPlaying ? (
+                <Pause className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+            ) : (
+                <Play className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+            )}
+            {isPlaying ? 'Pausar o artigo' : 'Ouvir o artigo'}
         </Button>
       </header>
       
@@ -140,6 +172,7 @@ export default function BlogPostPage() {
           />
         ))}
       </div>
+      <audio ref={audioRef} src="/audio-placeholder.mp3" />
     </div>
   );
 }
