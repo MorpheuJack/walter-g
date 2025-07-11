@@ -1,7 +1,7 @@
 
 'use client';
 
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
@@ -49,13 +49,43 @@ const content = [
   },
 ];
 
-const Chapter = ({ number }: { number: string }) => {
+const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: string; title: string; description: string[]; isReversed?: boolean }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  const variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  };
+
   return (
-    <div className="sticky top-0 flex h-screen items-center justify-center">
-      <p className="text-[20rem] font-black text-foreground/10 leading-none">{number}</p>
-    </div>
+    <motion.section 
+      ref={ref}
+      variants={variants}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-3 lg:gap-12 px-4 py-24 items-start"
+    >
+      <div className={`lg:col-span-1 ${isReversed ? 'lg:order-last' : ''}`}>
+        <p className="text-[10rem] lg:text-[15rem] font-black text-foreground/10 leading-none text-center lg:text-left">{chapter}</p>
+      </div>
+
+      <div className="lg:col-span-2">
+        <div className="w-full space-y-6">
+          <h3 className="text-3xl font-bold tracking-tight text-primary">
+            {title}
+          </h3>
+          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            {description.map((paragraph, pIndex) => (
+              <p key={pIndex}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.section>
   );
 };
+
 
 export default function BlogPostPage() {
   return (
@@ -67,32 +97,16 @@ export default function BlogPostPage() {
         </h1>
       </header>
       
-      <div className="container mx-auto grid max-w-6xl grid-cols-1 lg:grid-cols-3 lg:gap-12 px-4">
-        {/* Left Column for Chapter Numbers */}
-        <div className="hidden lg:block lg:col-span-1">
-          {content.map((item, index) => (
-            <Chapter key={index} number={item.chapter} />
-          ))}
-        </div>
-
-        {/* Right Column for Content */}
-        <div className="lg:col-span-2">
-          {content.map((item, index) => (
-            <section key={index} className="flex min-h-screen items-center py-24">
-              <div className="w-full space-y-6">
-                 <h2 className="lg:hidden text-8xl font-black text-foreground/10 leading-none">{item.chapter}</h2>
-                <h3 className="text-3xl font-bold tracking-tight text-primary">
-                  {item.title}
-                </h3>
-                <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                  {item.description.map((paragraph, pIndex) => (
-                    <p key={pIndex}>{paragraph}</p>
-                  ))}
-                </div>
-              </div>
-            </section>
-          ))}
-        </div>
+      <div className="flex flex-col">
+        {content.map((item, index) => (
+          <ChapterSection 
+            key={index} 
+            chapter={item.chapter} 
+            title={item.title} 
+            description={item.description}
+            isReversed={index % 2 !== 0} 
+          />
+        ))}
       </div>
 
        <footer className="container mx-auto max-w-6xl px-4 py-24">
