@@ -71,7 +71,7 @@ const content = [
       "A ansiedade muitas vezes nos faz acreditar em cenários catastróficos como se fossem fatos. Aprender a questionar esses pensamentos é fundamental para reduzir seu poder sobre você.",
       "Quando um pensamento ansioso surgir, pergunte-se: Qual é a evidência real de que isso vai acontecer? Qual é a pior coisa que realisticamente poderia acontecer, e eu conseguiria lidar com isso?",
       "Questione também: Existe uma maneira mais positiva ou realista de ver esta situação? Que conselho eu daria a um amigo que estivesse pensando isso?",
-      "Ao desafiar a validade desses pensamentos, você cria uma distância saudável entre você e a sua ansiedade, percebendo que seus pensamentos não são, necessariamente, a realidade."
+      "Ao desafiar a validade desses pensamentos, você cria uma distância saudável entre você e a sua ansiedade, percebendo que seus pensamentos não são, necessarily, a realidade."
     ]
   },
   {
@@ -122,11 +122,6 @@ const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: 
   );
 };
 
-const stats = [
-    { value: '10 anos', label: 'no mercado' },
-    { value: '500+', label: 'projetos concluídos' },
-    { value: '99%', label: 'de clientes satisfeitos' },
-];
 
 const CallToActionSection = () => {
     return (
@@ -136,27 +131,10 @@ const CallToActionSection = () => {
                     <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: "url('https://placehold.co/1920x1080.png')", backgroundSize: 'cover', backgroundPosition: 'center' }} data-ai-hint="dark green leaves"></div>
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Transformamos escritórios em zonas de trabalho confortáveis</h2>
-                            <p className="text-muted-foreground text-lg">Até mesmo um ambiente de negócios deve ser agradável, por isso criamos projetos únicos que contribuem para o trabalho produtivo de seus funcionários.</p>
+                            <h2 className="text-4xl md:text-5xl font-extrabold text-white">Transformamos escritórios em zonas de trabalho confortáveis</h2>
                         </div>
-                        <div/>
-                    </div>
-                    <div className="relative z-10 mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                        <div className="relative rounded-2xl overflow-hidden group">
-                            <Image src="https://placehold.co/600x400.png" alt="Office with plants" width={600} height={400} className="w-full h-full object-cover" data-ai-hint="office plants" />
-                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                                 <button className="h-20 w-20 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/50 transition-all duration-300">
-                                    <Play className="h-10 w-10 text-white fill-white" />
-                                </button>
-                            </div>
-                        </div>
-                        <div className="space-y-6">
-                            {stats.map((stat, index) => (
-                                <div key={index} className="bg-black/20 backdrop-blur-sm border border-white/10 p-6 rounded-xl flex items-center gap-6">
-                                    <p className="text-5xl font-bold text-white">{stat.value}</p>
-                                    <p className="text-muted-foreground text-lg">{stat.label}</p>
-                                </div>
-                            ))}
+                        <div>
+                             <p className="text-muted-foreground text-lg">Até mesmo um ambiente de negócios deve ser agradável, por isso criamos projetos únicos que contribuem para o trabalho produtivo de seus funcionários.</p>
                         </div>
                     </div>
                 </div>
