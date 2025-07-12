@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, Clock, ChevronDown } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
+import BlogPostCard from '@/components/blog-post-card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -142,6 +143,83 @@ const CallToActionSection = () => {
         </section>
     );
 }
+
+const nextReadsPosts = [
+  {
+    title: 'Introdução ao Mindfulness para Iniciantes',
+    category: 'Mindfulness',
+    imageUrl: 'https://placehold.co/600x400.png',
+    aiHint: 'meditation peaceful',
+    description: 'Um guia passo a passo para começar a praticar a atenção plena e reduzir o estresse.',
+  },
+  {
+    title: 'A Importância de Estabelecer Limites Saudáveis',
+    category: 'Relacionamentos',
+    imageUrl: 'https://placehold.co/600x400.png',
+    aiHint: 'strong confident person',
+    description: 'Aprenda a definir limites em seus relacionamentos para proteger sua energia e bem-estar emocional.',
+  },
+    {
+    title: 'O Impacto do Sono na Saúde Mental',
+    category: 'Bem-estar',
+    imageUrl: 'https://placehold.co/600x400.png',
+    aiHint: 'peaceful sleep',
+    description: 'Descubra a conexão profunda entre uma boa noite de sono e sua estabilidade emocional.',
+  },
+  {
+    title: 'Construindo Resiliência em Tempos de Incerteza',
+    category: 'Desenvolvimento Pessoal',
+    imageUrl: 'https://placehold.co/600x400.png',
+    aiHint: 'mountain sunrise',
+    description: 'Ferramentas e mentalidades para fortalecer sua capacidade de superar desafios e adversidades.',
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const NextReadsSection = () => {
+  return (
+    <section className="py-24 overflow-hidden">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-10">Próximas Leituras</h2>
+        <motion.div
+          className="flex gap-8 overflow-x-auto pb-8 -mx-4 px-4"
+          style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {nextReadsPosts.map((post, index) => (
+            <motion.div key={index} className="flex-shrink-0 w-[340px]" variants={itemVariants}>
+              <BlogPostCard {...post} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 
 export default function BlogPostPage() {
@@ -280,7 +358,10 @@ export default function BlogPostPage() {
         ))}
       </div>
       <CallToActionSection />
+      <NextReadsSection />
       <audio ref={audioRef} src="/audio-placeholder.mp3" />
     </div>
   );
 }
+
+    
