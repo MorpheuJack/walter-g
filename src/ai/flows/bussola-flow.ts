@@ -8,7 +8,6 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {generate} from 'genkit/generate';
 import {z} from 'zod';
 
 export const ChatMessageSchema = z.object({
@@ -94,7 +93,7 @@ const bussolaFlow = ai.defineFlow(
     outputSchema: ChatWithBussolaOutputSchema,
   },
   async ({history}) => {
-    const response = await generate({
+    const response = await ai.generate({
       model: 'googleai/gemini-1.5-pro-latest',
       prompt: {
         role: 'user',
