@@ -8,15 +8,15 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
 const navLinks = [
-  { href: '/', label: 'Início' },
   { href: '/blog', label: 'Blog' },
+  { href: '/chat', label: 'Chat' },
 ];
 
 export default function Header() {
   const pathname = usePathname();
 
   const NavLink = ({ href, label }: { href: string; label: string }) => {
-    const isActive = pathname === href;
+    const isActive = pathname.startsWith(href);
     return (
       <Link
         href={href}
