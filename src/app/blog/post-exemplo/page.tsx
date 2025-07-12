@@ -52,7 +52,7 @@ const content = [
     "description": [
       "Pode parecer contraintuitivo, mas agendar um horário para se preocupar é uma técnica poderosa da Terapia Cognitivo-Comportamental (TCC). Em vez de deixar a ansiedade consumir seu dia inteiro, você designa um período específico para ela.",
       "Para implementar, agende um horário fixo de 15 a 20 minutos no seu dia, evitando que seja perto da hora de dormir. Quando uma preocupação surgir fora desse período, anote-a e diga a si mesmo: 'Vou pensar sobre isso no meu tempo de preocupação'.",
-      "Durante o tempo agendado, revise a lista. Você pode descobrir que muitas das preocupações já não parecem tão urgentes. Para as que restam, pense em um pequeno passo que você pode dar para resolvê-las. Isso ajuda a conter a ansiedade, em vez de deixá-la livre para aparecer a qualquer momento."
+      "Durante o tempo agendado, revise a lista. Você pode descobrir que muitas das preocupações já não parecem tão urgentes. Para as que restam, pense em um pequeno passo que você pode dar para resolvê-las. Isso helps a conter a ansiedade, em vez de deixá-la livre para aparecer a qualquer momento."
     ]
   },
   {
@@ -223,34 +223,35 @@ export default function BlogPostPage() {
         <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl">
           5 Maneiras de Lidar com a Ansiedade no Dia a Dia
         </h1>
-        <div className="mt-8 max-w-xl space-y-4">
+        <div className="mt-8 max-w-xl">
             <div className="flex items-center gap-4">
                 <Button 
                     onClick={toggleAudio}
                     variant="outline"
                     size="icon"
-                    className="rounded-full h-14 w-14 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group flex-shrink-0">
+                    className="rounded-full h-12 w-12 flex-shrink-0 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
                     {isPlaying ? (
-                        <Pause className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                        <Pause className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                     ) : (
-                        <Play className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                        <Play className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                     )}
                 </Button>
                 <div className="w-full flex items-center gap-3">
-                    <span className="text-sm text-muted-foreground font-mono">{formatTime(currentTime)}</span>
+                    <span className="text-sm text-muted-foreground font-mono tabular-nums">{formatTime(currentTime)}</span>
                     <Slider
                         value={[progress]}
                         onValueChange={handleProgressChange}
                         max={100}
                         step={1}
+                        className="w-full"
                     />
-                    <span className="text-sm text-muted-foreground font-mono">{formatTime(duration)}</span>
+                    <span className="text-sm text-muted-foreground font-mono tabular-nums">{formatTime(duration)}</span>
                 </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="flex items-center gap-2 rounded-lg border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300">
                         <Clock className="h-4 w-4" />
-                        <span>{playbackRate}x</span>
+                        <span className="font-mono text-sm">{playbackRate}x</span>
                         <ChevronDown className="h-4 w-4" />
                     </Button>
                     </DropdownMenuTrigger>
