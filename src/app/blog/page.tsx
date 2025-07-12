@@ -76,11 +76,11 @@ const itemVariants = {
 export default function BlogPage() {
   return (
     <div className="w-full">
-       <section className="relative w-full h-[50vh] flex items-center justify-center text-center px-4 overflow-hidden">
+       <section className="relative w-full h-[60vh] flex items-center text-left overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://placehold.co/1920x1080.png"
-            data-ai-hint="dark green leaves"
+            data-ai-hint="dark fern leaves"
             alt="Fundo do blog"
             fill
             className="object-cover"
@@ -88,17 +88,19 @@ export default function BlogPage() {
           <div className="absolute inset-0 bg-black/70"></div>
         </div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="relative z-10"
+          className="relative z-10 container mx-auto px-4"
         >
-          <h1 className="text-5xl font-extrabold tracking-tighter sm:text-7xl md:text-8xl font-headline text-white">
-            Nosso Blog
-          </h1>
-          <p className="max-w-[600px] mx-auto mt-4 text-primary/80 md:text-xl">
-            Artigos, dicas e reflexões para apoiar sua jornada de autoconhecimento e bem-estar.
-          </p>
+          <div className="max-w-xl">
+            <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl font-headline text-white">
+              Nosso Blog
+            </h1>
+            <p className="mt-6 text-lg text-primary/80 md:text-xl">
+              Artigos, dicas e reflexões para apoiar sua jornada de autoconhecimento e bem-estar.
+            </p>
+          </div>
         </motion.div>
       </section>
 
