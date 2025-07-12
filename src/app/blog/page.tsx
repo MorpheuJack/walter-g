@@ -4,12 +4,16 @@
 import BlogPostCard from '@/components/blog-post-card';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const posts = [
   {
     title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
     category: 'Ansiedade',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://placehold.co/1200x800.png',
     aiHint: 'calm serene',
     description: 'Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.',
   },
@@ -56,7 +60,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.2,
+      delayChildren: 0.3,
     },
   },
 };
@@ -73,48 +77,86 @@ const itemVariants = {
   },
 };
 
+const featuredPost = posts[0];
+const otherPosts = posts.slice(1);
+
+
 export default function BlogPage() {
   return (
     <div className="w-full">
-       <section className="relative w-full h-[60vh] flex items-center text-left overflow-hidden">
-        <div className="absolute inset-0 z-0">
+       <motion.section 
+        className="relative w-full min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+       >
+        <motion.div 
+          className="absolute inset-0 z-0"
+          variants={{
+            hidden: { opacity: 0, scale: 1.1 },
+            visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
+          }}
+        >
           <Image
-            src="https://placehold.co/1920x1080.png"
-            data-ai-hint="dark fern leaves"
-            alt="Fundo do blog"
+            src={featuredPost.imageUrl}
+            data-ai-hint={featuredPost.aiHint}
+            alt={featuredPost.title}
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/70"></div>
-        </div>
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          className="relative z-10 container mx-auto px-4"
-        >
-          <div className="max-w-xl">
-            <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl font-headline text-white">
-              Nosso Blog
-            </h1>
-            <p className="mt-6 text-lg text-primary/80 md:text-xl">
-              Artigos, dicas e reflexões para apoiar sua jornada de autoconhecimento e bem-estar.
-            </p>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent lg:bg-gradient-to-r lg:from-background lg:via-background/70 lg:to-transparent"></div>
         </motion.div>
-      </section>
+        
+        <div className="relative z-10 container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div className="text-white py-12" variants={itemVariants}>
+              <Badge variant="secondary" className="mb-4">{featuredPost.category}</Badge>
+              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline">
+                {featuredPost.title}
+              </h1>
+              <p className="mt-6 text-lg text-primary/80 md:text-xl max-w-lg">
+                {featuredPost.description}
+              </p>
+              <Button asChild size="lg" className="mt-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
+                 <Link href="/blog/post-exemplo">
+                    Ler Artigo
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                 </Link>
+              </Button>
+            </motion.div>
+            
+            <motion.div 
+              className="hidden lg:grid grid-cols-1 gap-8"
+            >
+              <motion.div variants={itemVariants}>
+                <BlogPostCard {...posts[1]} />
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <BlogPostCard {...posts[2]} />
+              </motion.div>
+            </motion.div>
+        </div>
+      </motion.section>
 
       <motion.div
-        className="container mx-auto px-4 py-16 md:py-24 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-        variants={containerVariants}
+        className="container mx-auto px-4 py-16 md:py-24"
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={containerVariants}
       >
-        {posts.map((post, index) => (
-          <motion.div key={index} variants={itemVariants}>
-            <BlogPostCard {...post} />
-          </motion.div>
-        ))}
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-12"
+          variants={itemVariants}
+        >
+          Mais Artigos
+        </motion.h2>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {otherPosts.map((post, index) => (
+            <motion.div key={index} variants={itemVariants}>
+              <BlogPostCard {...post} />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </div>
   );
