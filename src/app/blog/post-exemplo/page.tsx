@@ -296,54 +296,72 @@ export default function BlogPostPage() {
 
   return (
     <div className="w-full bg-background text-foreground">
-      <header className="container mx-auto max-w-6xl px-4 py-24 md:py-32 text-left">
-         <Badge variant="secondary">Ansiedade</Badge>
-        <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl">
-          5 Maneiras de Lidar com a Ansiedade no Dia a Dia
-        </h1>
-        <div className="mt-8 max-w-xl">
-            <div className="flex items-center gap-4">
-                <Button 
-                    onClick={toggleAudio}
-                    variant="outline"
-                    size="icon"
-                    className="rounded-full h-12 w-12 flex-shrink-0 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
-                    {isPlaying ? (
-                        <Pause className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                    ) : (
-                        <Play className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                    )}
-                </Button>
-                <div className="w-full flex items-center gap-3">
-                    <span className="text-sm text-muted-foreground font-mono tabular-nums">{formatTime(currentTime)}</span>
-                    <Slider
-                        value={[progress]}
-                        onValueChange={handleProgressChange}
-                        max={100}
-                        step={1}
-                        className="w-full"
-                    />
-                    <span className="text-sm text-muted-foreground font-mono tabular-nums">{formatTime(duration)}</span>
-                </div>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="flex items-center gap-2 rounded-lg border-primary/50 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300">
-                        <Clock className="h-4 w-4" />
-                        <span className="font-mono text-sm">{playbackRate}x</span>
-                        <ChevronDown className="h-4 w-4" />
-                    </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-24 bg-card">
-                    <DropdownMenuRadioGroup value={playbackRate} onValueChange={handlePlaybackRateChange}>
-                        <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="1">1x</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
+      <header className="relative w-full h-screen flex items-center justify-center text-left">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://placehold.co/1920x1080.png"
+            data-ai-hint="dark forest leaves"
+            alt="Fundo do artigo"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 container mx-auto max-w-4xl px-4 text-white"
+        >
+          <Badge variant="secondary">Ansiedade</Badge>
+          <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight max-w-3xl">
+            5 Maneiras de Lidar com a Ansiedade no Dia a Dia
+          </h1>
+          <div className="mt-10 max-w-xl rounded-2xl bg-black/20 border border-white/10 p-4 backdrop-blur-sm">
+              <div className="flex items-center gap-4">
+                  <Button 
+                      onClick={toggleAudio}
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full h-12 w-12 flex-shrink-0 border-primary/50 text-primary bg-transparent hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
+                      {isPlaying ? (
+                          <Pause className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                      ) : (
+                          <Play className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                      )}
+                  </Button>
+                  <div className="w-full flex items-center gap-3">
+                      <span className="text-sm text-white/70 font-mono tabular-nums">{formatTime(currentTime)}</span>
+                      <Slider
+                          value={[progress]}
+                          onValueChange={handleProgressChange}
+                          max={100}
+                          step={1}
+                          className="w-full"
+                      />
+                      <span className="text-sm text-white/70 font-mono tabular-nums">{formatTime(duration)}</span>
+                  </div>
+                  <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="flex items-center gap-2 rounded-lg border-primary/50 text-primary bg-transparent hover:bg-primary/10 hover:text-primary transition-all duration-300">
+                          <Clock className="h-4 w-4" />
+                          <span className="font-mono text-sm">{playbackRate}x</span>
+                          <ChevronDown className="h-4 w-4" />
+                      </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-24 bg-card">
+                      <DropdownMenuRadioGroup value={playbackRate} onValueChange={handlePlaybackRateChange}>
+                          <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="1">1x</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                      </DropdownMenuContent>
+                  </DropdownMenu>
+              </div>
+          </div>
+        </motion.div>
       </header>
       
       <div className="flex flex-col">
@@ -363,5 +381,7 @@ export default function BlogPostPage() {
     </div>
   );
 }
+
+    
 
     
