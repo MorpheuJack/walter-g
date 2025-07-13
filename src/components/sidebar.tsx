@@ -1,16 +1,27 @@
+
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Badge } from './ui/badge';
+
+interface Post {
+    title: string;
+    category: string;
+    imageUrl: string;
+    aiHint: string;
+    description: string;
+}
 
 interface SidebarProps {
   navLinks: { href: string; label: string }[];
+  featuredPosts: Post[];
 }
 
-export default function Sidebar({ navLinks }: SidebarProps) {
+export default function Sidebar({ navLinks, featuredPosts }: SidebarProps) {
   const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
@@ -72,6 +83,30 @@ export default function Sidebar({ navLinks }: SidebarProps) {
           <Button variant="outline" className="w-full" asChild>
             <Link href="/blog">Voltar ao Blog</Link>
           </Button>
+        </div>
+         <div>
+          <h3 className="font-semibold text-foreground mb-4">Posts em Destaque</h3>
+            <div className="space-y-4">
+                {featuredPosts.map((post) => (
+                    <Link href="/blog/post-exemplo" key={post.title} className="group flex items-center gap-4">
+                        <div className="relative h-16 w-16 flex-shrink-0">
+                            <Image
+                                src={post.imageUrl}
+                                alt={post.title}
+                                fill
+                                className="rounded-md object-cover"
+                                data-ai-hint={post.aiHint}
+                            />
+                        </div>
+                        <div>
+                            <Badge variant="secondary" className="mb-1 text-xs">{post.category}</Badge>
+                            <h4 className="text-sm font-semibold leading-tight text-foreground group-hover:text-primary transition-colors">
+                                {post.title}
+                            </h4>
+                        </div>
+                    </Link>
+                ))}
+            </div>
         </div>
       </div>
     </aside>
