@@ -16,12 +16,13 @@ interface Post {
     description: string;
 }
 
-interface SidebarProps {
+interface TableOfContentsProps {
   navLinks: { href: string; label: string }[];
   featuredPosts: Post[];
+  showExtras: boolean;
 }
 
-export default function Sidebar({ navLinks, featuredPosts }: SidebarProps) {
+export default function TableOfContents({ navLinks, featuredPosts, showExtras }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function Sidebar({ navLinks, featuredPosts }: SidebarProps) {
 
 
   return (
-    <aside className="w-64">
+    <aside className="w-full lg:w-64">
       <div className="space-y-6">
         <div>
           <h3 className="font-semibold text-foreground mb-3">Neste artigo</h3>
@@ -76,41 +77,43 @@ export default function Sidebar({ navLinks, featuredPosts }: SidebarProps) {
             ))}
           </nav>
         </div>
-        <div className="space-y-3">
-          <Button className="w-full" asChild>
-            <Link href="/chat">Falar com Bússola AI</Link>
-          </Button>
-          <Button variant="outline" className="w-full" asChild>
-            <Link href="/blog">Voltar ao Blog</Link>
-          </Button>
-        </div>
-         <div>
-          <h3 className="font-semibold text-foreground mb-4">Posts em Destaque</h3>
-            <div className="space-y-4">
-                {featuredPosts.map((post) => (
-                    <Link href="/blog/post-exemplo" key={post.title} className="group flex items-center gap-4">
-                        <div className="relative h-16 w-16 flex-shrink-0">
-                            <Image
-                                src={post.imageUrl}
-                                alt={post.title}
-                                fill
-                                className="rounded-md object-cover"
-                                data-ai-hint={post.aiHint}
-                            />
-                        </div>
-                        <div>
-                            <Badge variant="secondary" className="mb-1 text-xs">{post.category}</Badge>
-                            <h4 className="text-sm font-semibold leading-tight text-foreground group-hover:text-primary transition-colors">
-                                {post.title}
-                            </h4>
-                        </div>
-                    </Link>
-                ))}
+        {showExtras && (
+          <>
+            <div className="space-y-3">
+              <Button className="w-full" asChild>
+                <Link href="/chat">Falar com Bússola AI</Link>
+              </Button>
+              <Button variant="outline" className="w-full" asChild>
+                <Link href="/blog">Voltar ao Blog</Link>
+              </Button>
             </div>
-        </div>
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Posts em Destaque</h3>
+                <div className="space-y-4">
+                    {featuredPosts.map((post) => (
+                        <Link href="/blog/post-exemplo" key={post.title} className="group flex items-center gap-4">
+                            <div className="relative h-16 w-16 flex-shrink-0">
+                                <Image
+                                    src={post.imageUrl}
+                                    alt={post.title}
+                                    fill
+                                    className="rounded-md object-cover"
+                                    data-ai-hint={post.aiHint}
+                                />
+                            </div>
+                            <div>
+                                <Badge variant="secondary" className="mb-1 text-xs">{post.category}</Badge>
+                                <h4 className="text-sm font-semibold leading-tight text-foreground group-hover:text-primary transition-colors">
+                                    {post.title}
+                                </h4>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+          </>
+        )}
       </div>
     </aside>
   );
 }
-
-    
