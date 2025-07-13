@@ -202,7 +202,6 @@ export default function BlogPostPage() {
                     transition={{ duration: 0.5 }}
                     className="space-y-12"
                 >
-                    <AudioPlayer />
                     <header className="space-y-4">
                         <p className="font-semibold text-primary">Artigo Completo</p>
                         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
@@ -212,6 +211,7 @@ export default function BlogPostPage() {
                             Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
                         </p>
                     </header>
+                    <AudioPlayer />
                     <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
                         {content.map((section) => (
                             <section key={section.id} id={section.id} className="scroll-mt-24">
@@ -228,5 +228,3 @@ export default function BlogPostPage() {
     </div>
   );
 }
-
-
