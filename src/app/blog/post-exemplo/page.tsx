@@ -9,6 +9,7 @@ import { Slider } from '@/components/ui/slider';
 import Sidebar from '@/components/sidebar';
 import Link from 'next/link';
 import StickySidebar from '@/components/sticky-sidebar';
+import { cn } from '@/lib/utils';
 
 const content = [
   {
@@ -234,6 +235,27 @@ const AudioPlayer = () => {
 
 export default function BlogPostPage() {
   const navLinks = content.map(item => ({ href: `#${item.id}`, label: item.title }));
+  const [isFixed, setIsFixed] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sidebarRef.current) {
+        const sidebarTop = sidebarRef.current.getBoundingClientRect().top;
+        const offset = 100; // Adjust this value based on your header height etc.
+        if (window.scrollY > sidebarRef.current.offsetTop - offset) {
+            setIsFixed(true);
+        } else {
+            setIsFixed(false);
+        }
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-12 md:py-16">
@@ -257,24 +279,26 @@ export default function BlogPostPage() {
             </motion.div>
 
             <div className="mt-16">
-                <StickySidebar>
-                    <Sidebar navLinks={navLinks} featuredPosts={posts.slice(1, 4)} />
-                </StickySidebar>
+                <div ref={sidebarRef}>
+                    <StickySidebar isFixed={isFixed}>
+                        <Sidebar navLinks={navLinks} featuredPosts={posts.slice(1, 4)} />
+                    </StickySidebar>
+                </div>
 
-                <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
-                    {content.map((section) => (
-                        <section key={section.id} id={section.id} className="scroll-mt-24">
-                            <h2>{section.title}</h2>
-                            {section.paragraphs.map((p, i) => (
-                                <p key={i}>{p}</p>
-                            ))}
-                        </section>
-                    ))}
-                </article>
+                <div className={cn('transition-all duration-300', isFixed ? 'md:ml-80' : '')}>
+                    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
+                        {content.map((section) => (
+                            <section key={section.id} id={section.id} className="scroll-mt-24">
+                                <h2>{section.title}</h2>
+                                {section.paragraphs.map((p, i) => (
+                                    <p key={i}>{p}</p>
+                                ))}
+                            </section>
+                        ))}
+                    </article>
+                </div>
             </div>
         </div>
     </div>
   );
 }
-
-    
