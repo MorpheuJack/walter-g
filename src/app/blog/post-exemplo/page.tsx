@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -202,6 +203,15 @@ export default function BlogPostPage() {
                     className="space-y-12"
                 >
                     <AudioPlayer />
+                    <header className="space-y-4">
+                        <p className="font-semibold text-primary">Artigo Completo</p>
+                        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
+                            5 Maneiras de Lidar com a Ansiedade no Dia a Dia
+                        </h1>
+                        <p className="text-lg text-muted-foreground">
+                            Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
+                        </p>
+                    </header>
                     <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
                         {content.map((section) => (
                             <section key={section.id} id={section.id} className="scroll-mt-24">
@@ -218,3 +228,5 @@ export default function BlogPostPage() {
     </div>
   );
 }
+
+
