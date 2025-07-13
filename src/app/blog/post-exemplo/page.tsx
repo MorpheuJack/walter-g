@@ -236,7 +236,7 @@ export default function BlogPostPage() {
   const triggerRef = useRef<HTMLDivElement>(null);
   
   const isTriggerInView = useInView(triggerRef, {
-    rootMargin: "-100px 0px 0px 0px",
+    rootMargin: "0px 0px -100% 0px",
   });
 
   useEffect(() => {
@@ -285,12 +285,10 @@ export default function BlogPostPage() {
 
           <div className="flex flex-col items-center">
              <div className="w-full max-w-4xl">
-                <div className="my-12">
+                <div ref={triggerRef} className="my-12">
                    <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
                 </div>
-
-                <div ref={triggerRef}></div>
-
+                
                 <motion.article
                   className={`prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground transition-all duration-300 ${
                     isSidebarVisible ? 'lg:ml-72' : ''
