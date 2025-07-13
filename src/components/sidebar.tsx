@@ -55,7 +55,7 @@ export default function Sidebar({ navLinks, featuredPosts }: SidebarProps) {
 
 
   return (
-    <aside className="sticky top-24">
+    <aside className="w-64">
       <div className="space-y-6">
         <div>
           <h3 className="font-semibold text-foreground mb-3">Neste artigo</h3>
@@ -112,3 +112,5 @@ export default function Sidebar({ navLinks, featuredPosts }: SidebarProps) {
     </aside>
   );
 }
+
+    

@@ -8,6 +8,7 @@ import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import Sidebar from '@/components/sidebar';
 import Link from 'next/link';
+import StickySidebar from '@/components/sticky-sidebar';
 
 const content = [
   {
@@ -236,40 +237,44 @@ export default function BlogPostPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 md:py-16">
-        <div className="flex flex-col lg:flex-row lg:gap-16">
-            <aside className="w-full lg:w-1/4 mb-12 lg:mb-0">
-                <Sidebar navLinks={navLinks} featuredPosts={posts.slice(1, 4)} />
-            </aside>
-            <main className="w-full lg:w-3/4">
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="space-y-12"
-                >
-                    <header className="space-y-4">
-                        <p className="font-semibold text-primary">Artigo Completo</p>
-                        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-                            5 Maneiras de Lidar com a Ansiedade no Dia a Dia
-                        </h1>
-                        <p className="text-lg text-muted-foreground">
-                            Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
-                        </p>
-                    </header>
-                    <AudioPlayer />
-                    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
-                        {content.map((section) => (
-                            <section key={section.id} id={section.id} className="scroll-mt-24">
-                                <h2>{section.title}</h2>
-                                {section.paragraphs.map((p, i) => (
-                                    <p key={i}>{p}</p>
-                                ))}
-                            </section>
-                        ))}
-                    </article>
-                </motion.div>
-            </main>
+        <div className="relative">
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="space-y-12 max-w-4xl mx-auto"
+            >
+                <header className="space-y-4 text-center">
+                    <p className="font-semibold text-primary">Artigo Completo</p>
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
+                        5 Maneiras de Lidar com a Ansiedade no Dia a Dia
+                    </h1>
+                    <p className="text-lg text-muted-foreground">
+                        Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
+                    </p>
+                </header>
+                <AudioPlayer />
+            </motion.div>
+
+            <div className="mt-16">
+                <StickySidebar>
+                    <Sidebar navLinks={navLinks} featuredPosts={posts.slice(1, 4)} />
+                </StickySidebar>
+
+                <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
+                    {content.map((section) => (
+                        <section key={section.id} id={section.id} className="scroll-mt-24">
+                            <h2>{section.title}</h2>
+                            {section.paragraphs.map((p, i) => (
+                                <p key={i}>{p}</p>
+                            ))}
+                        </section>
+                    ))}
+                </article>
+            </div>
         </div>
     </div>
   );
 }
+
+    
