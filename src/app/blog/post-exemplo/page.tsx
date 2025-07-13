@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import Sidebar from '@/components/sidebar';
+import Link from 'next/link';
 
 const content = [
   {
@@ -153,7 +154,7 @@ const AudioPlayer = () => {
     }, []);
 
     return (
-        <div className="rounded-xl bg-card p-6">
+        <div className="rounded-xl bg-card p-6 border border-white/10">
             <div className="flex items-center gap-4">
                 <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
                     {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
@@ -167,7 +168,7 @@ const AudioPlayer = () => {
                     </div>
                 </div>
                  <div className="flex items-center gap-2">
-                    <Button onClick={() => console.log("Restart")} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                    <Button onClick={() => audioRef.current && (audioRef.current.currentTime = 0)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
                         <RotateCcw className="h-5 w-5" />
                     </Button>
                     <Button onClick={handlePlaybackRateChange} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
@@ -201,9 +202,9 @@ export default function BlogPostPage() {
                     className="space-y-12"
                 >
                     <AudioPlayer />
-                    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-a:text-primary hover:prose-a:text-primary/90">
+                    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground">
                         {content.map((section) => (
-                            <section key={section.id} id={section.id}>
+                            <section key={section.id} id={section.id} className="scroll-mt-24">
                                 <h2>{section.title}</h2>
                                 {section.paragraphs.map((p, i) => (
                                     <p key={i}>{p}</p>

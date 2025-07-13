@@ -5,7 +5,6 @@ import { Heart } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
 
 const navLinks = [
   { href: '/blog', label: 'Blog' },
@@ -31,8 +30,8 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-lg">
+       <div className="container flex h-20 items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center gap-2 mr-6" aria-label="Voltar para Início">
             <Heart className="h-7 w-7 text-primary transition-transform duration-300 hover:scale-110" />
@@ -46,7 +45,7 @@ export default function Header() {
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-4">
-          <Button asChild className="rounded-full px-6 text-base font-semibold">
+           <Button asChild className="rounded-full px-6 text-base font-semibold bg-primary/20 text-primary-foreground border-2 border-primary/50 hover:bg-primary/30">
             <Link href="/#analysis-section">Começar Análise</Link>
           </Button>
         </div>
