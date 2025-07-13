@@ -3,47 +3,42 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
 
-const navLinks = [
-  { href: '/recursos', label: 'Recursos' },
-  { href: '/ansiedade', label: 'Ansiedade' },
-  { href: '/depressao', label: 'Depressão' },
-  { href: '/relacionamentos', label: 'Relacionamentos' },
-];
+interface SidebarProps {
+  navLinks: { href: string; label: string }[];
+}
 
-export default function Sidebar() {
+export default function Sidebar({ navLinks }: SidebarProps) {
   const pathname = usePathname();
 
-  const NavLink = ({ href, label }: { href: string; label: string }) => {
-    const isActive = pathname === href;
-    return (
-      <Link
-        href={href}
-        className={cn(
-          'transition-colors hover:text-white',
-          isActive ? 'text-white font-bold' : 'text-primary'
-        )}
-      >
-        {label}
-      </Link>
-    );
-  };
-
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-full w-24 flex-col items-center justify-between bg-black/10 py-8 backdrop-blur-sm">
-      <Link href="/" className="text-lg font-bold tracking-[0.3em] text-white [writing-mode:vertical-rl] transform rotate-180">
-        WALTER
-      </Link>
-      
-      <nav className="flex flex-col items-center space-y-12 [writing-mode:vertical-rl]">
-        {navLinks.map((link) => (
-          <div key={link.href} className="transform rotate-180">
-             <NavLink {...link} />
-          </div>
-        ))}
-      </nav>
-
-      <div />
+    <aside className="sticky top-24">
+      <div className="space-y-6">
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Neste artigo</h3>
+          <nav className="flex flex-col space-y-2 border-l-2 border-border">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  'block -ml-px pl-4 text-sm text-muted-foreground border-l-2 border-transparent hover:text-foreground hover:border-foreground',
+                  // TODO: Add active state based on scroll position
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="space-y-3">
+          <Button className="w-full">Falar com Especialista</Button>
+          <Button variant="secondary" className="w-full" asChild>
+            <Link href="/blog">Voltar ao Blog</Link>
+          </Button>
+        </div>
+      </div>
     </aside>
   );
 }

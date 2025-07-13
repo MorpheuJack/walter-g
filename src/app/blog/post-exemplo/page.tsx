@@ -1,36 +1,26 @@
-
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, Clock, ChevronDown } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
-import BlogPostCard from '@/components/blog-post-card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import Sidebar from '@/components/sidebar';
 
 const content = [
   {
-    "chapter": "00",
-    "title": "Introdução: Um Alarme que Não Desliga",
-    "description": [
+    id: 'introduction',
+    title: 'Introdução: Um Alarme que Não Desliga',
+    paragraphs: [
       "A ansiedade parece um alarme que nunca desliga. O coração acelera, a mente dispara com preocupações e uma sensação de aperto no peito se torna uma companhia constante. Se isso soa familiar, saiba que você não está sozinho. A ansiedade é uma das experiências mais comuns no mundo moderno, mas não precisa ser a sua sentença.",
       "No dia a dia, pequenas mudanças de hábito e a aplicação de técnicas específicas podem fazer uma enorme diferença, transformando o modo como você reage aos gatilhos de estresse.",
       "Aqui no Terapia Digital, acreditamos no poder de ferramentas práticas para promover sua saúde mental. Por isso, preparamos uma lista com 5 maneiras eficazes e comprovadas de lidar com a ansiedade no dia a dia, permitindo que você respire mais aliviado e retome as rédeas da sua vida."
     ]
   },
   {
-    "chapter": "01",
-    "title": "A Técnica da Respiração Diafragmática",
-    "description": [
+    id: 'breathing-technique',
+    title: 'A Técnica da Respiração Diafragmática',
+    paragraphs: [
       "Quando a ansiedade ataca, nossa respiração se torna curta e rápida, intensificando a sensação de pânico. A respiração diafragmática, ou abdominal, é a maneira mais rápida de comunicar ao seu cérebro que está tudo bem e que é seguro relaxar.",
       "Como praticar: Encontre um lugar tranquilo e sente-se ou deite-se confortavelmente. Posicione uma mão sobre o peito e a outra sobre o abdômen.",
       "Inspire lentamente pelo nariz por 4 segundos. O objetivo é sentir sua barriga expandir, enquanto o peito se move o mínimo possível. Segure a respiração por 2 segundos.",
@@ -39,36 +29,36 @@ const content = [
     ]
   },
   {
-    "chapter": "02",
-    "title": "Mindfulness: A Arte de Focar no Agora",
-    "description": [
+    id: 'mindfulness',
+    title: 'Mindfulness: A Arte de Focar no Agora',
+    paragraphs: [
       "A ansiedade prospera com preocupações sobre o futuro ('e se...') e ruminações sobre o passado. O mindfulness, ou atenção plena, é a prática de trazer sua consciência para o momento presente, sem julgamentos.",
       "Para controlar a ansiedade com mindfulness, use a Técnica 5-4-3-2-1. Quando sentir a mente acelerar, pause e identifique: 5 coisas que você pode ver (olhe ao redor e nomeie cinco objetos); 4 coisas que você pode sentir (a textura da sua roupa, a cadeira sob você); 3 coisas que você pode ouvir (o teclado, um pássaro lá fora); 2 coisas que você pode cheirar (o aroma do café, um perfume); e 1 coisa que você pode provar (um gole de água).",
       "Essa prática ancora você no presente de forma imediata, interrompendo o ciclo de pensamentos ansiosos e trazendo sua atenção para a realidade sensorial."
     ]
   },
   {
-    "chapter": "03",
-    "title": "Organize Suas Preocupações: O 'Tempo de Preocupação'",
-    "description": [
+    id: 'worry-time',
+    title: 'Organize Suas Preocupações: O "Tempo de Preocupação"',
+    paragraphs: [
       "Pode parecer contraintuitivo, mas agendar um horário para se preocupar é uma técnica poderosa da Terapia Cognitivo-Comportamental (TCC). Em vez de deixar a ansiedade consumir seu dia inteiro, você designa um período específico para ela.",
       "Para implementar, agende um horário fixo de 15 a 20 minutos no seu dia, evitando que seja perto da hora de dormir. Quando uma preocupação surgir fora desse período, anote-a e diga a si mesmo: 'Vou pensar sobre isso no meu tempo de preocupação'.",
       "Durante o tempo agendado, revise a lista. Você pode descobrir que muitas das preocupações já não parecem tão urgentes. Para as que restam, pense em um pequeno passo que você pode dar para resolvê-las. Isso helps a conter a ansiedade, em vez de deixá-la livre para aparecer a qualquer momento."
     ]
   },
   {
-    "chapter": "04",
-    "title": "Movimente o Corpo para Acalmar a Mente",
-    "description": [
+    id: 'movement',
+    title: 'Movimente o Corpo para Acalmar a Mente',
+    paragraphs: [
       "A atividade física é um dos antidepressivos e ansiolíticos mais naturais que existem. Exercícios liberam endorfinas, neurotransmissores que promovem uma sensação de bem-estar e aliviam a tensão física e mental.",
       "Você não precisa correr uma maratona. Encontrar uma atividade que você goste é a chave para a consistência. Pode ser uma caminhada de 20 minutos para espairecer, uma prática de yoga que combina movimento e respiração, ou simplesmente dançar sua música favorita.",
       "O importante é quebrar o estado de imobilidade e tensão que a ansiedade muitas vezes impõe, usando o movimento para mudar seu estado fisiológico e emocional."
     ]
   },
   {
-    "chapter": "05",
-    "title": "Questione Seus Pensamentos Ansiosos",
-    "description": [
+    id: 'question-thoughts',
+    title: 'Questione Seus Pensamentos Ansiosos',
+    paragraphs: [
       "A ansiedade muitas vezes nos faz acreditar em cenários catastróficos como se fossem fatos. Aprender a questionar esses pensamentos é fundamental para reduzir seu poder sobre você.",
       "Quando um pensamento ansioso surgir, pergunte-se: Qual é a evidência real de que isso vai acontecer? Qual é a pior coisa que realisticamente poderia acontecer, e eu conseguiria lidar com isso?",
       "Questione também: Existe uma maneira mais positiva ou realista de ver esta situação? Que conselho eu daria a um amigo que estivesse pensando isso?",
@@ -76,9 +66,9 @@ const content = [
     ]
   },
   {
-    "chapter": "06",
-    "title": "Conclusão: Seu Próximo Passo",
-    "description": [
+    id: 'conclusion',
+    title: 'Conclusão: Seu Próximo Passo',
+    paragraphs: [
       "Lidar com a ansiedade no dia a dia é um processo contínuo, não uma solução instantânea. Comece escolhendo uma ou duas dessas técnicas para praticar. Seja gentil consigo mesmo e celebre as pequenas vitórias.",
       "Lembre-se: entender como controlar a ansiedade é um ato de autocuidado e fortalecimento.",
       "Se a ansiedade continua sendo um obstáculo significativo em sua vida, buscar o apoio de um profissional de saúde mental é um passo corajoso e transformador. Aqui no Terapia Digital, conectamos você a psicólogos qualificados que podem oferecer orientação personalizada e estratégias eficazes para o seu bem-estar."
@@ -86,302 +76,144 @@ const content = [
   }
 ];
 
-const ChapterSection = ({ chapter, title, description, isReversed }: { chapter: string; title: string; description: string[]; isReversed?: boolean }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  const variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
-  };
+const AudioPlayer = () => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [playbackRate, setPlaybackRate] = useState(1.0);
+    const audioRef = useRef<HTMLAudioElement>(null);
+  
+    const toggleAudio = () => {
+      if (audioRef.current) {
+        if (isPlaying) {
+          audioRef.current.pause();
+        } else {
+          audioRef.current.play();
+        }
+        setIsPlaying(!isPlaying);
+      }
+    };
+    
+    const formatTime = (time: number) => {
+      if (isNaN(time)) return '00:00';
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    };
+  
+    const handleProgressChange = (value: number[]) => {
+      if (audioRef.current) {
+        const newTime = (value[0] / 100) * duration;
+        audioRef.current.currentTime = newTime;
+        setProgress(value[0]);
+      }
+    };
+  
+    const handlePlaybackRateChange = () => {
+      const rates = [1.0, 1.25, 1.5, 2.0, 0.75];
+      const currentIndex = rates.indexOf(playbackRate);
+      const nextRate = rates[(currentIndex + 1) % rates.length];
+      if (audioRef.current) {
+        audioRef.current.playbackRate = nextRate;
+      }
+      setPlaybackRate(nextRate);
+    };
+  
+    useEffect(() => {
+      const audio = audioRef.current;
+      if (audio) {
+        const updateProgress = () => {
+          const currentProgress = (audio.currentTime / audio.duration) * 100;
+          setProgress(currentProgress);
+          setCurrentTime(audio.currentTime);
+        };
+        
+        const setAudioData = () => {
+          setDuration(audio.duration);
+        }
+  
+        const handleEnded = () => {
+          setIsPlaying(false);
+          setProgress(0);
+          audio.currentTime = 0;
+        }
+  
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('loadedmetadata', setAudioData);
+        audio.addEventListener('ended', handleEnded);
+  
+        return () => {
+          audio.removeEventListener('timeupdate', updateProgress);
+          audio.removeEventListener('loadedmetadata', setAudioData);
+          audio.removeEventListener('ended', handleEnded);
+        };
+      }
+    }, []);
 
-  return (
-    <motion.section 
-      ref={ref}
-      variants={variants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-3 lg:gap-12 px-4 py-24"
-    >
-      <div className={`self-start lg:sticky lg:top-32 lg:col-span-1 ${isReversed ? 'lg:order-last' : ''}`}>
-        <p className="text-[10rem] lg:text-[15rem] font-black text-foreground/10 leading-none text-center lg:text-left">{chapter}</p>
-      </div>
-
-      <div className="lg:col-span-2">
-        <div className="w-full space-y-6">
-          <h3 className="text-3xl font-bold tracking-tight text-primary">
-            {title}
-          </h3>
-          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-            {description.map((paragraph, pIndex) => (
-              <p key={pIndex}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.section>
-  );
-};
-
-
-const CallToActionSection = () => {
     return (
-        <section className="py-24">
-            <div className="container mx-auto max-w-6xl px-4">
-                <div className="bg-card/50 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
-                    <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: "url('https://placehold.co/1920x1080.png')", backgroundSize: 'cover', backgroundPosition: 'center' }} data-ai-hint="dark green leaves"></div>
-                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h2 className="text-4xl md:text-5xl font-extrabold text-white">Transformamos escritórios em zonas de trabalho confortáveis</h2>
-                        </div>
-                        <div>
-                             <p className="text-muted-foreground text-lg">Até mesmo um ambiente de negócios deve ser agradável, por isso criamos projetos únicos que contribuem para o trabalho produtivo de seus funcionários.</p>
-                        </div>
+        <div className="rounded-xl bg-card p-6">
+            <div className="flex items-center gap-4">
+                <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+                </Button>
+                <div className="flex w-full flex-col gap-2">
+                    <span className="text-sm font-semibold text-foreground">5 Maneiras de Lidar com a Ansiedade...</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-muted-foreground font-mono tabular-nums">{formatTime(currentTime)}</span>
+                      <Slider value={[progress]} onValueChange={handleProgressChange} max={100} step={1} />
+                      <span className="text-xs text-muted-foreground font-mono tabular-nums">{formatTime(duration)}</span>
                     </div>
                 </div>
+                 <div className="flex items-center gap-2">
+                    <Button onClick={() => console.log("Restart")} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                        <RotateCcw className="h-5 w-5" />
+                    </Button>
+                    <Button onClick={handlePlaybackRateChange} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                        <span className="text-sm font-bold">{playbackRate.toFixed(1)}x</span>
+                    </Button>
+                     <Button variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                        <Volume2 className="h-5 w-5" />
+                    </Button>
+                </div>
             </div>
-        </section>
-    );
+            <audio ref={audioRef} src="/audio-placeholder.mp3" />
+        </div>
+    )
 }
-
-const nextReadsPosts = [
-  {
-    title: 'Introdução ao Mindfulness para Iniciantes',
-    category: 'Mindfulness',
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'meditation peaceful',
-    description: 'Um guia passo a passo para começar a praticar a atenção plena e reduzir o estresse.',
-  },
-  {
-    title: 'A Importância de Estabelecer Limites Saudáveis',
-    category: 'Relacionamentos',
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'strong confident person',
-    description: 'Aprenda a definir limites em seus relacionamentos para proteger sua energia e bem-estar emocional.',
-  },
-    {
-    title: 'O Impacto do Sono na Saúde Mental',
-    category: 'Bem-estar',
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'peaceful sleep',
-    description: 'Descubra a conexão profunda entre uma boa noite de sono e sua estabilidade emocional.',
-  },
-  {
-    title: 'Construindo Resiliência em Tempos de Incerteza',
-    category: 'Desenvolvimento Pessoal',
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'mountain sunrise',
-    description: 'Ferramentas e mentalidades para fortalecer sua capacidade de superar desafios e adversidades.',
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const NextReadsSection = () => {
-  return (
-    <section className="py-24 overflow-hidden">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-10">Próximas Leituras</h2>
-        <motion.div
-          className="flex gap-8 overflow-x-auto pb-8 -mx-4 px-4"
-          style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {nextReadsPosts.map((post, index) => (
-            <motion.div key={index} className="flex-shrink-0 w-[340px]" variants={itemVariants}>
-              <BlogPostCard {...post} />
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-};
 
 
 export default function BlogPostPage() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [playbackRate, setPlaybackRate] = useState('1');
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-  
-  const formatTime = (time: number) => {
-    if (isNaN(time)) return '00:00';
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-  };
-
-  const handleProgressChange = (value: number[]) => {
-    if (audioRef.current) {
-      const newTime = (value[0] / 100) * duration;
-      audioRef.current.currentTime = newTime;
-      setProgress(value[0]);
-    }
-  };
-
-  const handlePlaybackRateChange = (rate: string) => {
-    if (audioRef.current) {
-      audioRef.current.playbackRate = parseFloat(rate);
-      setPlaybackRate(rate);
-    }
-  };
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      const updateProgress = () => {
-        const currentProgress = (audio.currentTime / audio.duration) * 100;
-        setProgress(currentProgress);
-        setCurrentTime(audio.currentTime);
-      };
-      
-      const setAudioData = () => {
-        setDuration(audio.duration);
-      }
-
-      const handleEnded = () => {
-        setIsPlaying(false);
-        setProgress(0);
-        audio.currentTime = 0;
-      }
-
-      audio.addEventListener('timeupdate', updateProgress);
-      audio.addEventListener('loadedmetadata', setAudioData);
-      audio.addEventListener('ended', handleEnded);
-
-      return () => {
-        audio.removeEventListener('timeupdate', updateProgress);
-        audio.removeEventListener('loadedmetadata', setAudioData);
-        audio.removeEventListener('ended', handleEnded);
-      };
-    }
-  }, []);
+  const navLinks = content.map(item => ({ href: `#${item.id}`, label: item.title }));
 
   return (
-    <div className="w-full bg-background text-foreground">
-      <header className="relative w-full h-screen flex items-center justify-center text-left">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://placehold.co/1920x1080.png"
-            data-ai-hint="dark forest leaves"
-            alt="Fundo do artigo"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70"></div>
+    <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="flex flex-col lg:flex-row lg:gap-16">
+            <aside className="w-full lg:w-1/4 mb-12 lg:mb-0">
+                <Sidebar navLinks={navLinks} />
+            </aside>
+            <main className="w-full lg:w-3/4">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-12"
+                >
+                    <AudioPlayer />
+                    <article className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-a:text-primary hover:prose-a:text-primary/90">
+                        {content.map((section) => (
+                            <section key={section.id} id={section.id}>
+                                <h2>{section.title}</h2>
+                                {section.paragraphs.map((p, i) => (
+                                    <p key={i}>{p}</p>
+                                ))}
+                            </section>
+                        ))}
+                    </article>
+                </motion.div>
+            </main>
         </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 container mx-auto max-w-4xl px-4 text-white"
-        >
-          <Badge variant="secondary">Ansiedade</Badge>
-          <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight max-w-3xl">
-            5 Maneiras de Lidar com a Ansiedade no Dia a Dia
-          </h1>
-          <div className="mt-10 max-w-xl rounded-2xl bg-black/20 border border-white/10 p-4 backdrop-blur-sm">
-              <div className="flex items-center gap-4">
-                  <Button 
-                      onClick={toggleAudio}
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full h-12 w-12 flex-shrink-0 border-primary/50 text-primary bg-transparent hover:bg-primary/10 hover:text-primary transition-all duration-300 group">
-                      {isPlaying ? (
-                          <Pause className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                      ) : (
-                          <Play className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                      )}
-                  </Button>
-                  <div className="w-full flex items-center gap-3">
-                      <span className="text-sm text-white/70 font-mono tabular-nums">{formatTime(currentTime)}</span>
-                      <Slider
-                          value={[progress]}
-                          onValueChange={handleProgressChange}
-                          max={100}
-                          step={1}
-                          className="w-full"
-                      />
-                      <span className="text-sm text-white/70 font-mono tabular-nums">{formatTime(duration)}</span>
-                  </div>
-                  <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="flex items-center gap-2 rounded-lg border-primary/50 text-primary bg-transparent hover:bg-primary/10 hover:text-primary transition-all duration-300">
-                          <Clock className="h-4 w-4" />
-                          <span className="font-mono text-sm">{playbackRate}x</span>
-                          <ChevronDown className="h-4 w-4" />
-                      </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-24 bg-card">
-                      <DropdownMenuRadioGroup value={playbackRate} onValueChange={handlePlaybackRateChange}>
-                          <DropdownMenuRadioItem value="0.5">0.5x</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="1">1x</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="1.5">1.5x</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="2">2x</DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                      </DropdownMenuContent>
-                  </DropdownMenu>
-              </div>
-          </div>
-        </motion.div>
-      </header>
-      
-      <div className="flex flex-col">
-        {content.map((item, index) => (
-          <ChapterSection 
-            key={index} 
-            chapter={item.chapter} 
-            title={item.title} 
-            description={item.description}
-            isReversed={index % 2 !== 0} 
-          />
-        ))}
-      </div>
-      <CallToActionSection />
-      <NextReadsSection />
-      <audio ref={audioRef} src="/audio-placeholder.mp3" />
     </div>
   );
 }
-
-    
-
-    

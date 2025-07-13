@@ -3,8 +3,6 @@
 
 import BlogPostCard from '@/components/blog-post-card';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
@@ -77,81 +75,41 @@ const itemVariants = {
   },
 };
 
-const featuredPost = posts[0];
-const otherPosts = posts.slice(1);
-
 
 export default function BlogPage() {
   return (
     <div className="w-full">
        <motion.section 
-        className="relative w-full min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden"
+        className="w-full py-24 md:py-32"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
        >
-        <motion.div 
-          className="absolute inset-0 z-0"
-          variants={{
-            hidden: { opacity: 0, scale: 1.1 },
-            visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
-          }}
-        >
-          <Image
-            src={featuredPost.imageUrl}
-            data-ai-hint={featuredPost.aiHint}
-            alt={featuredPost.title}
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent lg:bg-gradient-to-r lg:from-background lg:via-background/70 lg:to-transparent"></div>
-        </motion.div>
-        
-        <div className="relative z-10 container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div className="text-white py-12" variants={itemVariants}>
-              <Badge variant="secondary" className="mb-4">{featuredPost.category}</Badge>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline">
-                {featuredPost.title}
-              </h1>
-              <p className="mt-6 text-lg text-primary/80 md:text-xl max-w-lg">
-                {featuredPost.description}
-              </p>
-              <Button asChild size="lg" className="mt-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-transform duration-300 hover:scale-105">
-                 <Link href="/blog/post-exemplo">
-                    Ler Artigo
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                 </Link>
-              </Button>
-            </motion.div>
-            
-            <motion.div 
-              className="hidden lg:grid grid-cols-1 gap-8"
+        <div className="container mx-auto px-4 text-center">
+            <motion.h1 
+                className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+                variants={itemVariants}
             >
-              <motion.div variants={itemVariants}>
-                <BlogPostCard {...posts[1]} />
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <BlogPostCard {...posts[2]} />
-              </motion.div>
-            </motion.div>
+                Blog Terapia Digital
+            </motion.h1>
+            <motion.p 
+                className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground md:text-xl"
+                variants={itemVariants}
+            >
+                Artigos, dicas e reflexões para sua jornada de autoconhecimento e bem-estar.
+            </motion.p>
         </div>
       </motion.section>
 
       <motion.div
-        className="container mx-auto px-4 py-16 md:py-24"
+        className="container mx-auto px-4 pb-16 md:pb-24"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
         variants={containerVariants}
       >
-        <motion.h2 
-          className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-12"
-          variants={itemVariants}
-        >
-          Mais Artigos
-        </motion.h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {otherPosts.map((post, index) => (
+          {posts.map((post, index) => (
             <motion.div key={index} variants={itemVariants}>
               <BlogPostCard {...post} />
             </motion.div>

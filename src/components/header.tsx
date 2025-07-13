@@ -21,8 +21,8 @@ export default function Header() {
       <Link
         href={href}
         className={cn(
-          'text-base font-medium transition-colors hover:text-white',
-          isActive ? 'text-white' : 'text-primary/80'
+          'text-base font-medium transition-colors hover:text-primary',
+          isActive ? 'text-primary' : 'text-muted-foreground'
         )}
       >
         {label}
@@ -31,31 +31,26 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full p-4">
-      <motion.div 
-        className="container mx-auto flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-black/20 p-4 backdrop-blur-lg"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.2 }}
-      >
-        <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
-          <Heart className="h-7 w-7 text-primary transition-transform duration-300 hover:scale-110" />
-        </Link>
-
-        <nav className="hidden items-center gap-4 md:flex">
-          <div className="flex items-center gap-6 rounded-full border border-white/10 bg-black/20 px-6 py-2">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center">
+        <div className="mr-4 flex items-center">
+          <Link href="/" className="flex items-center gap-2 mr-6" aria-label="Voltar para Início">
+            <Heart className="h-7 w-7 text-primary transition-transform duration-300 hover:scale-110" />
+            <span className="font-bold hidden sm:inline-block">Terapia Digital</span>
+          </Link>
+          <nav className="items-center gap-6 text-sm hidden md:flex">
             {navLinks.map((link) => (
               <NavLink key={link.href} {...link} />
             ))}
-          </div>
-        </nav>
+          </nav>
+        </div>
 
-        <div className="flex items-center">
-          <Button asChild className="rounded-full border border-primary/50 bg-primary/20 px-6 text-base font-semibold text-primary transition-all duration-300 hover:bg-primary/30 hover:text-white hover:shadow-lg hover:shadow-primary/20">
+        <div className="flex flex-1 items-center justify-end space-x-4">
+          <Button asChild className="rounded-full px-6 text-base font-semibold">
             <Link href="/#analysis-section">Começar Análise</Link>
           </Button>
         </div>
-      </motion.div>
+      </div>
     </header>
   );
 }

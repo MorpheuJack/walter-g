@@ -6,7 +6,7 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative">
+    <div>
       <Header />
       <main>{children}</main>
     </div>
