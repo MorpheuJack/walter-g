@@ -247,9 +247,8 @@ export default function BlogPostPage() {
     <div className="container mx-auto px-4 py-12 md:py-16">
       <div className="relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          layout
+          transition={{ duration: 0.5, type: 'spring', bounce: 0.2 }}
           className="space-y-12 flex flex-col items-center"
         >
           <header className="space-y-4 text-center max-w-4xl">
@@ -272,7 +271,7 @@ export default function BlogPostPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="hidden lg:block fixed top-24 left-12 w-64"
+                className="hidden lg:block fixed top-24 left-16 w-64"
               >
                 <TableOfContents
                   navLinks={navLinks}
@@ -290,8 +289,9 @@ export default function BlogPostPage() {
                 </div>
                 
                 <motion.article
+                  layout
                   className={`prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground transition-all duration-300 ${
-                    isSidebarVisible ? 'lg:ml-72' : ''
+                    isSidebarVisible ? 'lg:ml-80' : ''
                   }`}
                 >
                   {content.map((section) => (
