@@ -272,7 +272,7 @@ export default function BlogPostPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="hidden lg:block fixed top-24 left-8 w-64"
+                className="hidden lg:block fixed top-24 left-12 w-64"
               >
                 <TableOfContents
                   navLinks={navLinks}
@@ -291,7 +291,7 @@ export default function BlogPostPage() {
                 
                 <motion.article
                   className={`prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground transition-all duration-300 ${
-                    isSidebarVisible ? 'lg:ml-[18rem]' : ''
+                    isSidebarVisible ? 'lg:ml-72' : ''
                   }`}
                 >
                   {content.map((section) => (
