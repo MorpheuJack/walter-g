@@ -2,7 +2,7 @@
 'use client';
 
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
@@ -236,7 +236,7 @@ export default function BlogPostPage() {
   const triggerRef = useRef<HTMLDivElement>(null);
   
   const isTriggerInView = useInView(triggerRef, {
-    rootMargin: "0px 0px -100% 0px",
+    rootMargin: "0px 0px -40% 0px",
   });
 
   useEffect(() => {
@@ -272,7 +272,7 @@ export default function BlogPostPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="hidden lg:block fixed top-24 left-12 w-64"
+                className="hidden lg:block fixed top-24 left-8 w-64"
               >
                 <TableOfContents
                   navLinks={navLinks}
@@ -291,7 +291,7 @@ export default function BlogPostPage() {
                 
                 <motion.article
                   className={`prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground transition-all duration-300 ${
-                    isSidebarVisible ? 'lg:ml-72' : ''
+                    isSidebarVisible ? 'lg:ml-[18rem]' : ''
                   }`}
                 >
                   {content.map((section) => (
