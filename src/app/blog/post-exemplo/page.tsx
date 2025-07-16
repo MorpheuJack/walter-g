@@ -236,7 +236,7 @@ export default function BlogPostPage() {
   const triggerRef = useRef<HTMLDivElement>(null);
   
   const isTriggerInView = useInView(triggerRef, {
-    rootMargin: "0px 0px -40% 0px",
+    rootMargin: "0px 0px -100% 0px",
   });
   
   const footerRef = useRef<HTMLDivElement>(null);
@@ -269,28 +269,34 @@ export default function BlogPostPage() {
         </motion.div>
 
         <div className="mt-16 relative">
-          <AnimatePresence>
-            {isSidebarVisible && (
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
-                className={`hidden lg:block top-24 left-8 w-64 ${!isFooterVisible ? 'fixed' : 'absolute bottom-0'}`}
-              >
-                <TableOfContents
-                  navLinks={navLinks}
-                  featuredPosts={posts.slice(1, 4)}
-                  showExtras={true}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="lg:absolute lg:left-0 lg:top-0 lg:h-full lg:w-64">
+            <AnimatePresence>
+              {isSidebarVisible && (
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                  className="hidden lg:block"
+                >
+                  <div className={!isFooterVisible ? 'fixed top-24 w-64' : 'absolute top-full -translate-y-full w-64'}>
+                    <TableOfContents
+                      navLinks={navLinks}
+                      featuredPosts={posts.slice(1, 4)}
+                      showExtras={true}
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <div className="flex flex-col items-center">
              <div className="w-full max-w-4xl">
-                <div ref={triggerRef} className="my-12">
-                   <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
+                <div ref={triggerRef}>
+                  <div className="my-12">
+                     <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
+                  </div>
                 </div>
                 
                 <motion.article
