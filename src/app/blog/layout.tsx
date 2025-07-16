@@ -1,4 +1,3 @@
-import Header from '@/components/header';
 
 export default function BlogLayout({
   children,
@@ -7,8 +6,9 @@ export default function BlogLayout({
 }) {
   return (
     <div>
-      <Header />
       <main>{children}</main>
     </div>
   );
 }
+
+    
