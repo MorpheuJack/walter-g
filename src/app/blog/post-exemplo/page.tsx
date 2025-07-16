@@ -241,7 +241,7 @@ export default function BlogPostPage() {
   
   const footerRef = useRef<HTMLDivElement>(null);
   const isFooterVisible = useInView(footerRef, {
-      rootMargin: "0px 0px 100% 0px"
+      rootMargin: "0px 0px 0px 0px"
   });
 
   useEffect(() => {
@@ -269,7 +269,7 @@ export default function BlogPostPage() {
         </motion.div>
 
         <div className="mt-16 relative">
-          <div className="lg:absolute lg:left-0 lg:top-0 lg:h-full lg:w-64">
+          <div className="lg:absolute lg:left-8 lg:top-0 lg:h-full lg:w-64">
             <AnimatePresence>
               {isSidebarVisible && (
                 <motion.div
