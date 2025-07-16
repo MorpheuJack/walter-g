@@ -238,11 +238,6 @@ export default function BlogPostPage() {
   const isTriggerInView = useInView(triggerRef, {
     rootMargin: "0px 0px -100% 0px",
   });
-  
-  const footerRef = useRef<HTMLDivElement>(null);
-  const isFooterVisible = useInView(footerRef, {
-      rootMargin: "0px 0px 0px 0px"
-  });
 
   useEffect(() => {
     setSidebarVisible(!isTriggerInView);
@@ -279,7 +274,7 @@ export default function BlogPostPage() {
                   transition={{ duration: 0.3 }}
                   className="hidden lg:block"
                 >
-                  <div className={!isFooterVisible ? 'fixed top-24 w-64' : 'absolute top-full -translate-y-full w-64'}>
+                  <div className='fixed top-24 w-64'>
                     <TableOfContents
                       navLinks={navLinks}
                       featuredPosts={posts.slice(1, 4)}
@@ -318,7 +313,6 @@ export default function BlogPostPage() {
           </div>
         </div>
       </div>
-      <div ref={footerRef}></div>
     </div>
   );
 }
