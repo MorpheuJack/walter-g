@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/blog', label: 'Blog' },
-  { href: '/chat', label: 'Chat' },
 ];
 
 export default function Header() {
@@ -45,9 +44,6 @@ export default function Header() {
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-4">
-           <Button asChild className="rounded-full px-6 text-base font-semibold bg-primary/20 text-primary-foreground border-2 border-primary/50 hover:bg-primary/30">
-            <Link href="/#analysis-section">Começar Análise</Link>
-          </Button>
         </div>
       </div>
     </header>

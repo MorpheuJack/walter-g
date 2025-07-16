@@ -13,10 +13,7 @@ export default function Footer() {
             </span>
           </div>
           <nav className="flex gap-6 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-primary transition-colors">Início</Link>
             <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
-            <Link href="/chat" className="hover:text-primary transition-colors">Chat</Link>
-            <Link href="/#analysis-section" className="hover:text-primary transition-colors">Análise</Link>
           </nav>
           <p className="text-center text-xs text-muted-foreground">
             © {new Date().getFullYear()} Terapia Digital. Todos os direitos reservados.
