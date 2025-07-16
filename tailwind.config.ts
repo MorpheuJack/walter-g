@@ -115,6 +115,11 @@ export default {
             '--tw-prose-td-borders': theme('colors.border'),
           },
         },
+        lg: {
+          css: {
+            maxWidth: '80ch',
+          },
+        },
       }),
     },
   },
