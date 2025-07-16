@@ -1,13 +1,14 @@
 
 'use client';
 
-import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import TableOfContents from '@/components/table-of-contents';
 import Footer from '@/components/footer';
+import { useState, useEffect } from 'react';
 
 const content = [
   {
@@ -233,98 +234,58 @@ const AudioPlayer = () => {
 
 export default function BlogPostPage() {
   const navLinks = content.map(item => ({ href: `#${item.id}`, label: item.title }));
-  const [isSidebarVisible, setSidebarVisible] = useState(false);
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLDivElement>(null);
-  
-  const isTriggerInView = useInView(triggerRef, {
-    rootMargin: "0px 0px -40% 0px",
-  });
-
-  const isFooterVisible = useInView(footerRef, {
-    rootMargin: "100px 0px 0px 0px",
-  });
-
-  useEffect(() => {
-    setSidebarVisible(!isTriggerInView);
-  }, [isTriggerInView]);
-
 
   return (
     <>
       <div className="container mx-auto px-4 py-12 md:py-16">
-          <div className="relative">
-            <motion.div
-              layout
-              transition={{ duration: 0.5, type: 'spring', bounce: 0.2 }}
-              className="space-y-12 flex flex-col items-center"
-            >
-              <header className="space-y-4 text-center max-w-4xl">
-                <p className="font-semibold text-primary">Artigo Completo</p>
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-                  5 Maneiras de Lidar com a Ansiedade no Dia a Dia
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
-                </p>
-              </header>
-              <AudioPlayer />
-            </motion.div>
+          <header className="space-y-4 text-center max-w-4xl mx-auto">
+            <p className="font-semibold text-primary">Artigo Completo</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
+              5 Maneiras de Lidar com a Ansiedade no Dia a Dia
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
+            </p>
+          </header>
+          
+          <div className="my-12">
+            <AudioPlayer />
+          </div>
 
-            <div className="mt-16 relative">
-              <div className="lg:absolute lg:left-8 lg:top-0 lg:h-full lg:w-64">
-                <AnimatePresence>
-                  {isSidebarVisible && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
-                      transition={{ duration: 0.3 }}
-                      className="hidden lg:block"
-                    >
-                      <div className={!isFooterVisible ? 'lg:fixed lg:top-24 w-64' : 'lg:absolute lg:bottom-0 w-64'}>
-                        <TableOfContents
-                          navLinks={navLinks}
-                          featuredPosts={posts.slice(1, 4)}
-                          showExtras={true}
-                        />
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+          <div className="relative lg:grid lg:grid-cols-[256px_1fr] lg:gap-12">
+            <aside className="hidden lg:block lg:sticky lg:top-24 h-fit">
+              <TableOfContents
+                navLinks={navLinks}
+                featuredPosts={posts.slice(1, 4)}
+                showExtras={true}
+              />
+            </aside>
 
-              <div className="flex flex-col items-center">
-                <div className="w-full max-w-4xl">
-                    <div ref={triggerRef}>
-                      <div className="my-12 lg:hidden">
-                        <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
-                      </div>
-                    </div>
-                    
-                    <motion.article
-                      layout
-                      className={`prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground transition-all duration-300 ${
-                        isSidebarVisible ? 'lg:ml-72' : ''
-                      }`}
-                    >
-                      {content.map((section) => (
-                        <section key={section.id} id={section.id} className="scroll-mt-24">
-                          <h2>{section.title}</h2>
-                          {section.paragraphs.map((p, i) => (
-                            <p key={i}>{p}</p>
-                          ))}
-                        </section>
-                      ))}
-                    </motion.article>
-                </div>
+            <div className="flex flex-col items-center">
+              <div className="w-full max-w-4xl">
+                  <div className="my-12 lg:hidden">
+                    <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
+                  </div>
+                  
+                  <article
+                    className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground"
+                  >
+                    {content.map((section) => (
+                      <section key={section.id} id={section.id} className="scroll-mt-24">
+                        <h2>{section.title}</h2>
+                        {section.paragraphs.map((p, i) => (
+                          <p key={i}>{p}</p>
+                        ))}
+                      </section>
+                    ))}
+                  </article>
               </div>
             </div>
           </div>
       </div>
-      <div ref={footerRef}>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
+
+    
