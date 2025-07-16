@@ -276,7 +276,7 @@ export default function BlogPostPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className={`hidden lg:block top-24 left-16 w-64 ${!isFooterVisible ? 'fixed' : 'absolute bottom-0'}`}
+                className={`hidden lg:block top-24 left-8 w-64 ${!isFooterVisible ? 'fixed' : 'absolute bottom-0'}`}
               >
                 <TableOfContents
                   navLinks={navLinks}
@@ -296,7 +296,7 @@ export default function BlogPostPage() {
                 <motion.article
                   layout
                   className={`prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground transition-all duration-300 ${
-                    isSidebarVisible ? 'lg:ml-80' : ''
+                    isSidebarVisible ? 'lg:ml-72' : ''
                   }`}
                 >
                   {content.map((section) => (
