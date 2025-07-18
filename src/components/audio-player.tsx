@@ -83,18 +83,26 @@ export default function AudioPlayer() {
 
     return (
         <div className="rounded-xl bg-card p-4 border border-white/10 w-full max-w-4xl mx-auto">
-            <div className="flex items-center gap-4">
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3">
                 <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary/20 text-primary hover:bg-primary/30">
                     {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
                 </Button>
-                <div className="flex w-full flex-col gap-2.5">
-                    <span className="text-sm font-semibold text-foreground leading-tight">5 Maneiras de Lidar com a Ansiedade...</span>
+                
+                <div className="flex flex-col gap-2 overflow-hidden">
+                    <span className="text-sm font-semibold text-foreground truncate">5 Maneiras de Lidar com a Ansiedade...</span>
                     <div className="flex items-center gap-2">
-                       <Slider value={[progress]} onValueChange={handleProgressChange} max={100} step={1} />
+                      <Slider 
+                        value={[progress]} 
+                        onValueChange={handleProgressChange} 
+                        max={100} 
+                        step={1} 
+                        className="w-full"
+                      />
                     </div>
-                     <span className="text-xs text-muted-foreground font-mono tabular-nums -mt-1.5">{formatTime(currentTime)} / {formatTime(duration)}</span>
+                     <span className="text-xs text-muted-foreground font-mono tabular-nums -mt-1">{formatTime(currentTime)} / {formatTime(duration)}</span>
                 </div>
-                 <div className="flex items-center gap-1">
+
+                 <div className="flex flex-col items-center justify-between self-stretch gap-1">
                     <Button onClick={() => audioRef.current && (audioRef.current.currentTime = 0)} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
                         <RotateCcw className="h-4 w-4" />
                     </Button>
@@ -106,7 +114,7 @@ export default function AudioPlayer() {
                     </Button>
                 </div>
             </div>
-            <audio ref={audioRef} src="/audio-placeholder.mp3" />
+            <audio ref={audioRef} src="/audio-placeholder.mp3" preload="metadata" />
         </div>
     )
 }
