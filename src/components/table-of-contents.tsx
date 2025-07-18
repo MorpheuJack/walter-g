@@ -81,7 +81,7 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras }:
         {showExtras && (
           <>
             <div className="space-y-3">
-              <Button className="w-full" asChild>
+               <Button className="w-full" asChild>
                 <Link href="/#analysis-section">
                   <Heart className="mr-2 h-4 w-4" />
                   Receber Análise Gratuita

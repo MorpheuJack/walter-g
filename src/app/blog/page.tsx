@@ -4,7 +4,7 @@
 import BlogPostCard from '@/components/blog-post-card';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 const posts = [
@@ -98,6 +98,14 @@ export default function BlogPage() {
             >
                 Artigos, dicas e reflexões para sua jornada de autoconhecimento e bem-estar.
             </motion.p>
+             <motion.div className="mt-8" variants={itemVariants}>
+              <Button asChild size="lg" className="transition-transform duration-300 hover:scale-105">
+                <Link href="/#analysis-section">
+                  <Heart className="mr-2 h-5 w-5" />
+                  Receber Análise Gratuita
+                </Link>
+              </Button>
+            </motion.div>
         </div>
       </motion.section>
 
