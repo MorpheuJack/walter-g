@@ -42,7 +42,7 @@ export default function AudioPlayer() {
   
     const handleSkip = (seconds: number) => {
         if (audioRef.current) {
-            audioRef.current.currentTime += seconds;
+            audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime + seconds);
         }
     }
 
@@ -80,9 +80,9 @@ export default function AudioPlayer() {
     }, [duration]);
 
     return (
-        <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-md mx-auto shadow-lg text-foreground">
+        <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
             <div className="flex items-center gap-4">
-                <div className="relative h-14 w-14 flex-shrink-0">
+                <div className="relative h-16 w-16 flex-shrink-0">
                     <Image 
                         src="https://placehold.co/100x100.png"
                         data-ai-hint="abstract waves"
@@ -102,7 +102,7 @@ export default function AudioPlayer() {
                     value={[progress]} 
                     onValueChange={handleProgressChange} 
                     max={100} 
-                    step={1} 
+                    step={1}
                 />
                 <div className="flex justify-between items-center mt-1.5">
                     <span className="text-xs font-mono tabular-nums text-muted-foreground">{formatTime(currentTime)}</span>

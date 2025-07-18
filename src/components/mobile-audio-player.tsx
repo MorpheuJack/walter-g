@@ -43,7 +43,7 @@ export default function MobileAudioPlayer() {
 
     const handleSkip = (seconds: number) => {
         if (audioRef.current) {
-            audioRef.current.currentTime += seconds;
+            audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime + seconds);
         }
     }
   
@@ -87,15 +87,15 @@ export default function MobileAudioPlayer() {
     return (
         <AnimatePresence>
             <motion.div 
-                className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border/50 shadow-[0_-4px_15px_rgba(0,0,0,0.1)]"
+                className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border/50 shadow-[0_-4px_15px_rgba(0,0,0,0.1)] p-2"
                 initial={{ y: "100%" }}
                 animate={{ y: "0%" }}
                 exit={{ y: "100%" }}
                 transition={{ type: "tween", ease: "circOut", duration: 0.5 }}
             >
-                <div className="container mx-auto px-2 py-2">
+                <div className="container mx-auto px-2 py-1">
                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-muted-foreground w-9 text-center">{formatTime(currentTime)}</span>
+                        <span className="text-xs font-mono text-muted-foreground w-10 text-center">{formatTime(currentTime)}</span>
                         <Slider 
                             value={[progress]} 
                             onValueChange={handleProgressChange} 
@@ -103,7 +103,7 @@ export default function MobileAudioPlayer() {
                             step={1} 
                             className="w-full"
                         />
-                        <span className="text-xs font-mono text-muted-foreground w-9 text-center">{formatTime(duration)}</span>
+                        <span className="text-xs font-mono text-muted-foreground w-10 text-center">{formatTime(duration)}</span>
                     </div>
                     <div className="flex items-center justify-between mt-1">
                         <div className="w-10">
