@@ -66,7 +66,9 @@ export default function AudioPlayer() {
         const handleEnded = () => {
           setIsPlaying(false);
           setProgress(0);
-          audio.currentTime = 0;
+          if (audio) {
+            audio.currentTime = 0;
+          }
         }
   
         audio.addEventListener('timeupdate', updateProgress);
@@ -79,10 +81,10 @@ export default function AudioPlayer() {
           audio.removeEventListener('ended', handleEnded);
         };
       }
-    }, []);
+    }, [duration]);
 
     return (
-        <div className="rounded-xl bg-card p-4 border border-white/10 w-full max-w-md mx-auto">
+        <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-md mx-auto shadow-md">
             <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-4">
                 <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary/20 text-primary hover:bg-primary/30">
                     {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
@@ -95,7 +97,7 @@ export default function AudioPlayer() {
                         onValueChange={handleProgressChange} 
                         max={100} 
                         step={1} 
-                        className="w-full [&>span:last-child]:hidden"
+                        className="w-full"
                       />
                      <span className="text-xs text-muted-foreground font-mono tabular-nums">{formatTime(currentTime)} / {formatTime(duration)}</span>
                 </div>
