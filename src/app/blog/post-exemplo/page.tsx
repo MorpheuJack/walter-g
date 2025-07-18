@@ -10,6 +10,7 @@ import Footer from '@/components/footer';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import MobileAudioPlayer from '@/components/mobile-audio-player';
 
 const content = [
   {
@@ -216,6 +217,7 @@ export default function BlogPostPage() {
           </div>
       </div>
       <Footer />
+      <MobileAudioPlayer />
     </>
   );
 }
