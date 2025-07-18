@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, RotateCcw, Volume2, ArrowDown, Heart } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, ArrowDown, Heart, ChevronDown } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import TableOfContents from '@/components/table-of-contents';
 import Footer from '@/components/footer';
@@ -245,7 +245,7 @@ export default function BlogPostPage() {
   return (
     <>
       <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4">
-         <header className="absolute top-0 left-0 right-0 z-50 p-8">
+         <header className="absolute top-0 left-0 right-0 z-20 p-8">
           <div className="container mx-auto flex items-center justify-between">
               <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
                 <Heart className="h-7 w-7 text-white transition-transform duration-300 hover:scale-110" />
@@ -263,8 +263,8 @@ export default function BlogPostPage() {
           fill
           className="object-cover -z-10"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent -z-10" />
-        <div className="container max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent -z-10" />
+        <div className="container max-w-4xl mx-auto z-10">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -294,10 +294,10 @@ export default function BlogPostPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
+            className="absolute bottom-12 left-1/2 -translate-x-1/2"
             aria-label="Rolar para o conteúdo"
           >
-            <ArrowDown className="h-8 w-8 text-white/80" />
+            <ChevronDown className="h-8 w-8 text-white/80 animate-bounce" />
           </motion.button>
         </div>
       </section>
@@ -342,5 +342,3 @@ export default function BlogPostPage() {
     </>
   );
 }
-
-    
