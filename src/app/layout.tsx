@@ -36,6 +36,7 @@ export default function RootLayout({
           'min-h-screen bg-background font-body antialiased flex flex-col'
         )}
       >
+        <Header />
         <div className="flex-grow">{children}</div>
         <Toaster />
         <Script

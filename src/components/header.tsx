@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { href: '/blog', label: 'Blog' },
@@ -17,11 +19,17 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // On blog post page, header is transparent at top, so don't apply scrolled styles
+      if (pathname.includes('/blog/post-exemplo')) {
+         setIsScrolled(window.scrollY > 10);
+         return
+      }
       setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   const NavLink = ({ href, label }: { href: string; label: string }) => {
     const isActive = pathname.startsWith(href);
@@ -57,6 +65,24 @@ export default function Header() {
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-4">
+           <AnimatePresence>
+            {pathname !== '/' && (
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                transition={{ duration: 0.3 }}
+                className="hidden sm:flex"
+              >
+                <Button asChild className="font-semibold transition-transform duration-300 hover:scale-105">
+                  <Link href="/#analysis-section">
+                    <Heart className="mr-2 h-5 w-5" />
+                    Receber Análise Gratuita
+                  </Link>
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </header>

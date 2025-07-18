@@ -244,18 +244,7 @@ export default function BlogPostPage() {
 
   return (
     <>
-      <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4">
-         <header className="absolute top-0 left-0 right-0 z-20 p-8">
-          <div className="container mx-auto flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
-                <Heart className="h-7 w-7 text-white transition-transform duration-300 hover:scale-110" />
-                <span className="font-bold hidden sm:inline-block text-white">Terapia Digital</span>
-              </Link>
-              <nav>
-                <Link href="/blog" className="text-base font-medium text-white/80 transition-colors hover:text-white">Blog</Link>
-              </nav>
-          </div>
-        </header>
+      <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4 -mt-20">
         <Image
           src="https://placehold.co/1200x800.png"
           data-ai-hint="calm serene meditation"
@@ -323,7 +312,7 @@ export default function BlogPostPage() {
                   </div>
                   
                   <article
-                    className="prose prose-lg max-w-none prose-headings:font-bold prose-p:text-muted-foreground"
+                    className="prose prose-lg max-w-none prose-p:text-muted-foreground"
                   >
                     {content.map((section) => (
                       <section key={section.id} id={section.id} className="scroll-mt-24">
