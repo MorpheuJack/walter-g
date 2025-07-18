@@ -114,7 +114,6 @@ export default function AudioPlayer() {
                 </div>
                 <div className="flex-1">
                     <h4 className="font-bold text-sm">Leitura do Artigo</h4>
-                    <p className="text-xs text-muted-foreground">5 Maneiras de Lidar com a Ansiedade</p>
                 </div>
             </div>
 
@@ -143,9 +142,8 @@ export default function AudioPlayer() {
                 </div>
 
                 <div className="flex items-center gap-1">
-                    <Button onClick={handleSpeedChange} variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
+                    <Button onClick={handleSpeedChange} variant="ghost" size="icon" className="relative h-9 w-9 text-muted-foreground hover:text-foreground">
                         <Gauge className="h-4 w-4" />
-                        <span className="absolute text-[10px] font-bold top-5 right-1">{playbackRate}x</span>
                     </Button>
                     <Popover>
                         <PopoverTrigger asChild>
