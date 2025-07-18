@@ -49,6 +49,17 @@ export default function AudioPlayer() {
       }
       setPlaybackRate(nextRate);
     };
+
+     const handleRestart = () => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        setProgress(0);
+        if (!isPlaying) {
+            audioRef.current.play();
+            setIsPlaying(true);
+        }
+      }
+    }
   
     useEffect(() => {
       const audio = audioRef.current;
@@ -90,7 +101,7 @@ export default function AudioPlayer() {
                     {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
                 </Button>
                 
-                <div className="flex flex-col gap-1.5 overflow-hidden">
+                <div className="flex flex-col gap-2 overflow-hidden">
                     <span className="text-sm font-semibold text-foreground truncate">5 Maneiras de Lidar com a Ansiedade...</span>
                     <Slider 
                         value={[progress]} 
@@ -103,7 +114,7 @@ export default function AudioPlayer() {
                 </div>
 
                  <div className="flex flex-col items-center justify-between self-stretch gap-1">
-                    <Button onClick={() => audioRef.current && (audioRef.current.currentTime = 0)} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                    <Button onClick={handleRestart} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
                         <RotateCcw className="h-4 w-4" />
                     </Button>
                     <Button onClick={handlePlaybackRateChange} variant="ghost" className="h-8 w-auto px-1 text-xs font-bold text-muted-foreground hover:text-foreground">
