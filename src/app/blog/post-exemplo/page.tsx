@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -84,7 +85,7 @@ const posts = [
   {
     title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
     category: 'Ansiedade',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://placehold.co/600x400.png',
     aiHint: 'calm serene',
     description: 'Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.',
   },
@@ -257,8 +258,8 @@ export default function BlogPostPage() {
         </header>
         <Image
           src="https://placehold.co/1200x800.png"
-          data-ai-hint="calm serene"
-          alt="Abstract background"
+          data-ai-hint="calm serene meditation"
+          alt="Pessoas meditando em um parque tranquilo"
           fill
           className="object-cover -z-10"
         />
@@ -307,7 +308,7 @@ export default function BlogPostPage() {
           </div>
 
           <div className="relative lg:grid lg:grid-cols-[256px_1fr] lg:gap-12">
-            <aside className="hidden lg:block lg:sticky lg:top-24 h-fit">
+            <aside className="hidden lg:sticky lg:top-24 lg:block h-fit">
               <TableOfContents
                 navLinks={navLinks}
                 featuredPosts={posts.slice(1, 4)}
