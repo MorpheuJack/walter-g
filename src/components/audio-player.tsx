@@ -3,15 +3,15 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
+import Image from 'next/image';
 
 export default function AudioPlayer() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [playbackRate, setPlaybackRate] = useState(1.0);
     const audioRef = useRef<HTMLAudioElement>(null);
 
     const toggleAudio = () => {
@@ -26,10 +26,10 @@ export default function AudioPlayer() {
     };
     
     const formatTime = (time: number) => {
-      if (isNaN(time)) return '00:00';
+      if (isNaN(time) || !isFinite(time)) return '0:00';
       const minutes = Math.floor(time / 60);
       const seconds = Math.floor(time % 60);
-      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      return `${minutes}:${String(seconds).padStart(2, '0')}`;
     };
   
     const handleProgressChange = (value: number[]) => {
@@ -40,27 +40,12 @@ export default function AudioPlayer() {
       }
     };
   
-    const handlePlaybackRateChange = () => {
-      const rates = [1.0, 1.25, 1.5, 2.0, 0.75];
-      const currentIndex = rates.indexOf(playbackRate);
-      const nextRate = rates[(currentIndex + 1) % rates.length];
-      if (audioRef.current) {
-        audioRef.current.playbackRate = nextRate;
-      }
-      setPlaybackRate(nextRate);
-    };
-
-     const handleRestart = () => {
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        setProgress(0);
-        if (!isPlaying) {
-            audioRef.current.play();
-            setIsPlaying(true);
+    const handleSkip = (seconds: number) => {
+        if (audioRef.current) {
+            audioRef.current.currentTime += seconds;
         }
-      }
     }
-  
+
     useEffect(() => {
       const audio = audioRef.current;
       if (audio) {
@@ -95,37 +80,48 @@ export default function AudioPlayer() {
     }, [duration]);
 
     return (
-        <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-md mx-auto shadow-md">
-            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-4">
-                <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary/20 text-primary hover:bg-primary/30">
-                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
-                </Button>
-                
-                <div className="flex flex-col gap-2 overflow-hidden">
-                    <span className="text-sm font-semibold text-foreground truncate">5 Maneiras de Lidar com a Ansiedade...</span>
-                    <Slider 
-                        value={[progress]} 
-                        onValueChange={handleProgressChange} 
-                        max={100} 
-                        step={1} 
-                        className="w-full"
-                      />
-                     <span className="text-xs text-muted-foreground font-mono tabular-nums">{formatTime(currentTime)} / {formatTime(duration)}</span>
+        <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-md mx-auto shadow-lg text-foreground">
+            <div className="flex items-center gap-4">
+                <div className="relative h-14 w-14 flex-shrink-0">
+                    <Image 
+                        src="https://placehold.co/100x100.png"
+                        data-ai-hint="abstract waves"
+                        alt="Capa do áudio"
+                        fill
+                        className="rounded-md object-cover"
+                    />
                 </div>
-
-                 <div className="flex flex-col items-center justify-between self-stretch gap-1">
-                    <Button onClick={handleRestart} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-                        <RotateCcw className="h-4 w-4" />
-                    </Button>
-                    <Button onClick={handlePlaybackRateChange} variant="ghost" className="h-8 w-auto px-1 text-xs font-bold text-muted-foreground hover:text-foreground">
-                        <span>{playbackRate.toFixed(1)}x</span>
-                    </Button>
-                     <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-                        <Volume2 className="h-4 w-4" />
-                    </Button>
+                <div className="flex-1">
+                    <h3 className="font-semibold text-sm truncate">5 Maneiras de Lidar com a Ansiedade...</h3>
+                    <p className="text-xs text-muted-foreground">Terapia Digital</p>
                 </div>
             </div>
-            <audio ref={audioRef} src="/audio-placeholder.mp3" preload="metadata" />
+
+            <div className="my-3">
+                <Slider 
+                    value={[progress]} 
+                    onValueChange={handleProgressChange} 
+                    max={100} 
+                    step={1} 
+                />
+                <div className="flex justify-between items-center mt-1.5">
+                    <span className="text-xs font-mono tabular-nums text-muted-foreground">{formatTime(currentTime)}</span>
+                    <span className="text-xs font-mono tabular-nums text-muted-foreground">{formatTime(duration)}</span>
+                </div>
+            </div>
+
+            <div className="flex items-center justify-center gap-4">
+                 <Button onClick={() => handleSkip(-10)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                    <SkipBack className="h-5 w-5" />
+                </Button>
+                <Button onClick={toggleAudio} variant="default" size="icon" className="h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90">
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
+                </Button>
+                 <Button onClick={() => handleSkip(10)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                    <SkipForward className="h-5 w-5" />
+                </Button>
+            </div>
+             <audio ref={audioRef} src="/audio-placeholder.mp3" preload="metadata" />
         </div>
     )
 }

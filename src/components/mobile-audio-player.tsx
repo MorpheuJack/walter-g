@@ -3,10 +3,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, RotateCcw, X, SkipBack, SkipForward } from 'lucide-react';
+import { Play, Pause, X, SkipBack, SkipForward } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 export default function MobileAudioPlayer() {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -28,7 +27,7 @@ export default function MobileAudioPlayer() {
     };
     
     const formatTime = (time: number) => {
-      if (isNaN(time) || time === 0) return '0:00';
+      if (isNaN(time) || !isFinite(time)) return '0:00';
       const minutes = Math.floor(time / 60);
       const seconds = Math.floor(time % 60);
       return `${minutes}:${String(seconds).padStart(2, '0')}`;
@@ -46,17 +45,6 @@ export default function MobileAudioPlayer() {
         if (audioRef.current) {
             audioRef.current.currentTime += seconds;
         }
-    }
-
-     const handleRestart = () => {
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        setProgress(0);
-        if (!isPlaying) {
-            audioRef.current.play();
-            setIsPlaying(true);
-        }
-      }
     }
   
     useEffect(() => {
@@ -105,9 +93,9 @@ export default function MobileAudioPlayer() {
                 exit={{ y: "100%" }}
                 transition={{ type: "tween", ease: "circOut", duration: 0.5 }}
             >
-                <div className="container mx-auto px-4 py-3">
-                    <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xs font-mono text-muted-foreground w-10 text-center">{formatTime(currentTime)}</span>
+                <div className="container mx-auto px-2 py-2">
+                     <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono text-muted-foreground w-9 text-center">{formatTime(currentTime)}</span>
                         <Slider 
                             value={[progress]} 
                             onValueChange={handleProgressChange} 
@@ -115,27 +103,28 @@ export default function MobileAudioPlayer() {
                             step={1} 
                             className="w-full"
                         />
-                        <span className="text-xs font-mono text-muted-foreground w-10 text-center">{formatTime(duration)}</span>
+                        <span className="text-xs font-mono text-muted-foreground w-9 text-center">{formatTime(duration)}</span>
                     </div>
+                    <div className="flex items-center justify-between mt-1">
+                        <div className="w-10">
+                           <Button onClick={() => setIsVisible(false)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                                <X className="h-5 w-5" />
+                            </Button>
+                        </div>
 
-                    <div className="flex items-center justify-between">
-                         <Button onClick={handleRestart} variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                            <RotateCcw className="h-5 w-5" />
-                        </Button>
-                        <Button onClick={() => handleSkip(-10)} variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                            <SkipBack className="h-6 w-6" />
-                        </Button>
-
-                        <Button onClick={toggleAudio} variant="outline" size="icon" className="h-14 w-14 rounded-full border-primary/50 text-foreground hover:bg-primary/10">
-                            {isPlaying ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-1" />}
-                        </Button>
-
-                        <Button onClick={() => handleSkip(10)} variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                            <SkipForward className="h-6 w-6" />
-                        </Button>
-                        <Button onClick={() => setIsVisible(false)} variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                            <X className="h-5 w-5" />
-                        </Button>
+                        <div className="flex items-center justify-center gap-2">
+                             <Button onClick={() => handleSkip(-10)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                                <SkipBack className="h-5 w-5" />
+                            </Button>
+                            <Button onClick={toggleAudio} variant="default" size="icon" className="h-12 w-12 rounded-full">
+                                {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
+                            </Button>
+                             <Button onClick={() => handleSkip(10)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                                <SkipForward className="h-5 w-5" />
+                            </Button>
+                        </div>
+                        
+                        <div className="w-10" />
                     </div>
                 </div>
                 <audio ref={audioRef} src="/audio-placeholder.mp3" preload="metadata" />
