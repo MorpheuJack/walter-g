@@ -7,6 +7,7 @@ import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Badge } from './ui/badge';
+import { Heart } from 'lucide-react';
 
 interface Post {
     title: string;
@@ -81,6 +82,12 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras }:
           <>
             <div className="space-y-3">
               <Button className="w-full" asChild>
+                <Link href="/#analysis-section">
+                  <Heart className="mr-2 h-4 w-4" />
+                  Receber Análise Gratuita
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full" asChild>
                 <Link href="/chat">Falar com Bússola AI</Link>
               </Button>
               <Button variant="outline" className="w-full" asChild>
