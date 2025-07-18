@@ -55,6 +55,7 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        'hero-purple': 'hsl(var(--hero-purple))',
       },
       borderRadius: {
         lg: 'var(--radius)',

@@ -6,7 +6,6 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Heart, ChevronDown } from 'lucide-react';
 import TableOfContents from '@/components/table-of-contents';
-import Footer from '@/components/footer';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -85,7 +84,7 @@ const posts = [
   {
     title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
     category: 'Ansiedade',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: '/pessoas_meditando.png',
     aiHint: 'calm serene',
     description: 'Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.',
   },
@@ -139,13 +138,14 @@ export default function BlogPostPage() {
     <>
       <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4">
         <Image
-          src="https://placehold.co/1200x800.png"
+          src="/pessoas_meditando.png"
           data-ai-hint="calm serene meditation"
           alt="Pessoas meditando em um parque tranquilo"
           fill
-          className="object-cover -z-10"
+          className="object-cover -z-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent -z-10" />
+        <div className="absolute inset-0 bg-primary/70 -z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-hero-purple via-hero-purple/30 to-transparent -z-10" />
         <div className="container max-w-4xl mx-auto z-10">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -216,7 +216,6 @@ export default function BlogPostPage() {
             </div>
           </div>
       </div>
-      <Footer />
       <MobileAudioPlayer />
     </>
   );

@@ -5,7 +5,7 @@ export default function BlogLayout({
 }) {
   return (
     <div>
-      <main className="pt-20">{children}</main>
+      <main className="pt-0">{children}</main>
     </div>
   );
 }

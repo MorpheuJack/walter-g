@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { Heart } from 'lucide-react';
 
+const navLinks = [
+  { href: '/blog', label: 'Blog' },
+];
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 mt-auto">
@@ -13,7 +17,15 @@ export default function Footer() {
             </span>
           </div>
           <nav className="flex gap-6 text-sm text-muted-foreground">
-            <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
           <p className="text-center text-xs text-muted-foreground">
             © {new Date().getFullYear()} Terapia Digital. Todos os direitos reservados.
