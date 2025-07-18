@@ -1,14 +1,14 @@
-
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, ArrowDown } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import TableOfContents from '@/components/table-of-contents';
 import Footer from '@/components/footer';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const content = [
   {
@@ -234,20 +234,62 @@ const AudioPlayer = () => {
 
 export default function BlogPostPage() {
   const navLinks = content.map(item => ({ href: `#${item.id}`, label: item.title }));
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const scrollToContent = () => {
+    contentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
-      <div className="container mx-auto px-4 py-12 md:py-16">
-          <header className="space-y-4 text-center max-w-4xl mx-auto">
-            <p className="font-semibold text-primary">Artigo Completo</p>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-              5 Maneiras de Lidar com a Ansiedade no Dia a Dia
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária, permitindo que você respire mais aliviado.
-            </p>
-          </header>
-          
+      <section className="relative w-full min-h-[90vh] flex items-center justify-center text-center text-white p-4">
+        <Image
+          src="https://placehold.co/1200x800.png"
+          data-ai-hint="calm serene"
+          alt="Abstract background"
+          fill
+          className="object-cover -z-10"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30 -z-10" />
+        <div className="container max-w-4xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="font-semibold text-primary"
+          >
+            Artigo Completo
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg"
+          >
+            5 Maneiras de Lidar com a Ansiedade no Dia a Dia
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-4 text-lg text-white/80"
+          >
+            Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.
+          </motion.p>
+          <motion.button
+            onClick={scrollToContent}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
+            aria-label="Rolar para o conteúdo"
+          >
+            <ArrowDown className="h-8 w-8 text-white/80" />
+          </motion.button>
+        </div>
+      </section>
+      
+      <div ref={contentRef} className="container mx-auto px-4 py-12 md:py-16">
           <div className="my-12">
             <AudioPlayer />
           </div>
@@ -287,5 +329,3 @@ export default function BlogPostPage() {
     </>
   );
 }
-
-    
