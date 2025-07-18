@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -20,9 +19,8 @@ export default function Header() {
   const isSpecialHeaderPage = pathname.startsWith('/blog') || pathname.startsWith('/chat');
 
   useEffect(() => {
-    // Moved the check inside the effect to stabilize dependencies.
-    if (pathname.startsWith('/blog') || pathname.startsWith('/chat')) {
-      setIsScrolled(false); // Ensure it's not scrolled on special pages
+    if (isSpecialHeaderPage) {
+      setIsScrolled(false);
       return;
     }
 
@@ -31,10 +29,10 @@ export default function Header() {
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Check scroll position on mount
+    handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]); // Dependency array is now stable.
+  }, [pathname, isSpecialHeaderPage]);
 
   const NavLink = ({ href, label }: { href: string; label: string }) => {
     const isActive = pathname.startsWith(href);
