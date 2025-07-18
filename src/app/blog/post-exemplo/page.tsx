@@ -146,14 +146,6 @@ export default function BlogPostPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-hero-purple/95 via-hero-purple/80 to-background -z-10"></div>
         <div className="container max-w-4xl mx-auto z-10">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="font-semibold text-primary-foreground/80"
-          >
-            Artigo Completo
-          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
