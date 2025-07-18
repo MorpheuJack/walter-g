@@ -144,7 +144,7 @@ export default function BlogPostPage() {
           fill
           className="object-cover -z-20"
         />
-        <div className="absolute inset-0 bg-primary/70 -z-10"></div>
+        <div className="absolute inset-0 bg-purple-900/80 -z-10"></div>
         <div className="container max-w-4xl mx-auto z-10">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
