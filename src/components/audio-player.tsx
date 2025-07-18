@@ -54,7 +54,7 @@ export default function AudioPlayer() {
       const audio = audioRef.current;
       if (audio) {
         const updateProgress = () => {
-          const currentProgress = (audio.currentTime / audio.duration) * 100;
+          const currentProgress = (audio.duration > 0) ? (audio.currentTime / audio.duration) * 100 : 0;
           setProgress(currentProgress);
           setCurrentTime(audio.currentTime);
         };
@@ -82,28 +82,27 @@ export default function AudioPlayer() {
     }, []);
 
     return (
-        <div className="rounded-xl bg-card p-6 border border-white/10 w-full max-w-4xl mx-auto">
+        <div className="rounded-xl bg-card p-4 border border-white/10 w-full max-w-4xl mx-auto">
             <div className="flex items-center gap-4">
-                <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+                <Button onClick={toggleAudio} variant="ghost" size="icon" className="h-14 w-14 flex-shrink-0 rounded-full bg-primary/20 text-primary hover:bg-primary/30">
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
                 </Button>
-                <div className="flex w-full flex-col gap-2">
-                    <span className="text-sm font-semibold text-foreground">5 Maneiras de Lidar com a Ansiedade...</span>
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs text-muted-foreground font-mono tabular-nums">{formatTime(currentTime)}</span>
-                      <Slider value={[progress]} onValueChange={handleProgressChange} max={100} step={1} />
-                      <span className="text-xs text-muted-foreground font-mono tabular-nums">{formatTime(duration)}</span>
+                <div className="flex w-full flex-col gap-2.5">
+                    <span className="text-sm font-semibold text-foreground leading-tight">5 Maneiras de Lidar com a Ansiedade...</span>
+                    <div className="flex items-center gap-2">
+                       <Slider value={[progress]} onValueChange={handleProgressChange} max={100} step={1} />
                     </div>
+                     <span className="text-xs text-muted-foreground font-mono tabular-nums -mt-1.5">{formatTime(currentTime)} / {formatTime(duration)}</span>
                 </div>
-                 <div className="flex items-center gap-2">
-                    <Button onClick={() => audioRef.current && (audioRef.current.currentTime = 0)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
-                        <RotateCcw className="h-5 w-5" />
+                 <div className="flex items-center gap-1">
+                    <Button onClick={() => audioRef.current && (audioRef.current.currentTime = 0)} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                        <RotateCcw className="h-4 w-4" />
                     </Button>
-                    <Button onClick={handlePlaybackRateChange} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
-                        <span className="text-sm font-bold">{playbackRate.toFixed(1)}x</span>
+                    <Button onClick={handlePlaybackRateChange} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                        <span className="text-xs font-bold">{playbackRate.toFixed(1)}x</span>
                     </Button>
-                     <Button variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
-                        <Volume2 className="h-5 w-5" />
+                     <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                        <Volume2 className="h-4 w-4" />
                     </Button>
                 </div>
             </div>

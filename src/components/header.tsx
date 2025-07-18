@@ -19,11 +19,6 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // On blog post page, header is transparent at top, so don't apply scrolled styles
-      if (pathname.includes('/blog/post-exemplo')) {
-         setIsScrolled(window.scrollY > 10);
-         return
-      }
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
