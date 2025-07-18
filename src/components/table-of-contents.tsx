@@ -3,11 +3,10 @@
 
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Badge } from './ui/badge';
-import { Heart } from 'lucide-react';
+import AudioPlayer from './audio-player';
 
 interface Post {
     title: string;
@@ -59,6 +58,11 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras }:
   return (
     <aside className="w-full lg:w-64">
       <div className="space-y-6">
+        {showExtras && (
+          <div className="mb-6">
+            <AudioPlayer />
+          </div>
+        )}
         <div>
           <h3 className="font-semibold text-foreground mb-3">Neste artigo</h3>
           <nav className="flex flex-col space-y-1 border-l-2 border-border">
@@ -80,22 +84,8 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras }:
         </div>
         {showExtras && (
           <>
-            <div className="space-y-3">
-               <Button className="w-full" asChild>
-                <Link href="/#analysis-section">
-                  <Heart className="mr-2 h-4 w-4" />
-                  Receber Análise Gratuita
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/chat">Falar com Bússola AI</Link>
-              </Button>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/blog">Voltar ao Blog</Link>
-              </Button>
-            </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-4">Posts em Destaque</h3>
+              <h3 className="font-semibold text-foreground my-4">Posts em Destaque</h3>
                 <div className="space-y-4">
                     {featuredPosts.map((post) => (
                         <Link href="/blog/post-exemplo" key={post.title} className="group flex items-center gap-4">
