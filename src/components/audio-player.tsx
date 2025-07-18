@@ -81,20 +81,14 @@ export default function AudioPlayer() {
 
     return (
         <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
-            <div className="flex items-center gap-4">
-                <div className="relative h-16 w-16 flex-shrink-0">
-                    <Image 
-                        src="https://placehold.co/100x100.png"
-                        data-ai-hint="abstract waves"
-                        alt="Capa do áudio"
-                        fill
-                        className="rounded-md object-cover"
-                    />
-                </div>
-                <div className="flex-1">
-                    <h3 className="font-semibold text-sm truncate">5 Maneiras de Lidar com a Ansiedade...</h3>
-                    <p className="text-xs text-muted-foreground">Terapia Digital</p>
-                </div>
+            <div className="relative h-24 w-full mb-4">
+                <Image 
+                    src="https://placehold.co/600x400.png"
+                    data-ai-hint="abstract waves"
+                    alt="Capa do áudio"
+                    fill
+                    className="rounded-md object-cover"
+                />
             </div>
 
             <div className="my-3">
