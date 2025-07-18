@@ -16,14 +16,18 @@ export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const isSpecialHeaderPage = pathname.startsWith('/blog') || pathname.startsWith('/chat');
+
   useEffect(() => {
+    if (isSpecialHeaderPage) return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+  }, [pathname, isSpecialHeaderPage]);
 
   const NavLink = ({ href, label }: { href: string; label: string }) => {
     const isActive = pathname.startsWith(href);
@@ -40,11 +44,15 @@ export default function Header() {
     );
   };
 
+  const headerClasses = isSpecialHeaderPage
+    ? 'absolute top-0 z-50 w-full bg-transparent'
+    : cn(
+        'sticky top-0 z-50 w-full transition-all duration-300',
+        isScrolled ? 'border-b border-border/50 bg-background/80 backdrop-blur-lg' : 'bg-transparent'
+      );
+
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isScrolled ? "border-b border-border/50 bg-background/80 backdrop-blur-lg" : "bg-transparent"
-    )}>
+    <header className={headerClasses}>
        <div className="container flex h-20 items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center gap-2 mr-6" aria-label="Voltar para Início">

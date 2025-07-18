@@ -37,7 +37,7 @@ export default function RootLayout({
         )}
       >
         <Header />
-        <div className="flex-grow">{children}</div>
+        <div className="flex-grow pt-20 lg:pt-0">{children}</div>
         <Toaster />
         <Script
           strategy="afterInteractive"

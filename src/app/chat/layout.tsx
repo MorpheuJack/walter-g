@@ -7,7 +7,6 @@ export default function ChatLayout({
 }) {
   return (
     <div className="relative">
-      <Header />
       <main className="pt-24">{children}</main>
     </div>
   );

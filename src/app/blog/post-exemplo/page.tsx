@@ -137,7 +137,7 @@ export default function BlogPostPage() {
 
   return (
     <>
-      <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4 -mt-20">
+      <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4">
         <Image
           src="https://placehold.co/1200x800.png"
           data-ai-hint="calm serene meditation"
