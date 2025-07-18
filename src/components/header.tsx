@@ -19,7 +19,8 @@ export default function Header() {
   const isSpecialHeaderPage = pathname.startsWith('/blog') || pathname.startsWith('/chat');
 
   useEffect(() => {
-    if (isSpecialHeaderPage) {
+    const isSpecial = pathname.startsWith('/blog') || pathname.startsWith('/chat');
+    if (isSpecial) {
       setIsScrolled(false);
       return;
     }
@@ -32,7 +33,7 @@ export default function Header() {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname, isSpecialHeaderPage]);
+  }, [pathname]);
 
   const NavLink = ({ href, label }: { href: string; label: string }) => {
     const isActive = pathname.startsWith(href);
