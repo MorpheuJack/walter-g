@@ -51,7 +51,7 @@ export default function Header() {
         }}
         animate={hidden && !isMobileMenuOpen ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-0 z-50 w-full bg-gradient-to-b from-transparent to-transparent backdrop-blur-lg"
+        className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-lg"
       >
         <div className="container flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
