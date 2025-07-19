@@ -28,7 +28,7 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
             <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
                 <div className={cn(
                     "flex items-center justify-center p-2 rounded-full transition-all duration-300",
-                     elementStyle(!isHeaderScrolled)
+                     isBlogPost && isHeaderScrolled ? '' : elementStyle(!isHeaderScrolled)
                 )}>
                     <Heart className="h-6 w-6 text-primary transition-transform duration-300 hover:scale-110" />
                 </div>
@@ -36,7 +36,7 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
 
             <nav className={cn(
                 "hidden md:flex items-center gap-2 p-2 rounded-full transition-all duration-300",
-                elementStyle(!isHeaderScrolled)
+                isBlogPost && isHeaderScrolled ? '' : elementStyle(!isHeaderScrolled)
             )}>
                 {navLinks.map((link) => {
                 const isActive = pathname === link.href && !isBlogPost;
