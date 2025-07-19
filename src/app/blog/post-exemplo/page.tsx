@@ -149,7 +149,12 @@ export default function BlogPostPage() {
             className="fixed top-0 left-0 right-0 z-40 h-14 bg-background/80 backdrop-blur-lg border-b border-border/50"
           >
             <div className="container mx-auto h-full flex items-center px-4">
-              <p className="font-semibold text-foreground truncate">{post.title}</p>
+              <div className="relative w-full lg:grid lg:grid-cols-[256px_1fr] lg:gap-12">
+                <div className="hidden lg:block" />
+                <div className="w-full max-w-4xl mx-auto">
+                    <p className="font-semibold text-foreground truncate">{post.title}</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
