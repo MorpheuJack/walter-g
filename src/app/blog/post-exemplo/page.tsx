@@ -72,7 +72,7 @@ const content = [
     paragraphs: [
       "A ansiedade muitas vezes nos faz acreditar em cenários catastróficos como se fossem fatos. Aprender a questionar esses pensamentos é fundamental para reduzir seu poder sobre você.",
       "Quando um pensamento ansioso surgir, pergunte-se: Qual é a evidência real de que isso vai acontecer? Qual é a pior coisa que realisticamente poderia acontecer, e eu conseguiria lidar com isso?",
-      "Questione também: Existe uma maneira mais positiva ou realista de ver esta situação? Que conselho eu daria a um amigo que estivesse pensando isso?",
+      "Questione também: Existe uma maneira mais realista de ver esta situação? Que conselho eu daria a um amigo que estivesse pensando isso?",
       "Ao desafiar a validade desses pensamentos, você cria uma distância saudável entre você e a sua ansiedade, percebendo que seus pensamentos não são, necessarily, a realidade."
     ]
   },
