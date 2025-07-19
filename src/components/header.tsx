@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import MobileMenu from './header-mobile';
 
 const navLinks = [
@@ -22,8 +22,6 @@ export default function Header() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
 
-  // Correction: Wrap scroll logic in useEffect to prevent hydration errors.
-  // This ensures the code only runs on the client, after the component has mounted.
   useEffect(() => {
     const unsubscribe = scrollY.on("change", (latest) => {
       const previous = scrollY.getPrevious() ?? 0;
@@ -36,9 +34,25 @@ export default function Header() {
     return () => unsubscribe();
   }, [scrollY]);
 
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    const handleResize = () => {
+        if (window.innerWidth >= 768) {
+            setIsMobileMenuOpen(false);
+        }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileMenuOpen]);
   
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -56,7 +70,7 @@ export default function Header() {
         }}
         animate={hidden && !isMobileMenuOpen ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-0 z-50 w-full backdrop-blur-lg"
+        className="fixed top-0 z-50 w-full"
       >
         <div className="container flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
