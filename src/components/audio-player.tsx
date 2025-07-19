@@ -102,19 +102,14 @@ export default function AudioPlayer() {
 
     return (
         <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
-            <div className="flex items-center gap-4">
-                <div className="relative h-16 w-16 flex-shrink-0">
-                    <Image 
-                        src="/pessoas_meditando.png"
-                        data-ai-hint="calm serene meditation"
-                        alt="Capa do áudio"
-                        fill
-                        className="rounded-md object-cover"
-                    />
-                </div>
-                <div className="flex-1">
-                    <h4 className="font-bold text-sm">Leitura do Artigo</h4>
-                </div>
+            <div className="relative w-full h-40 mb-4">
+                <Image 
+                    src="/pessoas_meditando.png"
+                    data-ai-hint="calm serene meditation"
+                    alt="Capa do áudio"
+                    fill
+                    className="rounded-md object-cover"
+                />
             </div>
 
             <div className="my-3 space-y-1">
