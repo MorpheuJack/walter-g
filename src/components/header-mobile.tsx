@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -14,8 +15,8 @@ interface MobileMenuProps {
 }
 
 const overlayVariants = {
-  open: { opacity: 1 },
-  closed: { opacity: 0 },
+  open: { opacity: 1, transition: { duration: 0.3 } },
+  closed: { opacity: 0, transition: { duration: 0.3, delay: 0.3 } },
 };
 
 const menuVariants = {
@@ -60,7 +61,10 @@ export default function MobileMenu({ links, isOpen, onClose }: MobileMenuProps) 
         className="container flex h-full flex-col items-center justify-center"
         variants={menuVariants}
       >
-        <nav className="flex flex-col items-center gap-8 text-center">
+        <motion.nav 
+          variants={menuVariants}
+          className="flex flex-col items-center gap-8 text-center"
+        >
           {links.map((link) => (
             <motion.div key={link.href} variants={menuItemVariants}>
               <Link
@@ -75,7 +79,7 @@ export default function MobileMenu({ links, isOpen, onClose }: MobileMenuProps) 
               </Link>
             </motion.div>
           ))}
-        </nav>
+        </motion.nav>
         <motion.div className="mt-12" variants={menuItemVariants}>
            <Button asChild size="lg" className="font-semibold transition-transform duration-300 hover:scale-105">
               <Link href="/#analysis-section" onClick={onClose}>

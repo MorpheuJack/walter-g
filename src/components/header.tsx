@@ -23,7 +23,7 @@ export default function Header() {
   const [hidden, setHidden] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
+    const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 150) {
       setHidden(true);
     } else {
@@ -35,7 +35,6 @@ export default function Header() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
   
-  // Close mobile menu on route change
   useEffect(() => {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
@@ -52,7 +51,7 @@ export default function Header() {
         }}
         animate={hidden && !isMobileMenuOpen ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-0 z-50 w-full"
+        className="fixed top-0 z-50 w-full bg-background/30 backdrop-blur-lg"
       >
         <div className="container flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
