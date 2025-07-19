@@ -1,12 +1,11 @@
 
 'use client';
 
-import { motion } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Heart, ChevronDown } from 'lucide-react';
 import TableOfContents from '@/components/table-of-contents';
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AudioPlayer from '@/components/audio-player';
@@ -115,13 +114,47 @@ const posts = [
 export default function BlogPostPage() {
   const navLinks = content.map(item => ({ href: `#${item.id}`, label: item.title }));
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isTitleBarVisible, setIsTitleBarVisible] = useState(false);
 
   const scrollToContent = () => {
     contentRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contentRef.current) {
+        const { top } = contentRef.current.getBoundingClientRect();
+        // Show the bar when the top of the content is at or above the top of the viewport
+        setIsTitleBarVisible(top <= 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on initial render
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
+      <AnimatePresence>
+        {isTitleBarVisible && (
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed top-0 left-0 right-0 z-40 h-14 bg-background/80 backdrop-blur-lg border-b border-border/50"
+          >
+            <div className="container mx-auto h-full flex items-center px-4">
+              <p className="font-semibold text-foreground truncate">{post.title}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4">
         <Image
           src={post.imageUrl}
