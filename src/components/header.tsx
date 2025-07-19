@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import MobileMenu from './header-mobile';
 import NavigationElements from './navigation-elements';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Início' },
@@ -18,6 +19,7 @@ export default function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -27,21 +29,28 @@ export default function Header() {
     } else {
       setHidden(false);
     }
+    
+    // Check if scrolled past the viewport height (past the hero)
+    if (typeof window !== 'undefined') {
+        setIsScrolled(latest > window.innerHeight * 0.9);
+    }
   });
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
     const handleResize = () => {
         if (window.innerWidth >= 768) {
             setIsMobileMenuOpen(false);
         }
     };
+
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
@@ -62,10 +71,13 @@ export default function Header() {
         }}
         animate={hidden && !isMobileMenuOpen ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-0 z-50 w-full"
+        className={cn(
+            "fixed top-0 z-50 w-full transition-colors duration-300",
+            isScrolled ? 'bg-background' : 'bg-transparent'
+        )}
       >
         <div className="container flex h-20 items-center justify-between">
-           <NavigationElements navLinks={navLinks} showCta={true} />
+           <NavigationElements navLinks={navLinks} showCta={true} isHeaderScrolled={isScrolled} />
 
             <div className="md:hidden">
               <Button onClick={toggleMobileMenu} variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">

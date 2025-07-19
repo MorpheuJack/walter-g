@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -10,20 +11,32 @@ import { Button } from './ui/button';
 interface NavigationElementsProps {
     navLinks: { href: string; label: string }[];
     showCta: boolean;
+    isHeaderScrolled?: boolean; // New prop to control styling
 }
 
-export default function NavigationElements({ navLinks, showCta }: NavigationElementsProps) {
+export default function NavigationElements({ navLinks, showCta, isHeaderScrolled = false }: NavigationElementsProps) {
     const pathname = usePathname();
+
+    const elementStyle = (isTransparent: boolean) =>
+      isTransparent
+        ? 'bg-background/50 backdrop-blur-sm border border-white/10 shadow-md'
+        : 'bg-transparent border-none shadow-none';
 
     return (
         <>
             <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
-                <div className="flex items-center justify-center p-2 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
+                <div className={cn(
+                    "flex items-center justify-center p-2 rounded-full transition-all duration-300",
+                     elementStyle(!isHeaderScrolled)
+                )}>
                     <Heart className="h-6 w-6 text-primary transition-transform duration-300 hover:scale-110" />
                 </div>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-2 p-2 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
+            <nav className={cn(
+                "hidden md:flex items-center gap-2 p-2 rounded-full transition-all duration-300",
+                elementStyle(!isHeaderScrolled)
+            )}>
                 {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -38,7 +51,10 @@ export default function NavigationElements({ navLinks, showCta }: NavigationElem
                     {link.label}
                     {isActive && (
                         <motion.div
-                        className="absolute inset-0 bg-primary/10 rounded-full -z-10"
+                        className={cn(
+                            "absolute inset-0 rounded-full -z-10",
+                            isHeaderScrolled ? 'bg-primary/20' : 'bg-primary/10'
+                        )}
                         layoutId="underline"
                         initial={false}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
@@ -51,7 +67,10 @@ export default function NavigationElements({ navLinks, showCta }: NavigationElem
             
             <div className="flex items-center gap-4">
                 {showCta && (
-                     <Button asChild className="hidden md:flex font-semibold transition-transform duration-300 hover:scale-105 shadow-md">
+                     <Button asChild className={cn(
+                        "hidden md:flex font-semibold transition-all duration-300 hover:scale-105",
+                        isHeaderScrolled ? 'bg-primary/80 hover:bg-primary/100' : 'shadow-md'
+                     )}>
                         <Link href="/#analysis-section">
                         <Heart className="mr-2 h-5 w-5" />
                         Receber Análise Gratuita
