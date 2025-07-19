@@ -51,14 +51,13 @@ export default function Header() {
         }}
         animate={hidden && !isMobileMenuOpen ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-0 z-50 w-full backdrop-blur-lg"
+        className="fixed top-0 z-50 w-full bg-gradient-to-b from-transparent to-transparent backdrop-blur-lg"
       >
         <div className="container flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
              <div className="flex items-center justify-center p-2 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
                 <Heart className="h-6 w-6 text-primary transition-transform duration-300 hover:scale-110" />
             </div>
-            <span className="font-bold hidden sm:inline-block text-lg drop-shadow-sm">Terapia Digital</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-2 p-2 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
