@@ -163,7 +163,15 @@ export default function BlogPostPage() {
           className="object-cover -z-20"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-hero-purple/95 via-hero-purple/80 to-background -z-10"></div>
-        <div className="container max-w-4xl mx-auto z-10">
+        <div className="container max-w-4xl mx-auto z-10 flex flex-col items-center">
+          <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm"
+            >
+              <Heart className="h-7 w-7 text-white" />
+          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,15 +202,17 @@ export default function BlogPostPage() {
       </section>
       
       <div ref={contentRef} className="container mx-auto px-4 py-12 md:py-16">
-          <div className="relative lg:grid lg:grid-cols-[256px_1fr] lg:gap-12">
-            <aside className="hidden lg:sticky lg:top-24 lg:block h-fit">
-              <TableOfContents
-                navLinks={navLinks}
-                featuredPosts={posts}
-                showExtras={true}
-                imageUrl={post.imageUrl}
-              />
-            </aside>
+          <div className="relative lg:grid lg:grid-cols-[288px_1fr] lg:gap-12">
+            <div className="hidden lg:sticky lg:top-24 lg:block h-fit bg-card p-6 rounded-2xl border">
+              <aside>
+                <TableOfContents
+                  navLinks={navLinks}
+                  featuredPosts={posts}
+                  showExtras={true}
+                  imageUrl={post.imageUrl}
+                />
+              </aside>
+            </div>
 
             <main className="w-full max-w-4xl mx-auto">
                 <div className="my-12 lg:hidden">

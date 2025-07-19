@@ -57,7 +57,7 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras, i
 
 
   return (
-    <aside className="w-full lg:w-64">
+    <aside className="w-full">
       <div className="space-y-6">
         {showExtras && (
           <div className="mb-6 hidden lg:block">
