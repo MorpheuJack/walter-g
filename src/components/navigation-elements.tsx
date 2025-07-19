@@ -18,17 +18,15 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
     const pathname = usePathname();
     const isBlogPost = pathname.startsWith('/blog/post-exemplo');
 
-    const elementStyle = (isTransparent: boolean) =>
-      isTransparent && !isBlogPost
-        ? 'bg-background/50 backdrop-blur-sm border border-white/10 shadow-md'
-        : 'bg-transparent border-none shadow-none';
+    const elementStyle = 'bg-background/50 backdrop-blur-sm border border-white/10 shadow-md';
 
     return (
         <>
             <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
                 <div className={cn(
                     "flex items-center justify-center p-2 rounded-full transition-all duration-300",
-                     isBlogPost && isHeaderScrolled ? '' : elementStyle(!isHeaderScrolled)
+                    isBlogPost && isHeaderScrolled ? elementStyle : 
+                    !isHeaderScrolled && !isBlogPost ? elementStyle : 'bg-transparent border-none shadow-none'
                 )}>
                     <Heart className="h-6 w-6 text-primary transition-transform duration-300 hover:scale-110" />
                 </div>
@@ -36,7 +34,7 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
 
             <nav className={cn(
                 "hidden md:flex items-center gap-2 p-2 rounded-full transition-all duration-300",
-                isBlogPost && isHeaderScrolled ? '' : elementStyle(!isHeaderScrolled)
+                isBlogPost && isHeaderScrolled ? '' : elementStyle
             )}>
                 {navLinks.map((link) => {
                 const isActive = pathname === link.href && !isBlogPost;
