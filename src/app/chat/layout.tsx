@@ -1,5 +1,3 @@
-import Header from '@/components/header';
-
 export default function ChatLayout({
   children,
 }: {
@@ -7,7 +5,7 @@ export default function ChatLayout({
 }) {
   return (
     <div className="relative">
-      <main className="pt-24">{children}</main>
+      <main className="">{children}</main>
     </div>
   );
 }

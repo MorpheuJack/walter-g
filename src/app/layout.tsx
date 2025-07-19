@@ -31,10 +31,8 @@ export default function RootLayout({
           'min-h-screen bg-background font-body antialiased flex flex-col'
         )}
       >
-        <div className='hidden'>
-          <Header />
-        </div>
-        <div className="flex-grow">{children}</div>
+        <Header />
+        <div className="flex-grow pt-20">{children}</div>
         <Toaster />
         <Script
           strategy="afterInteractive"
