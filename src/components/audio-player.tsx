@@ -154,8 +154,8 @@ export default function AudioPlayer({ isMobile = false }: AudioPlayerProps) {
     }
 
     return (
-        <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
-            <div className="relative w-full h-40 mb-4">
+        <div className="rounded-xl bg-card p-3 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
+            <div className="relative w-full h-32 mb-3">
                 <Image 
                     src="/pessoas_meditando.png"
                     data-ai-hint="calm serene meditation"
@@ -165,7 +165,7 @@ export default function AudioPlayer({ isMobile = false }: AudioPlayerProps) {
                 />
             </div>
 
-            <div className="my-3 space-y-1">
+            <div className="my-2 space-y-1">
                 <Slider 
                     value={[progress]} 
                     onValueChange={handleProgressChange} 
@@ -179,20 +179,20 @@ export default function AudioPlayer({ isMobile = false }: AudioPlayerProps) {
             </div>
 
             <div className="flex items-center justify-between gap-2">
-                <Button onClick={handleReset} variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
+                <Button onClick={handleReset} variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
                     <RotateCcw className="h-4 w-4" />
                 </Button>
                 
                 <div className="flex-1 flex justify-center">
-                    <Button onClick={toggleAudio} variant="default" size="icon" className="h-12 w-12 rounded-full shadow-lg bg-primary hover:bg-primary/90">
-                        {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
+                    <Button onClick={toggleAudio} variant="default" size="icon" className="h-10 w-10 rounded-full shadow-lg bg-primary hover:bg-primary/90">
+                        {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 ml-0.5" />}
                     </Button>
                 </div>
 
                 <div className="flex items-center gap-1">
                     <Popover>
                         <PopoverTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
                                 <Volume2 className="h-4 w-4" />
                             </Button>
                         </PopoverTrigger>
