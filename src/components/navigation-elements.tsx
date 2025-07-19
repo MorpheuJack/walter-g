@@ -11,14 +11,15 @@ import { Button } from './ui/button';
 interface NavigationElementsProps {
     navLinks: { href: string; label: string }[];
     showCta: boolean;
-    isHeaderScrolled?: boolean; // New prop to control styling
+    isHeaderScrolled?: boolean;
 }
 
 export default function NavigationElements({ navLinks, showCta, isHeaderScrolled = false }: NavigationElementsProps) {
     const pathname = usePathname();
+    const isBlogPost = pathname.startsWith('/blog/post-exemplo');
 
     const elementStyle = (isTransparent: boolean) =>
-      isTransparent
+      isTransparent && !isBlogPost
         ? 'bg-background/50 backdrop-blur-sm border border-white/10 shadow-md'
         : 'bg-transparent border-none shadow-none';
 
@@ -38,8 +39,13 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
                 elementStyle(!isHeaderScrolled)
             )}>
                 {navLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = pathname === link.href && !isBlogPost;
                 return (
+                    isBlogPost ? (
+                       <p key={link.href} className="px-4 py-2 text-sm font-semibold text-foreground truncate max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                         {link.label}
+                       </p>
+                    ) : (
                     <Link
                         key={link.href}
                         href={link.href}
@@ -61,6 +67,7 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
                         />
                     )}
                     </Link>
+                    )
                 );
                 })}
             </nav>
@@ -69,7 +76,7 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
                 {showCta && (
                      <Button asChild className={cn(
                         "hidden md:flex font-semibold transition-all duration-300 hover:scale-105",
-                        isHeaderScrolled ? 'bg-primary/80 hover:bg-primary/100' : 'shadow-md'
+                        isHeaderScrolled ? 'bg-primary hover:bg-primary/90' : 'shadow-md'
                      )}>
                         <Link href="/#analysis-section">
                         <Heart className="mr-2 h-5 w-5" />
@@ -78,7 +85,7 @@ export default function NavigationElements({ navLinks, showCta, isHeaderScrolled
                     </Button>
                 )}
                  {!showCta && (
-                    <div className="hidden md:block w-[244px]"></div> // Placeholder to balance layout
+                    <div className="hidden md:block w-[244px]"></div>
                 )}
             </div>
         </>

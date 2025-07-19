@@ -4,11 +4,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Heart, ChevronDown } from 'lucide-react';
+import { ChevronDown, Heart } from 'lucide-react';
 import TableOfContents from '@/components/table-of-contents';
 import Image from 'next/image';
 import Link from 'next/link';
 import AudioPlayer from '@/components/audio-player';
+import NavigationElements from '@/components/navigation-elements';
 
 const post = {
   title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
@@ -124,13 +125,12 @@ export default function BlogPostPage() {
     const handleScroll = () => {
       if (contentRef.current) {
         const { top } = contentRef.current.getBoundingClientRect();
-        // Show the bar when the top of the content is at or above the top of the viewport
         setIsTitleBarVisible(top <= 0);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on initial render
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -141,22 +141,17 @@ export default function BlogPostPage() {
     <>
       <AnimatePresence>
         {isTitleBarVisible && (
-          <motion.div
+          <motion.header
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed top-0 left-0 right-0 z-40 h-14 bg-background/80 backdrop-blur-lg border-b border-border/50"
+            className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border/50"
           >
-            <div className="container mx-auto h-full flex items-center px-4">
-              <div className="relative w-full lg:grid lg:grid-cols-[256px_1fr] lg:gap-12">
-                <div className="hidden lg:block" />
-                <div className="w-full max-w-4xl mx-auto">
-                    <p className="font-semibold text-foreground truncate">{post.title}</p>
-                </div>
-              </div>
+            <div className="container flex h-20 items-center justify-between">
+                <NavigationElements navLinks={[{href: '#', label: post.title}]} showCta={true} isHeaderScrolled={true} />
             </div>
-          </motion.div>
+          </motion.header>
         )}
       </AnimatePresence>
 
