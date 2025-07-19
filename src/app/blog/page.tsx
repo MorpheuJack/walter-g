@@ -3,9 +3,6 @@
 
 import BlogPostCard from '@/components/blog-post-card';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Heart } from 'lucide-react';
-import Link from 'next/link';
 
 const posts = [
   {
@@ -80,14 +77,14 @@ export default function BlogPage() {
   return (
     <div className="w-full">
        <motion.section 
-        className="w-full py-24 md:py-32"
+        className="w-full py-24 md:py-32 bg-primary/10"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
        >
         <div className="container mx-auto px-4 text-center">
             <motion.h1 
-                className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+                className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-primary"
                 variants={itemVariants}
             >
                 Blog Terapia Digital
@@ -98,14 +95,6 @@ export default function BlogPage() {
             >
                 Artigos, dicas e reflexões para sua jornada de autoconhecimento e bem-estar.
             </motion.p>
-             <motion.div className="mt-8" variants={itemVariants}>
-              <Button asChild size="lg" className="transition-transform duration-300 hover:scale-105">
-                <Link href="/#analysis-section">
-                  <Heart className="mr-2 h-5 w-5" />
-                  Receber Análise Gratuita
-                </Link>
-              </Button>
-            </motion.div>
         </div>
       </motion.section>
 
@@ -116,7 +105,7 @@ export default function BlogPage() {
         viewport={{ once: true, amount: 0.1 }}
         variants={containerVariants}
       >
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 pt-16">
           {posts.map((post, index) => (
             <motion.div key={index} variants={itemVariants}>
               <BlogPostCard {...post} />
