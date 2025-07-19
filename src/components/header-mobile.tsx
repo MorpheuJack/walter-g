@@ -50,7 +50,7 @@ export default function MobileMenu({ links, isOpen, onClose }: MobileMenuProps) 
 
   return (
     <motion.div
-      className="fixed inset-0 z-40 bg-background/80 backdrop-blur-lg"
+      className="fixed inset-0 z-40 backdrop-blur-lg"
       variants={overlayVariants}
       initial="closed"
       animate="open"
