@@ -22,14 +22,19 @@ export default function Header() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-  });
+  // Correction: Wrap scroll logic in useEffect to prevent hydration errors.
+  // This ensures the code only runs on the client, after the component has mounted.
+  useEffect(() => {
+    const unsubscribe = scrollY.on("change", (latest) => {
+      const previous = scrollY.getPrevious() ?? 0;
+      if (latest > previous && latest > 150) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollY]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
