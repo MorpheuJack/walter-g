@@ -20,9 +20,10 @@ interface TableOfContentsProps {
   navLinks: { href: string; label: string }[];
   featuredPosts: Post[];
   showExtras: boolean;
+  imageUrl?: string;
 }
 
-export default function TableOfContents({ navLinks, featuredPosts, showExtras }: TableOfContentsProps) {
+export default function TableOfContents({ navLinks, featuredPosts, showExtras, imageUrl }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras }:
       <div className="space-y-6">
         {showExtras && (
           <div className="mb-6 hidden lg:block">
-            <AudioPlayer />
+            <AudioPlayer imageUrl={imageUrl}/>
           </div>
         )}
         <div>

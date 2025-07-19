@@ -11,6 +11,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import AudioPlayer from '@/components/audio-player';
 
+const post = {
+  title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
+  description: 'Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.',
+  imageUrl: '/pessoas_meditando.png',
+  aiHint: 'calm serene meditation'
+}
+
 const content = [
   {
     id: 'introduction',
@@ -117,8 +124,8 @@ export default function BlogPostPage() {
     <>
       <section className="relative w-full min-h-[95vh] flex items-center justify-center text-center text-white p-4">
         <Image
-          src="/pessoas_meditando.png"
-          data-ai-hint="calm serene meditation"
+          src={post.imageUrl}
+          data-ai-hint={post.aiHint}
           alt="Pessoas meditando em um parque tranquilo"
           fill
           className="object-cover -z-20"
@@ -131,7 +138,7 @@ export default function BlogPostPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg"
           >
-            5 Maneiras de Lidar com a Ansiedade no Dia a Dia
+            {post.title}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -139,7 +146,7 @@ export default function BlogPostPage() {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-4 text-lg text-white/80"
           >
-            Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.
+            {post.description}
           </motion.p>
           <motion.button
             onClick={scrollToContent}
@@ -161,6 +168,7 @@ export default function BlogPostPage() {
                 navLinks={navLinks}
                 featuredPosts={posts}
                 showExtras={true}
+                imageUrl={post.imageUrl}
               />
             </aside>
 
@@ -168,7 +176,7 @@ export default function BlogPostPage() {
                 <div className="my-12 lg:hidden">
                   <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
                   <div className="mt-8">
-                     <AudioPlayer isMobile={true}/>
+                     <AudioPlayer isMobile={true} imageUrl={post.imageUrl}/>
                   </div>
                 </div>
                 

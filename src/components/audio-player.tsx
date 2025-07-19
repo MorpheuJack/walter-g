@@ -11,9 +11,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface AudioPlayerProps {
     isMobile?: boolean;
+    imageUrl?: string;
 }
 
-export default function AudioPlayer({ isMobile = false }: AudioPlayerProps) {
+export default function AudioPlayer({ isMobile = false, imageUrl = "/pessoas_meditando.png" }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
@@ -157,7 +158,7 @@ export default function AudioPlayer({ isMobile = false }: AudioPlayerProps) {
         <div className="rounded-xl bg-card p-3 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
             <div className="relative w-full h-32 mb-3">
                 <Image 
-                    src="/pessoas_meditando.png"
+                    src={imageUrl}
                     data-ai-hint="calm serene meditation"
                     alt="Capa do áudio"
                     fill

@@ -8,7 +8,7 @@ const posts = [
   {
     title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
     category: 'Ansiedade',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: '/pessoas_meditando.png',
     aiHint: 'calm serene',
     description: 'Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.',
   },
