@@ -3,18 +3,23 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, RotateCcw, Gauge, Volume2 } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, X, SkipBack, SkipForward } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import Image from 'next/image';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function AudioPlayer() {
+interface AudioPlayerProps {
+    isMobile?: boolean;
+}
+
+export default function AudioPlayer({ isMobile = false }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [playbackRate, setPlaybackRate] = useState(1);
     const [volume, setVolume] = useState(1);
+    const [isPlayerVisible, setIsPlayerVisible] = useState(true);
     const audioRef = useRef<HTMLAudioElement>(null);
 
     const toggleAudio = () => {
@@ -48,16 +53,6 @@ export default function AudioPlayer() {
             audioRef.current.currentTime = 0;
         }
     }
-
-    const handleSpeedChange = () => {
-        const rates = [1, 1.5, 2];
-        const currentRateIndex = rates.indexOf(playbackRate);
-        const nextRate = rates[(currentRateIndex + 1) % rates.length];
-        setPlaybackRate(nextRate);
-        if (audioRef.current) {
-            audioRef.current.playbackRate = nextRate;
-        }
-    }
     
     const handleVolumeChange = (value: number[]) => {
       const newVolume = value[0];
@@ -66,6 +61,12 @@ export default function AudioPlayer() {
         audioRef.current.volume = newVolume;
       }
     };
+
+    const handleSkip = (seconds: number) => {
+        if (audioRef.current) {
+            audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime + seconds);
+        }
+    }
 
     useEffect(() => {
       const audio = audioRef.current;
@@ -99,6 +100,58 @@ export default function AudioPlayer() {
         };
       }
     }, [duration]);
+
+    if (isMobile) {
+        if (!isPlayerVisible) return null;
+
+        return (
+            <AnimatePresence>
+                <motion.div 
+                    className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border/50 shadow-[0_-4px_15px_rgba(0,0,0,0.1)] p-2"
+                    initial={{ y: "100%" }}
+                    animate={{ y: "0%" }}
+                    exit={{ y: "100%" }}
+                    transition={{ type: "tween", ease: "circOut", duration: 0.5 }}
+                >
+                    <div className="container mx-auto px-2 py-1">
+                         <div className="flex items-center gap-2">
+                            <span className="text-xs font-mono text-muted-foreground w-10 text-center">{formatTime(currentTime)}</span>
+                            <Slider 
+                                value={[progress]} 
+                                onValueChange={handleProgressChange} 
+                                max={100} 
+                                step={1} 
+                                className="w-full"
+                            />
+                            <span className="text-xs font-mono text-muted-foreground w-10 text-center">{formatTime(duration)}</span>
+                        </div>
+                        <div className="flex items-center justify-between mt-1">
+                            <div className="w-10">
+                               <Button onClick={() => setIsPlayerVisible(false)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                                    <X className="h-5 w-5" />
+                                </Button>
+                            </div>
+
+                            <div className="flex items-center justify-center gap-2">
+                                 <Button onClick={() => handleSkip(-10)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                                    <SkipBack className="h-5 w-5" />
+                                </Button>
+                                <Button onClick={toggleAudio} variant="default" size="icon" className="h-12 w-12 rounded-full">
+                                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
+                                </Button>
+                                 <Button onClick={() => handleSkip(10)} variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-foreground">
+                                    <SkipForward className="h-5 w-5" />
+                                </Button>
+                            </div>
+                            
+                            <div className="w-10" />
+                        </div>
+                    </div>
+                    <audio ref={audioRef} src="/audio-placeholder.mp3" preload="metadata" />
+                </motion.div>
+            </AnimatePresence>
+        );
+    }
 
     return (
         <div className="rounded-xl bg-card p-4 border border-border/50 w-full max-w-sm mx-auto shadow-lg text-foreground">
@@ -137,9 +190,6 @@ export default function AudioPlayer() {
                 </div>
 
                 <div className="flex items-center gap-1">
-                    <Button onClick={handleSpeedChange} variant="ghost" size="icon" className="relative h-9 w-9 text-muted-foreground hover:text-foreground">
-                        <Gauge className="h-4 w-4" />
-                    </Button>
                     <Popover>
                         <PopoverTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">

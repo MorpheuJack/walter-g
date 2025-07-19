@@ -59,7 +59,7 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras }:
     <aside className="w-full lg:w-64">
       <div className="space-y-6">
         {showExtras && (
-          <div className="mb-6">
+          <div className="mb-6 hidden lg:block">
             <AudioPlayer />
           </div>
         )}

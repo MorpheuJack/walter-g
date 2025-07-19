@@ -9,7 +9,7 @@ import TableOfContents from '@/components/table-of-contents';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import MobileAudioPlayer from '@/components/mobile-audio-player';
+import AudioPlayer from '@/components/audio-player';
 
 const content = [
   {
@@ -82,13 +82,6 @@ const content = [
 
 const posts = [
   {
-    title: '5 Maneiras de Lidar com a Ansiedade no Dia a Dia',
-    category: 'Ansiedade',
-    imageUrl: '/pessoas_meditando.png',
-    aiHint: 'calm serene',
-    description: 'Estratégias práticas e eficazes para gerenciar a ansiedade e encontrar mais calma em sua rotina diária.',
-  },
-  {
     title: 'Introdução ao Mindfulness para Iniciantes',
     category: 'Mindfulness',
     imageUrl: 'https://placehold.co/600x400.png',
@@ -108,20 +101,6 @@ const posts = [
     imageUrl: 'https://placehold.co/600x400.png',
     aiHint: 'brain illustration',
     description: 'Entenda os princípios da TCC e como ela pode ser uma ferramenta poderosa para mudar padrões de pensamento.',
-  },
-    {
-    title: 'O Impacto do Sono na Saúde Mental',
-    category: 'Bem-estar',
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'peaceful sleep',
-    description: 'Descubra a conexão profunda entre uma boa noite de sono e sua estabilidade emocional.',
-  },
-  {
-    title: 'Construindo Resiliência em Tempos de Incerteza',
-    category: 'Desenvolvimento Pessoal',
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'mountain sunrise',
-    description: 'Ferramentas e mentalidades para fortalecer sua capacidade de superar desafios e adversidades.',
   },
 ];
 
@@ -180,34 +159,34 @@ export default function BlogPostPage() {
             <aside className="hidden lg:sticky lg:top-24 lg:block h-fit">
               <TableOfContents
                 navLinks={navLinks}
-                featuredPosts={posts.slice(1, 4)}
+                featuredPosts={posts}
                 showExtras={true}
               />
             </aside>
 
-            <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl">
-                  <div className="my-12 lg:hidden">
-                    <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
+            <main className="w-full max-w-4xl mx-auto">
+                <div className="my-12 lg:hidden">
+                  <TableOfContents navLinks={navLinks} featuredPosts={[]} showExtras={false} />
+                  <div className="mt-8">
+                     <AudioPlayer isMobile={true}/>
                   </div>
-                  
-                  <article
-                    className="prose prose-lg max-w-none prose-p:text-muted-foreground"
-                  >
-                    {content.map((section) => (
-                      <section key={section.id} id={section.id} className="scroll-mt-24">
-                        <h2>{section.title}</h2>
-                        {section.paragraphs.map((p, i) => (
-                          <p key={i}>{p}</p>
-                        ))}
-                      </section>
-                    ))}
-                  </article>
-              </div>
-            </div>
+                </div>
+                
+                <article
+                  className="prose prose-lg max-w-none prose-p:text-muted-foreground"
+                >
+                  {content.map((section) => (
+                    <section key={section.id} id={section.id} className="scroll-mt-24">
+                      <h2>{section.title}</h2>
+                      {section.paragraphs.map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </section>
+                  ))}
+                </article>
+            </main>
           </div>
       </div>
-      <MobileAudioPlayer />
     </>
   );
 }
