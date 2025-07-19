@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import MobileMenu from './header-mobile';
 import NavigationElements from './navigation-elements';
 import { cn } from '@/lib/utils';
@@ -22,19 +22,21 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    
-    // Check if scrolled past the viewport height (past the hero)
-    if (typeof window !== 'undefined') {
-        setIsScrolled(latest > window.innerHeight * 0.9);
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = scrollY.on("change", (latest) => {
+      const previous = scrollY.getPrevious() ?? 0;
+      if (latest > previous && latest > 150) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      
+      setIsScrolled(latest > window.innerHeight * 0.9);
+    });
+
+    return () => unsubscribe();
+  }, [scrollY]);
+  
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   
