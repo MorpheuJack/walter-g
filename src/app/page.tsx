@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import WalterBenefits from '@/components/walter-benefits';
+import HeroNavigation from '@/components/hero-navigation';
 
 const initialState = {
   message: '',
@@ -118,6 +119,7 @@ export default function Home() {
     <div className="w-full lg:grid lg:grid-cols-2 lg:gap-x-24">
       {/* Hero Section */}
       <section className="lg:col-span-1 w-full min-h-screen flex flex-col justify-center items-center lg:items-start px-6 pt-24 pb-12 lg:py-16 lg:pl-48 lg:pr-0 relative text-center lg:text-left">
+        <HeroNavigation />
         <MotionDiv 
           className="flex flex-col justify-center text-foreground items-center lg:items-start w-full max-w-2xl"
           initial={{ opacity: 0, y: -20 }}
