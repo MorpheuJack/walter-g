@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -6,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import MobileMenu from './header-mobile';
 
 const navLinks = [
@@ -16,25 +17,20 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
-
-  const headerClasses = cn(
-      'fixed top-0 z-50 w-full transition-all duration-300',
-      isScrolled || isMobileMenuOpen ? 'border-b border-border/50 bg-background/80 backdrop-blur-lg' : 'bg-transparent'
-    );
   
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -44,18 +40,29 @@ export default function Header() {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
     <>
-      <header className={headerClasses}>
+      <motion.header
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: "-100%" },
+        }}
+        animate={hidden && !isMobileMenuOpen ? "hidden" : "visible"}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="fixed top-0 z-50 w-full"
+      >
         <div className="container flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2" aria-label="Voltar para Início">
-            <Heart className="h-7 w-7 text-primary transition-transform duration-300 hover:scale-110" />
-            <span className="font-bold hidden sm:inline-block">Terapia Digital</span>
+             <div className="flex items-center justify-center p-2 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
+                <Heart className="h-6 w-6 text-primary transition-transform duration-300 hover:scale-110" />
+            </div>
+            <span className="font-bold hidden sm:inline-block text-lg drop-shadow-sm">Terapia Digital</span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-2 p-2 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -63,14 +70,14 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'relative text-sm font-medium transition-colors hover:text-primary',
+                    'relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary rounded-full',
                     isActive ? 'text-primary' : 'text-muted-foreground'
                   )}
                 >
                   {link.label}
                    {isActive && (
                     <motion.div
-                      className="absolute bottom-[-4px] left-0 right-0 h-[2px] bg-primary"
+                      className="absolute inset-0 bg-primary/10 rounded-full -z-10"
                       layoutId="underline"
                       initial={false}
                       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
@@ -82,14 +89,14 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-              <Button asChild className="hidden md:flex font-semibold transition-transform duration-300 hover:scale-105">
+              <Button asChild className="hidden md:flex font-semibold transition-transform duration-300 hover:scale-105 shadow-md">
                 <Link href="/#analysis-section">
                   <Heart className="mr-2 h-5 w-5" />
                   Receber Análise Gratuita
                 </Link>
               </Button>
             <div className="md:hidden">
-              <Button onClick={toggleMobileMenu} variant="ghost" size="icon">
+              <Button onClick={toggleMobileMenu} variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 shadow-md">
                 <AnimatePresence initial={false} mode="wait">
                     <motion.div
                       key={isMobileMenuOpen ? 'x' : 'menu'}
@@ -106,7 +113,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </header>
+      </motion.header>
        <AnimatePresence>
         {isMobileMenuOpen && (
           <MobileMenu 
