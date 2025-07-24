@@ -127,7 +127,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="font-headline font-extrabold text-4xl md:text-5xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
             Sua mente parece um lugar barulhento?
           </h1>
           <p className="mt-4 text-base md:text-lg tracking-[0.2em] text-primary">
