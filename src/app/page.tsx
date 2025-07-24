@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useFormStatus } from 'react-dom';
@@ -11,7 +12,7 @@ import { useActionState, useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
-import WalterBenefits from '@/components/walter-benefits';
+import ClarityBenefits from '@/components/clarity-benefits';
 import HeroNavigation from '@/components/hero-navigation';
 
 const initialState = {
@@ -127,7 +128,7 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <h1 className="font-headline font-extrabold text-5xl md:text-6xl lg:text-7xl bg-gradient-to-br from-white to-primary/80 bg-clip-text text-transparent drop-shadow-lg">
-            Walter Terapeuta
+            Terapia Digital
           </h1>
           <p className="mt-4 text-base md:text-lg tracking-[0.2em] text-primary">
             SEU PRIMEIRO PASSO PARA O BEM-
@@ -204,7 +205,7 @@ export default function Home() {
       {/* Benefits Section */}
       <section id="benefits-section" className="lg:col-span-1 w-full py-24 px-4 sm:px-6 lg:pl-48 lg:pr-0">
         <div className="w-full max-w-2xl">
-          <WalterBenefits />
+          <ClarityBenefits />
         </div>
       </section>
 
