@@ -25,7 +25,7 @@ export async function getPersonalizedTipsAction(
 
   const { email, issue } = validatedFields.data;
 
-  const n8nWebhookUrl = 'https://a807ca201131.ngrok-free.app/webhook/8e1b3a4a-174a-4f47-8223-2a20840d0f9b';
+  const n8nWebhookUrl = 'https://a6ed8bed9716.ngrok-free.app/webhook/8e1b3a4a-174a-4f47-8223-2a20840d0f9b';
 
   const dataToSend = {
       email: email,
