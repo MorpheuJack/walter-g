@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 interface BlogPostCardProps {
+  slug: string;
   title: string;
   category: string;
   imageUrl: string;
@@ -11,9 +12,9 @@ interface BlogPostCardProps {
   description: string;
 }
 
-export default function BlogPostCard({ title, category, imageUrl, aiHint, description }: BlogPostCardProps) {
+export default function BlogPostCard({ slug, title, category, imageUrl, aiHint, description }: BlogPostCardProps) {
   return (
-    <Link href="/blog/post-exemplo" className="group block overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1">
+    <Link href={`/blog/${slug}`} className="group block overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1">
       <div className="relative h-52 w-full">
         <Image
           src={imageUrl}

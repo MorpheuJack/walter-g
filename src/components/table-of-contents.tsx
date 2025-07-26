@@ -7,14 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Badge } from './ui/badge';
 import AudioPlayer from './audio-player';
-
-interface Post {
-    title: string;
-    category: string;
-    imageUrl: string;
-    aiHint: string;
-    description: string;
-}
+import type { Post } from '@/lib/blog-data';
 
 interface TableOfContentsProps {
   navLinks: { href: string; label: string }[];
@@ -89,7 +82,7 @@ export default function TableOfContents({ navLinks, featuredPosts, showExtras, i
               <h3 className="font-semibold text-foreground my-4">Posts em Destaque</h3>
                 <div className="space-y-4">
                     {featuredPosts.map((post) => (
-                        <Link href="/blog/post-exemplo" key={post.title} className="group flex items-center gap-4">
+                        <Link href={`/blog/${post.slug}`} key={post.title} className="group flex items-center gap-4">
                             <div className="relative h-16 w-16 flex-shrink-0">
                                 <Image
                                     src={post.imageUrl}
