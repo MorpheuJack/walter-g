@@ -96,7 +96,7 @@ export const postsData: Post[] = [
         slug: 'introducao-ao-mindfulness',
         title: 'Introdução ao Mindfulness para Iniciantes',
         category: 'Mindfulness',
-        imageUrl: 'https://placehold.co/600x400.png',
+        imageUrl: '/celular.jpg',
         aiHint: 'meditation peaceful',
         description: 'Um guia passo a passo para começar a praticar a atenção plena e reduzir o estresse.',
         content: [
@@ -122,7 +122,7 @@ export const postsData: Post[] = [
         slug: 'limites-saudaveis',
         title: 'A Importância de Estabelecer Limites Saudáveis',
         category: 'Relacionamentos',
-        imageUrl: 'https://placehold.co/600x400.png',
+        imageUrl: '/mulher.jpg',
         aiHint: 'strong confident person',
         description: 'Aprenda a definir limites em seus relacionamentos para proteger sua energia e bem-estar emocional.',
         content: [
@@ -175,7 +175,7 @@ export const postsData: Post[] = [
         slug: 'impacto-do-sono',
         title: 'O Impacto do Sono na Saúde Mental',
         category: 'Bem-estar',
-        imageUrl: 'https://placehold.co/600x400.png',
+        imageUrl: '/pessoa.jpg',
         aiHint: 'peaceful sleep',
         description: 'Descubra a conexão profunda entre uma boa noite de sono e sua estabilidade emocional.',
         content: [
@@ -201,7 +201,7 @@ export const postsData: Post[] = [
         slug: 'construindo-resiliencia',
         title: 'Construindo Resiliência em Tempos de Incerteza',
         category: 'Desenvolvimento Pessoal',
-        imageUrl: 'https://placehold.co/600x400.png',
+        imageUrl: '/cadeira.jpg',
         aiHint: 'mountain sunrise',
         description: 'Ferramentas e mentalidades para fortalecer sua capacidade de superar desafios e adversidades.',
         content: [
